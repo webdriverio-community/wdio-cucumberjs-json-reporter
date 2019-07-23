@@ -84,6 +84,39 @@ Object {
 }
 `;
 
+exports[`reporter getStepDataObject should be able to add arguments to the step if they are present 1`] = `
+Object {
+  "arguments": Array [
+    Object {
+      "rows": Array [
+        Object {
+          "cells": Array [
+            "Cucumber",
+            "Cucumis sativus",
+          ],
+        },
+        Object {
+          "cells": Array [
+            "Burr Gherkin",
+            "Cucumis anguria",
+          ],
+        },
+      ],
+    },
+  ],
+  "keyword": "Given",
+  "line": 6,
+  "match": Object {
+    "location": "can not be determined with webdriver.io",
+  },
+  "name": "I open &quot;http://webdriver.io/&quot;",
+  "result": Object {
+    "duration": 0,
+    "status": "pending",
+  },
+}
+`;
+
 exports[`reporter getStepDataObject should be able to to create a step JSON data object 1`] = `
 Object {
   "arguments": Array [],
