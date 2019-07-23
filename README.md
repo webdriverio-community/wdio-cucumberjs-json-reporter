@@ -8,9 +8,9 @@ A WDIO reporter that creates CucumberJS JSON files for WebdriverIO V5+
 
 [![NPM](https://nodei.co/npm/wdio-cucumberjs-json-reporter.png)](https://nodei.co/npm/wdio-cucumberjs-json-reporter/)
 
-> **THIS MODULE CAN ONLY WORK WITH WebdriverIO V5+!
+> **THIS MODULE CAN ONLY WORK WITH WebdriverIO V5+!**
 
-> **THIS MODULE IS NOT A REPLACEMENT OF [wdio-multiple-cucumber-html-reporter](https://github.com/wswebcreation/wdio-multiple-cucumber-html-reporter). THAT MODULE ONLY SUPPORTS WEBDRIVERIO V4 AND ALSO CREATES A REPORT**
+> **THIS MODULE IS NOT A REPLACEMENT OF [wdio-multiple-cucumber-html-reporter](https://github.com/wswebcreation/wdio-multiple-cucumber-html-reporter). THAT MODULE ONLY SUPPORTS WEBDRIVERIO V4 AND ALSO CREATES A REPORT. THIS MODULE ONLY CREATES A JSON, NO REPORT!!**
 
 ## What does it do
 This reporter will generate a **Cucumber JSON file** for each feature that is being tested. The JSON file can be used with whatever report you want to use like for example [multiple-cucumber-html-reporter](https://github.com/wswebcreation/multiple-cucumber-html-reporter).
@@ -74,7 +74,7 @@ where the script is executed. Executing it from the root of your project will al
 ## Metadata
 As said, this report can automatically store the metadata of the current machine / device the feature has been executed on. 
 
-To customize this you can add this by adding the following object to your `capabilities`;
+To customize this you can add IT by adding the following object to your `capabilities`
 
 ```js
 // Example wdio.conf.js
@@ -105,6 +105,8 @@ exports.config = {
     ],
 };
 ```
+
+> The metadata object needs to have the `cjson` prefix,  otherwise it will not work!
 
 ### Metadata values
 #### `metadata.app.name`
