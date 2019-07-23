@@ -59,3 +59,15 @@ typings/
 
 # next.js build output
 .next
+
+# JetBrains IDE
+.idea/
+
+#Visual Studio Code
+.DS_Store
+
+package-lock.json
+
+# Some folders
+.tmp/
+build/
