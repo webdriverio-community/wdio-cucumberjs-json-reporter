@@ -86,7 +86,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-push": "npm run test.lint"
+      "pre-push": "npm run test.lint && npm run test.unit.coverage"
     }
   }
 }
