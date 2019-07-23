@@ -1,6 +1,13 @@
 # wdio-cucumberjs-json-reporter
 A WDIO reporter that creates CucumberJS JSON files for WebdriverIO V5+
 
+[![dependencies Status](https://david-dm.org/wswebcreation/wdio-cucumberjs-json-reporter/status.svg)](https://david-dm.org/wswebcreation/wdio-cucumberjs-json-reporter)
+[![Build Status](https://travis-ci.org/wswebcreation/wdio-cucumberjs-json-reporter.svg?branch=master)](https://travis-ci.org/wswebcreation/wdio-cucumberjs-json-reporter)
+[![Coverage Status](https://coveralls.io/repos/github/wswebcreation/wdio-cucumberjs-json-reporter/badge.svg?branch=master)](https://coveralls.io/github/wswebcreation/wdio-cucumberjs-json-reporter?branch=master)
+[![MIT license](http://img.shields.io/badge/license-MIT-brightgreen.svg)](http://opensource.org/licenses/MIT)
+
+[![NPM](https://nodei.co/npm/wdio-cucumberjs-json-reporter.png)](https://nodei.co/npm/wdio-cucumberjs-json-reporter/)
+
 > **THIS MODULE CAN ONLY WORK WITH WebdriverIO V5+!
 
 > **THIS MODULE IS NOT A REPLACEMENT OF [wdio-multiple-cucumber-html-reporter](https://github.com/wswebcreation/wdio-multiple-cucumber-html-reporter). THAT MODULE ONLY SUPPORTS WEBDRIVERIO V4 AND ALSO CREATES A REPORT**
