@@ -1,0 +1,92 @@
+{
+  "name": "wdio-cucumberjs-json-reporter",
+  "version": "1.0.0",
+  "description": "A WDIO reporter that creates CucumberJS JSON files for WebdriverIO V5+",
+  "main": "./build/reporter.js",
+  "scripts": {
+    "clean": "rimraf coverage build .tmp",
+    "compile": "babel lib/ --ignore **/*.spec.js --ignore **/mocks.js -d build/",
+    "test.lint": "eslint lib",
+    "test.unit.coverage": "jest --coverage ",
+    "release": "np",
+    "precompile": "npm run clean",
+    "prerelease": "npm run compile",
+    "prepublish": "npm run compile",
+    "watch": "npm run compile -- --watch",
+    "coveralls": "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wswebcreation/wdio-cucumberjs-json-reporter.git"
+  },
+  "keywords": [
+    "cucumberjs",
+    "reporter",
+    "report",
+    "webdriverio",
+    "wdio",
+    "wdio-reporter"
+  ],
+  "author": "Wim Selles <wim@wswebcreation.nl>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/wswebcreation/wdio-cucumberjs-json-reporter/issues"
+  },
+  "homepage": "https://github.com/wswebcreation/wdio-cucumberjs-json-reporter#readme",
+  "dependencies": {
+    "@wdio/logger": "^5.11.0",
+    "@wdio/reporter": "^5.11.0",
+    "fs-extra": "^8.1.0",
+    "multiple-cucumber-html-reporter": "^1.11.10"
+  },
+  "peerDependencies": {
+    "wdio-cucumber-framework": "^5.11"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.5.5",
+    "@babel/core": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
+    "@babel/register": "^7.5.5",
+    "@types/jest": "^24.0.15",
+    "babel-eslint": "^10.0.2",
+    "babel-jest": "^24.8.0",
+    "babel-plugin-transform-function-bind": "^6.22.0",
+    "coveralls": "^3.0.5",
+    "eslint": "^4.19.1",
+    "eslint-plugin-import": "^2.18.2",
+    "husky": "^3.0.1",
+    "jest": "^24.8.0",
+    "np": "^5.0.1",
+    "rimraf": "^2.6.3",
+    "yargs": "^11.0.0"
+  },
+  "jest": {
+    "testMatch": [
+      "<rootDir>/lib/tests/*.spec.js"
+    ],
+    "testPathIgnorePatterns": [
+      "<rootDir>/node_modules/"
+    ],
+    "coverageDirectory": "./coverage/",
+    "collectCoverage": true,
+    "coverageThreshold": {
+      "global": {
+        "branches": 100,
+        "functions": 100,
+        "lines": 100,
+        "statements": 100
+      }
+    },
+    "testEnvironment": "node",
+    "coveragePathIgnorePatterns": [
+      "node_modules/",
+      "tests/",
+      "docs/"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-push": "npm run test.lint"
+    }
+  }
+}

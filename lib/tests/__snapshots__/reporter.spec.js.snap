@@ -1,0 +1,183 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`reporter addStepData should add step data to a current scenario 1`] = `
+Array [
+  Object {
+    "foo": "current-step",
+  },
+]
+`;
+
+exports[`reporter cucumberJsAttachment should be able to add embeddings to a current step when they have not been added 1`] = `
+Object {
+  "foo": "current-step",
+  "status": "pending",
+}
+`;
+
+exports[`reporter cucumberJsAttachment should be able to add embeddings to a current step when they have not been added 2`] = `
+Object {
+  "embeddings": Array [
+    Object {
+      "data": "data",
+      "mime_type": "mime_type",
+    },
+  ],
+  "foo": "current-step",
+  "status": "pending",
+}
+`;
+
+exports[`reporter cucumberJsAttachment should be able to add embeddings to a current step which already has embeddings 1`] = `
+Object {
+  "embeddings": Array [
+    Object {
+      "data": "data-1",
+      "mime_type": "mime_type-1",
+    },
+  ],
+  "foo": "current-step",
+  "status": "pending",
+}
+`;
+
+exports[`reporter cucumberJsAttachment should be able to add embeddings to a current step which already has embeddings 2`] = `
+Object {
+  "embeddings": Array [
+    Object {
+      "data": "data-1",
+      "mime_type": "mime_type-1",
+    },
+    Object {
+      "data": "data-2",
+      "mime_type": "mime_type-2",
+    },
+  ],
+  "foo": "current-step",
+  "status": "pending",
+}
+`;
+
+exports[`reporter getFeatureDataObject should be able to to create a feature JSON data object 1`] = `
+Object {
+  "description": "",
+  "elements": Array [],
+  "id": "create-passed-feature",
+  "keyword": "Feature",
+  "line": 2,
+  "metadata": Object {
+    "foo": "bar",
+  },
+  "name": "Create passed feature",
+  "tags": "",
+}
+`;
+
+exports[`reporter getScenarioDataObject should be able to to create a scenario JSON data object 1`] = `
+Object {
+  "description": "",
+  "id": "create-passed-feature;given-i-open-\\"http://webdriver.io/\\"",
+  "keyword": "Scenario",
+  "name": "Given I open &quot;http://webdriver.io/&quot;",
+  "steps": Array [],
+  "tags": "",
+}
+`;
+
+exports[`reporter getStepDataObject should be able to to create a step JSON data object 1`] = `
+Object {
+  "arguments": Array [],
+  "keyword": "Given",
+  "line": 6,
+  "match": Object {
+    "location": "can not be determined with webdriver.io",
+  },
+  "name": "I open &quot;http://webdriver.io/&quot;",
+  "result": Object {
+    "duration": 0,
+    "status": "pending",
+  },
+}
+`;
+
+exports[`reporter getStepDataObject should be able to to create a step JSON data object based on a hook 1`] = `
+Object {
+  "arguments": Array [],
+  "keyword": "Before",
+  "line": "",
+  "match": Object {
+    "location": "can not be determined with webdriver.io",
+  },
+  "name": "Hook",
+  "result": Object {
+    "duration": 0,
+    "status": "",
+  },
+}
+`;
+
+exports[`reporter getStepDataObject should be able to to create a step JSON data object based on malformed data 1`] = `
+Object {
+  "arguments": Array [],
+  "keyword": "",
+  "line": "",
+  "match": Object {
+    "location": "can not be determined with webdriver.io",
+  },
+  "name": "",
+  "result": Object {
+    "duration": 0,
+    "status": "",
+  },
+}
+`;
+
+exports[`reporter on create should set the defaults  if no options are provided 1`] = `
+Object {
+  "jsonFolder": ".tmp/json/",
+}
+`;
+
+exports[`reporter on create should verify initial properties 1`] = `
+Object {
+  "jsonFolder": ".tmp/json-folder/",
+}
+`;
+
+exports[`reporter onSuiteStart should add a scenario to the feature if the feature is already there 1`] = `
+Array [
+  Object {
+    "description": "",
+    "id": "create-passed-feature;open-website",
+    "keyword": "Scenario",
+    "name": "Open website",
+    "steps": Array [],
+    "tags": "",
+  },
+]
+`;
+
+exports[`reporter onSuiteStart should add the CucumberJS feature object if it is not available 1`] = `
+Object {
+  "keyword": "feature",
+}
+`;
+
+exports[`reporter updateStepStatus should update step data of the current scenario step 1`] = `
+Array [
+  Object {
+    "foo": "current-step",
+    "status": "pending",
+  },
+]
+`;
+
+exports[`reporter updateStepStatus should update step data of the current scenario step 2`] = `
+Array [
+  Object {
+    "bar": false,
+    "foo": "current-step",
+    "status": "passed",
+  },
+]
+`;
