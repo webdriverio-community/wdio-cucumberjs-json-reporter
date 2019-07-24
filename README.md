@@ -15,7 +15,7 @@ A WDIO reporter that creates CucumberJS JSON files for WebdriverIO V5+
 ## What does it do
 This reporter will generate a **Cucumber JSON file** for each feature that is being tested. The JSON file can be used with whatever report you want to use like for example [multiple-cucumber-html-reporter](https://github.com/wswebcreation/multiple-cucumber-html-reporter).
 
-It will also add metadata about the running instance to the feature file and last but not least, it will give you  the opportunity to add attachments to the JSON output.
+It will also add metadata about the running instance to the feature file and last but not least, it will give you the opportunity to add attachments to the JSON output.
 
 ## Installation
 The easiest way is to keep `wdio-cucumberjs-json-reporter` as a devDependency in your `package.json`.
@@ -34,7 +34,7 @@ You can simple do it by:
 npm install wdio-cucumberjs-json-reporter --save-dev
 ```
 
-so it will be added automatically to your `package.json`
+so it will automatically be added to your `package.json`
 
 Instructions on how to install `WebdriverIO` can be found [here](http://webdriver.io/guide/getstarted/install.html).
 
@@ -106,7 +106,7 @@ exports.config = {
 };
 ```
 
-> The metadata object needs to have the `cjson` prefix,  otherwise it will not work!
+> The metadata object needs to have the `cjson` prefix, otherwise it will not work!
 
 ### Metadata values
 #### `metadata.app.name`
@@ -173,3 +173,61 @@ cucumberJson.attach({"json-string": true}, 'application/json');
 
 // Attach a screenshot in a before hook
 cucumberJson.attach(browser.takeScreenshot(), 'image/png');
+```
+
+## Use it with multiple-cucumber-html-reporter
+The previous module for WebdriverIO V4, [wdio-multiple-cucumber-html-reporter](https://github.com/wswebcreation/wdio-multiple-cucumber-html-reporter),
+had a build in connection with the [multiple-cucumber-html-reporter](https://github.com/wswebcreation/multiple-cucumber-html-reporter)-module. **This is not the case for this
+reporter** because the new setup of WebdriverIO V5 is based on a instance which doesn't allow me to use the `onPrepare` and `onComplete` hook.
+
+If you still want to use the [multiple-cucumber-html-reporter](https://github.com/wswebcreation/multiple-cucumber-html-reporter)-module you can add the following to your config file.
+
+- Install the module with 
+
+    ```bash
+    npm install multiple-cucumber-html-reporter --save-dev
+    ```
+    
+  Maybe even install `fs-extra` to remove the report folder before you start all  sessions.
+
+    ```bash
+    npm install fs-extra --save-dev
+    ```
+
+- Add this to your configuration file
+
+    ```js
+    // Import the module
+    const { generate } = require('multiple-cucumber-html-reporter');
+    const { removeSync } = require('fs-extra');
+    
+    // Example wdio.conf.js
+    exports.config = {
+      //.. 
+    
+      // =====
+      // Hooks
+      // =====
+      /**
+       * Gets executed once before all workers get launched. 
+       */
+      onPrepare: () => {
+        // Remove the `.tmp/` folder that holds the json and report files 
+        removeSync('.tmp/');
+      },
+      /**
+       * Gets executed after all workers got shut down and the process is about to exit.
+       */
+      onComplete: () => {
+        // Generate the report when it all tests are done
+        generate({
+          // Required
+          // This part needs to be the same path where you store the JSON files
+          // default = '.tmp/json/'
+          jsonDir: '.tmp/json/',
+          reportPath: '.tmp/report/',
+          // for more options see https://github.com/wswebcreation/multiple-cucumber-html-reporter#options
+        });
+      }
+    }
+    ```
