@@ -39,7 +39,7 @@
     "fs-extra": "^8.1.0"
   },
   "peerDependencies": {
-    "wdio-cucumber-framework": "^5.11"
+    "@wdio/cucumber-framework": "^5.11.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.5.5",
