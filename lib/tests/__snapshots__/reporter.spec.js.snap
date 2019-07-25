@@ -78,7 +78,7 @@ Object {
   "description": "",
   "id": "create-passed-feature;given-i-open-\\"http://webdriver.io/\\"",
   "keyword": "Scenario",
-  "name": "Given I open &quot;http://webdriver.io/&quot;",
+  "name": "Given I open \\"http://webdriver.io/\\"",
   "steps": Array [],
   "tags": "",
 }
@@ -109,7 +109,7 @@ Object {
   "match": Object {
     "location": "can not be determined with webdriver.io",
   },
-  "name": "I open &quot;http://webdriver.io/&quot;",
+  "name": "I open \\"http://webdriver.io/\\"",
   "result": Object {
     "duration": 0,
     "status": "pending",
@@ -125,7 +125,7 @@ Object {
   "match": Object {
     "location": "can not be determined with webdriver.io",
   },
-  "name": "I open &quot;http://webdriver.io/&quot;",
+  "name": "I open \\"http://webdriver.io/\\"",
   "result": Object {
     "duration": 0,
     "status": "pending",
