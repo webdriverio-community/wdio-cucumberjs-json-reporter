@@ -1,7 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`utils escapeHTML should return an empty string and escape nothing 1`] = `"&lt;div id=&quot;feature-chart&quot;&gt;&amp;&lt;/div&gt;"`;
-
 exports[`utils getFailedMessage should return an error message if the status is "failed" 1`] = `
 Object {
   "error_message": "Actual: WebdriverIO · Next-gen WebDriver test framework for Node.js
