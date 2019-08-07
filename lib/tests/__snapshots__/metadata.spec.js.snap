@@ -45,11 +45,20 @@ Object {
 }
 `;
 
-exports[`metadata determineBrowserData should return that the browser name and version based on the capabilities 1`] = `
+exports[`metadata determineBrowserData should return that the browser name and version based on the capabilities when browserVersion is used 1`] = `
 Object {
   "browser": Object {
     "name": "capabilities browser name",
-    "version": "capabilities browser version",
+    "version": "capabilities browserVersion",
+  },
+}
+`;
+
+exports[`metadata determineBrowserData should return that the browser name and version based on the capabilities when version is used 1`] = `
+Object {
+  "browser": Object {
+    "name": "capabilities browser name",
+    "version": "capabilities version",
   },
 }
 `;
@@ -76,7 +85,7 @@ exports[`metadata determineDeviceName should be able to return the device metada
 
 exports[`metadata determineDeviceName should be able to return the device metadata based on the metadata.device 1`] = `"metadata.device"`;
 
-exports[`metadata determineDeviceName should be able to return the not known deviceName 1`] = `"not known"`;
+exports[`metadata determineDeviceName should be able to return the not known deviceName 1`] = `"Device name not known"`;
 
 exports[`metadata determineMetadata should be able to return browser metadata 1`] = `
 Object {
@@ -142,7 +151,7 @@ Object {
 }
 `;
 
-exports[`metadata determinePlatformName should be able to return the not known platform name 1`] = `"not known"`;
+exports[`metadata determinePlatformName should be able to return the not known platform name 1`] = `"Platform name not known"`;
 
 exports[`metadata determinePlatformName should be able to return the platform name based on the currentCapabilities.platformName 1`] = `"currentCapabilities.platformName"`;
 
@@ -152,6 +161,6 @@ exports[`metadata determinePlatformName should be able to return the platform na
 
 exports[`metadata determinePlatformName should be able to return the platform name based on the metadata.platform 1`] = `"platform.name"`;
 
-exports[`metadata determinePlatformVersion should be able to return the not known platform version 1`] = `"not known"`;
+exports[`metadata determinePlatformVersion should be able to return the not known platform version 1`] = `"Version not known"`;
 
 exports[`metadata determinePlatformVersion should be able to return the platform version based on the metadata.platform 1`] = `"platform.version"`;
