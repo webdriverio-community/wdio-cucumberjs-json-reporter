@@ -17,6 +17,9 @@ This reporter will generate a **Cucumber JSON file** for each feature that is be
 
 It will also add metadata about the running instance to the feature file and last but not least, it will give you the opportunity to add attachments to the JSON output.
 
+> **NOTE:<br>**
+> Be aware of the fact that this module only supports the English language! Other languages make this module spit out incorrect JSON output without proper keywords and steps.
+
 ## Installation
 The easiest way is to keep `wdio-cucumberjs-json-reporter` as a devDependency in your `package.json`.
 
