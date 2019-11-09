@@ -65,9 +65,6 @@ Object {
   "id": "create-passed-feature",
   "keyword": "Feature",
   "line": 2,
-  "metadata": Object {
-    "foo": "bar",
-  },
   "name": "Create passed feature",
   "tags": "",
   "uri": "Can not be determined",
@@ -180,6 +177,8 @@ Object {
 }
 `;
 
+exports[`reporter on create should verify initial properties 2`] = `Object {}`;
+
 exports[`reporter onSuiteStart should add a scenario to the feature if the feature is already there 1`] = `
 Array [
   Object {
@@ -193,9 +192,43 @@ Array [
 ]
 `;
 
-exports[`reporter onSuiteStart should add the CucumberJS feature object if it is not available 1`] = `
+exports[`reporter onSuiteStart should add instance data to the feature if the feature is already there 1`] = `Object {}`;
+
+exports[`reporter onSuiteStart should add instance data to the feature if the feature is already there 2`] = `
 Object {
-  "keyword": "feature",
+  "feature": Object {
+    "description": "",
+    "elements": Array [
+      Object {
+        "description": "",
+        "id": "create-passed-feature;open-website",
+        "keyword": "Scenario",
+        "name": "Open website",
+        "steps": Array [],
+        "tags": "",
+      },
+    ],
+    "id": "empty-feature",
+    "keyword": "Feature",
+    "line": 2,
+    "metadata": Object {
+      "foo": "bar",
+    },
+    "name": "Empty feature",
+    "tags": "",
+  },
+}
+`;
+
+exports[`reporter onSuiteStart should add the CucumberJS feature object if it is not available 1`] = `Object {}`;
+
+exports[`reporter onSuiteStart should add the CucumberJS feature object if it is not available 2`] = `
+Object {
+  "feature": Object {
+    "report": Object {
+      "keyword": "feature",
+    },
+  },
 }
 `;
 
