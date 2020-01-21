@@ -7,7 +7,7 @@ node_js:
   - "stable"
 
 script:
-  - npm run test.unit.coverage
+  - npm run test
 
 after_script:
   - npm run coveralls
