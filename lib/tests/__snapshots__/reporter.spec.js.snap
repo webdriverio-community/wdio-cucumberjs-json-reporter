@@ -67,6 +67,7 @@ Object {
   "line": 2,
   "name": "Create passed feature",
   "tags": "",
+  "type": "suite",
   "uri": "Can not be determined",
 }
 `;
@@ -79,6 +80,7 @@ Object {
   "name": "Given I open \\"http://webdriver.io/\\"",
   "steps": Array [],
   "tags": "",
+  "type": "test",
 }
 `;
 
