@@ -81,6 +81,10 @@ where the script is executed. Executing it from the root of your project will al
 The language in which the Gherkin scenarios are written (defaults to English). The list of language codes and its keywords can be found [here](https://cucumber.io/docs/gherkin/reference/#overview).
 
 ## Metadata
+
+> **Note:**\
+> This is currently not supported if you are using WebdriverIO V6, WebdriverIO V5 still supports this
+
 As said, this report can automatically store the metadata of the current machine / device the feature has been executed on.
 
 To customize this you can add IT by adding the following object to your `capabilities`
