@@ -8,7 +8,7 @@ A WDIO reporter that creates CucumberJS JSON files for WebdriverIO V5+
 
 [![NPM](https://nodei.co/npm/wdio-cucumberjs-json-reporter.png)](https://nodei.co/npm/wdio-cucumberjs-json-reporter/)
 
-> **THIS MODULE CAN ONLY WORK WITH WebdriverIO V5+!**
+> **THIS MODULE CAN ONLY WORK WITH WebdriverIO V5!**
 
 > **THIS MODULE IS NOT A REPLACEMENT OF [wdio-multiple-cucumber-html-reporter](https://github.com/wswebcreation/wdio-multiple-cucumber-html-reporter). THAT MODULE ONLY SUPPORTS WEBDRIVERIO V4 AND ALSO CREATES A REPORT. THIS MODULE ONLY CREATES A JSON, NO REPORT!!**
 
