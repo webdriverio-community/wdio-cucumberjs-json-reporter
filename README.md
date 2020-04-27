@@ -1,5 +1,5 @@
 # wdio-cucumberjs-json-reporter
-A WDIO reporter that creates CucumberJS JSON files for WebdriverIO V5+
+A WDIO reporter that creates CucumberJS JSON files for WebdriverIO V6+
 
 [![dependencies Status](https://david-dm.org/wswebcreation/wdio-cucumberjs-json-reporter/status.svg)](https://david-dm.org/wswebcreation/wdio-cucumberjs-json-reporter)
 [![Build Status](https://travis-ci.org/wswebcreation/wdio-cucumberjs-json-reporter.svg?branch=master)](https://travis-ci.org/wswebcreation/wdio-cucumberjs-json-reporter)
