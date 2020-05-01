@@ -167,7 +167,7 @@ Object {
 }
 `;
 
-exports[`metadata determineMetadata should return metadata based on the browser.options.capabilities 2`] = `
+exports[`metadata determineMetadata should return metadata based on the browser.options.capabilities if w3cCaps is empty 1`] = `
 Object {
   "metadata": Object {
     "browser": Object {
