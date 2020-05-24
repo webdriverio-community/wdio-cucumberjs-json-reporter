@@ -2,11 +2,10 @@
 
 exports[`utils getFailedMessage should return an error message if the status is "failed" 1`] = `
 Object {
-  "error_message": "Actual: WebdriverIO · Next-gen WebDriver test framework for Node.js
-Expected: WebdriverIO
+  "error_message": "Error: expect(received).toEqual(expected) // deep equality
 
-Stack:
-AssertionError: expected 'WebdriverIO · Next-gen WebDriver test framework for Node.js' to equal 'WebdriverIO'
-    at World.equal (/step_definitions/all.steps.js:39:35)",
+Expected: \\"bar\\"
+Received: \\"foo\\"
+    at World.<anonymous> (/Users/wimselles/Git/cucumberjs-json-demo/steps.js:17:19)",
 }
 `;
