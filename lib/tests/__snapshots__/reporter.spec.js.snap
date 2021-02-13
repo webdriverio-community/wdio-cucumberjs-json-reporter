@@ -165,6 +165,22 @@ Object {
 }
 `;
 
+exports[`reporter getStepDataObject should be able to to create a step JSON data object based on missing keyword data 1`] = `
+Object {
+  "arguments": Array [],
+  "keyword": "",
+  "line": "",
+  "match": Object {
+    "location": "can not be determined with webdriver.io",
+  },
+  "name": "I load the Swag Labs demo website",
+  "result": Object {
+    "duration": 555000000,
+    "status": "passed",
+  },
+}
+`;
+
 exports[`reporter on create should set the defaults  if no options are provided 1`] = `
 Object {
   "jsonFolder": ".tmp/json/",
