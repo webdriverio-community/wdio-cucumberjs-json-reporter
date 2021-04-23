@@ -24,7 +24,7 @@
               "status": "passed",
               "duration": 1000000
             },
-            "line": 0,
+            "line": "",
             "match": {
               "location": "can not be determined with webdriver.io"
             }
@@ -37,7 +37,7 @@
               "status": "passed",
               "duration": 1000000
             },
-            "line": 0,
+            "line": "",
             "match": {
               "location": "can not be determined with webdriver.io"
             },
@@ -130,7 +130,7 @@
               "status": "passed",
               "duration": 1000000
             },
-            "line": 0,
+            "line": "",
             "match": {
               "location": "can not be determined with webdriver.io"
             },
@@ -149,7 +149,7 @@
               "status": "passed",
               "duration": 0
             },
-            "line": 0,
+            "line": "",
             "match": {
               "location": "can not be determined with webdriver.io"
             }
@@ -172,7 +172,7 @@
               "status": "passed",
               "duration": 0
             },
-            "line": 0,
+            "line": "",
             "match": {
               "location": "can not be determined with webdriver.io"
             }
@@ -185,7 +185,7 @@
               "status": "passed",
               "duration": 1000000
             },
-            "line": 0,
+            "line": "",
             "match": {
               "location": "can not be determined with webdriver.io"
             },
@@ -236,7 +236,7 @@
               "status": "passed",
               "duration": 0
             },
-            "line": 0,
+            "line": "",
             "match": {
               "location": "can not be determined with webdriver.io"
             },
@@ -255,7 +255,7 @@
               "status": "passed",
               "duration": 0
             },
-            "line": 0,
+            "line": "",
             "match": {
               "location": "can not be determined with webdriver.io"
             }
@@ -278,7 +278,7 @@
               "status": "passed",
               "duration": 0
             },
-            "line": 0,
+            "line": "",
             "match": {
               "location": "can not be determined with webdriver.io"
             }
@@ -291,7 +291,7 @@
               "status": "passed",
               "duration": 0
             },
-            "line": 0,
+            "line": "",
             "match": {
               "location": "can not be determined with webdriver.io"
             },
@@ -342,7 +342,7 @@
               "status": "passed",
               "duration": 0
             },
-            "line": 0,
+            "line": "",
             "match": {
               "location": "can not be determined with webdriver.io"
             },
@@ -361,7 +361,7 @@
               "status": "passed",
               "duration": 0
             },
-            "line": 0,
+            "line": "",
             "match": {
               "location": "can not be determined with webdriver.io"
             }
