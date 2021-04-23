@@ -72,6 +72,20 @@ Object {
 }
 `;
 
+exports[`reporter getFeatureDataObject should be able to to create a feature JSON data object with no line data 1`] = `
+Object {
+  "description": "",
+  "elements": Array [],
+  "id": "create-passed-feature",
+  "keyword": "Feature",
+  "line": 0,
+  "name": "Create passed feature",
+  "tags": "",
+  "type": "suite",
+  "uri": "Can not be determined",
+}
+`;
+
 exports[`reporter getScenarioDataObject should be able to to create a scenario JSON data object 1`] = `
 Object {
   "description": "",
