@@ -77,6 +77,7 @@ Object {
   "description": "",
   "id": "create-passed-feature;hook-this-is-doing-nothing-because-it's-a-background\\"",
   "keyword": "Scenario",
+  "line": 0,
   "name": "Hook This is doing nothing because it's a background\\"",
   "steps": Array [],
   "tags": "",
@@ -137,7 +138,7 @@ exports[`reporter getStepDataObject should be able to to create a step JSON data
 Object {
   "arguments": Array [],
   "keyword": "Before",
-  "line": "",
+  "line": 0,
   "match": Object {
     "location": "can not be determined with webdriver.io",
   },
@@ -153,7 +154,7 @@ exports[`reporter getStepDataObject should be able to to create a step JSON data
 Object {
   "arguments": Array [],
   "keyword": "",
-  "line": "",
+  "line": 0,
   "match": Object {
     "location": "can not be determined with webdriver.io",
   },
@@ -169,7 +170,7 @@ exports[`reporter getStepDataObject should be able to to create a step JSON data
 Object {
   "arguments": Array [],
   "keyword": "",
-  "line": "",
+  "line": 13,
   "match": Object {
     "location": "can not be determined with webdriver.io",
   },
