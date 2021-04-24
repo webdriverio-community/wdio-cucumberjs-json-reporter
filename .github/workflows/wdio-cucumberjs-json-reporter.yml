@@ -28,7 +28,7 @@ jobs:
               run: npm install
             - name: Run Unit Tests and generate coverage report
               working-directory: ./
-              run: npm run test.unit.coverage
+              run: npm run test
             - name: Upload coverage to Codecov
               uses: codecov/codecov-action@v1
               with:
