@@ -2,8 +2,8 @@
 A WDIO reporter that creates CucumberJS JSON files for WebdriverIO V6+
 
 [![dependencies Status](https://david-dm.org/wswebcreation/wdio-cucumberjs-json-reporter/status.svg)](https://david-dm.org/wswebcreation/wdio-cucumberjs-json-reporter)
-[![Build Status](https://travis-ci.org/wswebcreation/wdio-cucumberjs-json-reporter.svg?branch=master)](https://travis-ci.org/wswebcreation/wdio-cucumberjs-json-reporter)
-[![Coverage Status](https://coveralls.io/repos/github/wswebcreation/wdio-cucumberjs-json-reporter/badge.svg?branch=master)](https://coveralls.io/github/wswebcreation/wdio-cucumberjs-json-reporter?branch=master)
+![example workflow](https://github.com/wswebcreation/wdio-cucumberjs-json-reporter/actions/workflows/wdio-cucumberjs-json-reporter.yml/badge.svg)
+[![codecov](https://codecov.io/gh/wswebcreation/wdio-cucumberjs-json-reporter/branch/master/graph/badge.svg?token=N5FRT0DA6N)](https://codecov.io/gh/wswebcreation/wdio-cucumberjs-json-reporter)
 [![MIT license](http://img.shields.io/badge/license-MIT-brightgreen.svg)](http://opensource.org/licenses/MIT)
 
 [![NPM](https://nodei.co/npm/wdio-cucumberjs-json-reporter.png)](https://nodei.co/npm/wdio-cucumberjs-json-reporter/)
