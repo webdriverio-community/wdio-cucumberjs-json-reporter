@@ -16,7 +16,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/wswebcreation/wdio-cucumberjs-json-reporter.git"
+    "url": "git+https://github.com/webdriverio-community/wdio-cucumberjs-json-reporter.git"
   },
   "keywords": [
     "cucumberjs",
@@ -29,9 +29,9 @@
   "author": "Wim Selles <wim@wswebcreation.nl>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/wswebcreation/wdio-cucumberjs-json-reporter/issues"
+    "url": "https://github.com/webdriverio-community/wdio-cucumberjs-json-reporter/issues"
   },
-  "homepage": "https://github.com/wswebcreation/wdio-cucumberjs-json-reporter#readme",
+  "homepage": "https://github.com/webdriverio-community/wdio-cucumberjs-json-reporter#readme",
   "dependencies": {
     "@cucumber/gherkin": "^12.0.0",
     "@wdio/logger": "^6.0.16",
