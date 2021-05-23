@@ -33,31 +33,31 @@
   },
   "homepage": "https://github.com/webdriverio-community/wdio-cucumberjs-json-reporter#readme",
   "dependencies": {
-    "@cucumber/gherkin": "^12.0.0",
-    "@wdio/logger": "^6.0.16",
-    "@wdio/reporter": "^6.0.14",
-    "fs-extra": "^9.0.0"
+    "@cucumber/gherkin": "^19.0.2",
+    "@wdio/logger": "^7.5.3",
+    "@wdio/reporter": "^7.6.0",
+    "fs-extra": "^10.0.0"
   },
   "peerDependencies": {
-    "@wdio/cucumber-framework": "^6.1.1"
+    "@wdio/cucumber-framework": "^7.6.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.12.16",
-    "@babel/core": "^7.9.0",
-    "@babel/preset-env": "^7.9.5",
-    "@babel/register": "^7.9.0",
-    "@types/jest": "^25.2.1",
+    "@babel/cli": "^7.14.3",
+    "@babel/core": "^7.14.3",
+    "@babel/preset-env": "^7.14.2",
+    "@babel/register": "^7.13.16",
+    "@types/jest": "^26.0.23",
     "babel-eslint": "^10.1.0",
-    "babel-jest": "^25.4.0",
+    "babel-jest": "^26.6.3",
     "babel-plugin-transform-function-bind": "^6.22.0",
-    "eslint": "^6.8.0",
-    "eslint-plugin-import": "^2.20.2",
-    "husky": "^4.2.5",
-    "jest": "^25.4.0",
-    "np": "^6.2.2",
+    "eslint": "^7.27.0",
+    "eslint-plugin-import": "^2.23.3",
+    "husky": "^6.0.0",
+    "jest": "^26.6.3",
+    "np": "^7.5.0",
     "rimraf": "^3.0.2",
     "strip-ansi": "^6.0.0",
-    "yargs": "^15.3.1"
+    "yargs": "^17.0.1"
   },
   "jest": {
     "testMatch": [

@@ -8,8 +8,9 @@ A WDIO reporter that creates CucumberJS JSON files for WebdriverIO V6+
 
 [![NPM](https://nodei.co/npm/wdio-cucumberjs-json-reporter.png)](https://nodei.co/npm/wdio-cucumberjs-json-reporter/)
 
-> **THIS MODULE CAN ONLY WORK WITH WebdriverIO V6+!**
-> **For V5 please check the docs [here](https://github.com/wswebcreation/wdio-cucumberjs-json-reporter/tree/v5) and use version 1.3.0**
+> **THIS MODULE CAN ONLY WORK WITH WebdriverIO V7+!**\
+> **For V6 please check the docs [here](https://github.com/webdriverio-community/wdio-cucumberjs-json-reporter/tree/v6) and use version 2.0.4**\
+> **For V5 please check the docs [here](https://github.com/webdriverio-community/wdio-cucumberjs-json-reporter/tree/v5) and use version 1.3.0**
 
 > **THIS MODULE IS NOT A REPLACEMENT OF [wdio-multiple-cucumber-html-reporter](https://github.com/wswebcreation/wdio-multiple-cucumber-html-reporter). THAT MODULE ONLY SUPPORTS WEBDRIVERIO V4 AND ALSO CREATES A REPORT. THIS MODULE ONLY CREATES A JSON, NO REPORT!!**
 
@@ -189,7 +190,7 @@ cucumberJson.attach(browser.takeScreenshot(), 'image/png');
 ```
 
 ## Use it with multiple-cucumber-html-reporter
-The previous module for WebdriverIO V4, [wdio-multiple-cucumber-html-reporter](https://github.com/wswebcreation/wdio-multiple-cucumber-html-reporter),
+The previous module for WebdriverIO V4, [wdio-multiple-cucumber-html-reporter](https://github.com/webdriverio-community/wdio-multiple-cucumber-html-reporter),
 had a build in connection with the [multiple-cucumber-html-reporter](https://github.com/wswebcreation/multiple-cucumber-html-reporter)-module. **This is not the case for this
 reporter** because the new setup of WebdriverIO V5 is based on a instance which doesn't allow me to use the `onPrepare` and `onComplete` hook.
 
