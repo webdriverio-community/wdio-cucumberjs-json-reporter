@@ -1,0 +1,38 @@
+{
+    "compileOnSave": true,
+    "compilerOptions": {
+        "noFallthroughCasesInSwitch": true,
+        "allowUnreachableCode": false,
+        "allowUnusedLabels": false,
+        "strict": false,
+        // "diagnostics": true,
+        // "listFiles": true,
+        "strictNullChecks": false,
+        "noImplicitAny" : false,
+        "preserveSymlinks": true,
+        "allowJs": true,
+        "resolveJsonModule": true,
+        "sourceMap": true,
+        // "declaration": false,
+        "declaration": true,
+        // "declarationMap": true,
+        // "inlineSourceMap": true,
+        "inlineSources": true,
+        "typeRoots": ["./node_modules/@types","./lib/types" ],
+        "rootDir": "./",
+        "target": "ES2020",
+        "removeComments": true,
+        "module": "commonjs",
+        "moduleResolution": "node",
+        "baseUrl": ".",
+        "types": ["node", "@wdio/sync","jest","@types/fs-extra", "long"],
+        "allowSyntheticDefaultImports": true,
+        "esModuleInterop": true,
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
+        "outDir": "./dist"
+    },
+    "include": [
+      "**/*.ts"
+    ]
+}

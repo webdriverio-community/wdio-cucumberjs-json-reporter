@@ -1,0 +1,30 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558 
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "startWebDriver",
+            "type": "npm",
+            "script": "startWebDriver",
+            "problemMatcher": []
+        },
+        {
+            "label": "stopWebdriver",
+            "type": "npm",
+            "script": "stopWebdriver",
+            "problemMatcher": []
+        },
+        {
+            "type": "typescript",
+            "tsconfig": "tsconfig.json",
+            "problemMatcher": [
+                "$tsc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        }
+    ]
+}

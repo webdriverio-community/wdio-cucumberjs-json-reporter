@@ -1,0 +1,57 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            // "sourceMaps": true,
+            // "resolveSourceMapLocations": [
+            //     "${workspaceFolder}/**",
+            //     "!**/node_modules/**"
+            // ],
+            // "type": "pwa-node",
+            "type": "node",
+            "request": "launch",
+            "name": "Launch wdio typescript",
+            "timeout": 60000,
+            // "protocol": "inspector",
+            // "port": 5859,
+            "autoAttachChildProcesses": true,
+            // "program": "${workspaceRoot}/node_modules/@wdio/cli/bin/wdio.js",
+            "runtimeExecutable":"${workspaceRoot}/node_modules/@wdio/cli/bin/wdio.js",
+            "windows": {
+                "runtimeExecutable": "${workspaceRoot}/node_modules/.bin/wdio.cmd"
+            },
+            "outFiles": ["${workspaceFolder}/dist/**/*.js"],
+            "cwd": "${workspaceRoot}",
+            "console": "integratedTerminal",
+            // "outputCapture": "std",
+            "envFile":"${workspaceRoot}/webdriverio.env",
+            // "smartStep": true,
+            "args": [
+                "run",
+                "${workspaceFolder}/test/cucumber/configuration/js/local-conf.js",
+                // "${workspaceFolder}/test/cucumber/configuration/js/local-conf.js",
+                // "${workspaceFolder}/test/cucumber/configuration/ts/local-conf.ts",
+                "--spec",
+                "test/cucumber/features/ClickOnCheckboxes.feature",
+                "--browser=chrome",
+                "--debug",
+                " --maxInstances=1"
+            ],
+            "skipFiles": [
+                "<node_internals>/**",
+                "node_modules/**"
+              ],
+            "disableOptimisticBPs": true,
+            // "env": { 
+            //     "DEBUG": "1" 
+            //     // use an environment variable to be able 
+            //     // to toggle debug mode on and off 
+            //   }
+
+            
+        }
+    ]
+}

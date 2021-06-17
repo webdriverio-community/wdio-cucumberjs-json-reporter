@@ -1,22 +1,26 @@
 {
-  "name": "wdio-cucumberjs-json-reporter",
-  "version": "2.0.4",
+  "name": "wdio-cucumberjs-json-reporter-with-typescript-reporter",
+  "version": "3.0.7",
   "description": "A WDIO reporter that creates CucumberJS JSON files for WebdriverIO V5+",
-  "main": "./build/reporter.js",
+  "main": "./dist/lib/reporter.js",
   "scripts": {
-    "clean": "rimraf coverage build .tmp",
-    "compile": "babel lib/ --ignore **/*.spec.js --ignore **/mocks.js -d build/",
+    "build": "npm run-script clean && tsc",
+    "clean": "rimraf coverage dist .tmp",
+    "compile": "npm run-script clean && tsc",
     "test.lint": "eslint lib",
     "test": "jest --coverage",
     "release": "np",
     "precompile": "npm run clean",
     "prerelease": "npm run compile",
     "prepublish": "npm run compile",
-    "watch": "npm run compile -- --watch"
+    "watch": "npm run compile -- --watch",
+    "coveralls": "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage",
+    "update-package-json-dependencies": "npx ncu -u && npm i",
+    "eslint-fix-all": "npx eslint lib/**/**/*.ts lib/**/*.ts lib/*.ts --fix"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/webdriverio-community/wdio-cucumberjs-json-reporter.git"
+    "url": "git+https://github.com/wswebcreation/wdio-cucumberjs-json-reporter.git"
   },
   "keywords": [
     "cucumberjs",
@@ -29,59 +33,48 @@
   "author": "Wim Selles <wim@wswebcreation.nl>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/webdriverio-community/wdio-cucumberjs-json-reporter/issues"
+    "url": "https://github.com/wswebcreation/wdio-cucumberjs-json-reporter/issues"
   },
-  "homepage": "https://github.com/webdriverio-community/wdio-cucumberjs-json-reporter#readme",
+  "homepage": "https://github.com/wswebcreation/wdio-cucumberjs-json-reporter#readme",
   "dependencies": {
-    "@cucumber/gherkin": "^19.0.2",
-    "@wdio/logger": "^7.5.3",
-    "@wdio/reporter": "^7.6.0",
-    "fs-extra": "^10.0.0"
+    "@cucumber/gherkin": "16.0.0",
+    "@wdio/logger": "6.10.10",
+    "@wdio/reporter": "6.11.0",
+    "fs-extra": "9.1.0"
   },
   "peerDependencies": {
-    "@wdio/cucumber-framework": "^7.6.0"
+    "@wdio/cucumber-framework": "6.11.1"
   },
   "devDependencies": {
-    "@babel/cli": "^7.14.3",
-    "@babel/core": "^7.14.3",
-    "@babel/preset-env": "^7.14.2",
-    "@babel/register": "^7.13.16",
-    "@types/jest": "^26.0.23",
-    "babel-eslint": "^10.1.0",
-    "babel-jest": "^26.6.3",
-    "babel-plugin-transform-function-bind": "^6.22.0",
-    "eslint": "^7.27.0",
-    "eslint-plugin-import": "^2.23.3",
-    "husky": "^6.0.0",
-    "jest": "^26.6.3",
-    "np": "^7.5.0",
-    "rimraf": "^3.0.2",
-    "strip-ansi": "^6.0.0",
-    "yargs": "^17.0.1"
-  },
-  "jest": {
-    "testMatch": [
-      "<rootDir>/lib/tests/*.spec.js"
-    ],
-    "testPathIgnorePatterns": [
-      "<rootDir>/node_modules/"
-    ],
-    "coverageDirectory": "./coverage/",
-    "collectCoverage": true,
-    "coverageThreshold": {
-      "global": {
-        "branches": 100,
-        "functions": 100,
-        "lines": 100,
-        "statements": 100
-      }
-    },
-    "testEnvironment": "node",
-    "coveragePathIgnorePatterns": [
-      "node_modules/",
-      "tests/",
-      "docs/"
-    ]
+    "@types/fs-extra": "9.0.6",
+    "@types/long": "4.0.1",
+    "@types/node": "14.14.25",
+    "@typescript-eslint/eslint-plugin": "4.14.2",
+    "@typescript-eslint/eslint-plugin-tslint": "4.14.2",
+    "@typescript-eslint/parser": "4.14.2",
+    "@wdio/cucumber-framework": "^6.11.1",
+    "@wdio/sync": "6.11.0",
+    "babel-eslint": "10.1.0",
+    "babel-plugin-transform-function-bind": "6.22.0",
+    "coveralls": "3.1.0",
+    "eslint": "7.19.0",
+    "eslint-config-prettier": "7.2.0",
+    "eslint-plugin-import": "2.22.1",
+    "eslint-plugin-jsdoc": "31.6.0",
+    "eslint-plugin-prefer-arrow": "1.2.3",
+    "eslint-plugin-prettier": "3.3.1",
+    "eslint-plugin-tslint": "3.1.0",
+    "husky": "4.3.8",
+    "jest": "26.6.3",
+    "np": "7.2.0",
+    "npm-check-updates": "11.1.1",
+    "rimraf": "3.0.2",
+    "strip-ansi": "6.0.0",
+    "ts-jest": "26.5.0",
+    "tslint": "6.1.3",
+    "typescript": "4.1.3",
+    "webdriverio": "^6.12.1",
+    "yargs": "16.2.0"
   },
   "husky": {
     "hooks": {

@@ -1,14 +1,14 @@
 module.exports = {
-    plugins: [
-        'transform-function-bind',
+  plugins: [
+    'transform-function-bind',
+  ],
+  presets: [
+    [ '@babel/preset-env',
+      {
+        targets: {
+          node: 8
+        },
+      },
     ],
-    presets: [
-        [ '@babel/preset-env',
-            {
-                targets: {
-                    node: 8
-                },
-            },
-        ],
-    ],
-}
+  ],
+};

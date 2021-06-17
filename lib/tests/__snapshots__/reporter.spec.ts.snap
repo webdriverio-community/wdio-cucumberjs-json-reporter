@@ -66,21 +66,7 @@ Object {
   "keyword": "Feature",
   "line": 2,
   "name": "Create passed feature",
-  "tags": "",
-  "type": "suite",
-  "uri": "Can not be determined",
-}
-`;
-
-exports[`reporter getFeatureDataObject should be able to to create a feature JSON data object with no line data 1`] = `
-Object {
-  "description": "",
-  "elements": Array [],
-  "id": "create-passed-feature",
-  "keyword": "Feature",
-  "line": 0,
-  "name": "Create passed feature",
-  "tags": "",
+  "tags": Array [],
   "type": "suite",
   "uri": "Can not be determined",
 }
@@ -89,35 +75,19 @@ Object {
 exports[`reporter getScenarioDataObject should be able to to create a scenario JSON data object 1`] = `
 Object {
   "description": "",
-  "id": "create-passed-feature;hook-this-is-doing-nothing-because-it's-a-background\\"",
+  "id": "create-passed-feature;create-passed-feature",
   "keyword": "Scenario",
-  "line": 0,
-  "name": "Hook This is doing nothing because it's a background\\"",
+  "name": "Create passed feature",
   "steps": Array [],
-  "tags": "",
-  "type": "test",
+  "tags": Array [],
+  "type": "suite",
 }
 `;
 
 exports[`reporter getStepDataObject should be able to add arguments to the step if they are present 1`] = `
 Object {
   "arguments": Array [
-    Object {
-      "rows": Array [
-        Object {
-          "cells": Array [
-            "Cucumber",
-            "Cucumis sativus",
-          ],
-        },
-        Object {
-          "cells": Array [
-            "Burr Gherkin",
-            "Cucumis anguria",
-          ],
-        },
-      ],
-    },
+    Object {},
   ],
   "keyword": "Given",
   "line": 6,
@@ -152,7 +122,7 @@ exports[`reporter getStepDataObject should be able to to create a step JSON data
 Object {
   "arguments": Array [],
   "keyword": "Before",
-  "line": 0,
+  "line": "",
   "match": Object {
     "location": "can not be determined with webdriver.io",
   },
@@ -168,7 +138,7 @@ exports[`reporter getStepDataObject should be able to to create a step JSON data
 Object {
   "arguments": Array [],
   "keyword": "",
-  "line": 0,
+  "line": "",
   "match": Object {
     "location": "can not be determined with webdriver.io",
   },
@@ -176,22 +146,6 @@ Object {
   "result": Object {
     "duration": 0,
     "status": "",
-  },
-}
-`;
-
-exports[`reporter getStepDataObject should be able to to create a step JSON data object based on missing keyword data 1`] = `
-Object {
-  "arguments": Array [],
-  "keyword": "",
-  "line": 13,
-  "match": Object {
-    "location": "can not be determined with webdriver.io",
-  },
-  "name": "I load the Swag Labs demo website",
-  "result": Object {
-    "duration": 555000000,
-    "status": "passed",
   },
 }
 `;
@@ -241,12 +195,10 @@ Object {
         "tags": "",
       },
     ],
+    "foo": "bar",
     "id": "empty-feature",
     "keyword": "Feature",
     "line": 2,
-    "metadata": Object {
-      "foo": "bar",
-    },
     "name": "Empty feature",
     "tags": "",
   },
@@ -258,9 +210,7 @@ exports[`reporter onSuiteStart should add the CucumberJS feature object if it is
 exports[`reporter onSuiteStart should add the CucumberJS feature object if it is not available 2`] = `
 Object {
   "feature": Object {
-    "report": Object {
-      "keyword": "feature",
-    },
+    "keyword": "feature",
   },
 }
 `;
