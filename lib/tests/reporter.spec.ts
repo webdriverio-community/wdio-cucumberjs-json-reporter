@@ -12,7 +12,6 @@ import { HookStats, RunnerStats, SuiteStats, TestStats } from '@wdio/reporter';
 import { copySync, readJsonSync, readdirSync, removeSync } from 'fs-extra';
 import { Metadata } from '../metadata';
 import { Step } from '../models';
-// import Utils from '../utils';
 import WdioCucumberJsJsonReporter from '../reporter';
 import { fileExists } from './fileExists';
 
@@ -21,8 +20,9 @@ describe( 'reporter', () => {
 
   beforeEach( () => {
     tmpReporter = new WdioCucumberJsJsonReporter( {
-      jsonFolder: '.tmp/json-folder/',
+      jsonFolder:  '.tmp/json-folder/',
       language: 'en',
+      logFile: 'tmp/logfile.json'
     } );
   } );
 
@@ -34,8 +34,8 @@ describe( 'reporter', () => {
   } );
 
   describe( 'on create', () => {
-    it( 'should set the defaults  if no options are provided', () => {
-      const noOptionsReporter = new WdioCucumberJsJsonReporter( {} );
+    it( 'should set the defaults if only the logfile option is provided', () => {
+      const noOptionsReporter = new WdioCucumberJsJsonReporter( { logFile: 'tmp/logfile.json' } );
 
       expect( noOptionsReporter.options ).toMatchSnapshot();
     } );

@@ -1,5 +1,5 @@
-import { Tag } from '@wdio/reporter';
-import type { pickle } from 'cucumber';
+import { Argument, Tag } from '@wdio/reporter';
+
 
 export interface BrowserData{
   browser: {
@@ -59,7 +59,7 @@ export interface Scenario{
 }
 
 export interface Step{
-  arguments?: pickle.Argument[];
+  arguments?: (string | Argument)[];
   keyword?: string;
   name?: string;
   result?: {

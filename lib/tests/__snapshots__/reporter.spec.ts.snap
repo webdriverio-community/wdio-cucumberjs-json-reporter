@@ -150,10 +150,11 @@ Object {
 }
 `;
 
-exports[`reporter on create should set the defaults  if no options are provided 1`] = `
+exports[`reporter on create should set the defaults if only the logfile option is provided 1`] = `
 Object {
   "jsonFolder": ".tmp/json/",
   "language": "en",
+  "logFile": "tmp/logfile.json",
 }
 `;
 
@@ -161,6 +162,7 @@ exports[`reporter on create should verify initial properties 1`] = `
 Object {
   "jsonFolder": ".tmp/json-folder/",
   "language": "en",
+  "logFile": "tmp/logfile.json",
 }
 `;
 

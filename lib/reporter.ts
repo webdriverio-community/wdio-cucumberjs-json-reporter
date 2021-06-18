@@ -10,24 +10,26 @@ import {
   TEXT_PLAIN,
 } from './constants';
 import { CucumberJsAttachment, Feature, MetadataObject, Report, Scenario, Step } from './models';
-import WDIOReporter, { HookStats, RunnerStats, SuiteStats,TestStats, WDIOReporterOptions } from '@wdio/reporter';
+import WDIOReporter, { HookStats, RunnerStats, SuiteStats,TestStats } from '@wdio/reporter';
 import { existsSync, outputJsonSync, readJsonSync } from 'fs-extra';
 import { Metadata } from './metadata';
+import { Reporters } from '@wdio/types';
 import Utils from './utils';
 import logger from '@wdio/logger';
 import { resolve } from 'path';
+// Set Options = Reporters.Options;
 
 const log = logger( 'wdio-multiple-cucumber-html-reporter' );
 
 export class CucumberJsJsonReporter extends WDIOReporter {
-  public options: Partial<WDIOReporterOptions>;
+  public options: Partial<Reporters.Options>;
   public reporterName: string;
   public instanceMetadata: MetadataObject;
   public report: Report;
   public metadataClassObject: Metadata;
   public utilsObject: Utils;
 
-  public constructor( options: Partial<WDIOReporterOptions> ) {
+  public constructor( options: Partial<Reporters.Options> ) {
     super( options );
 
     if ( !options.jsonFolder ) {

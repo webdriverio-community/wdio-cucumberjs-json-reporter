@@ -1,4 +1,5 @@
 import { BrowserData , MetadataObject, cjson_metadata } from './models';
+import { Capabilities } from '@wdio/types';
 import { NOT_KNOWN } from './constants';
 import { RunnerStats } from '@wdio/reporter';
 import WebDriver from 'webdriver';
@@ -34,19 +35,15 @@ export class Metadata {
   public determineMetadata ( data: RunnerStats ): MetadataObject {
     let instanceData: MetadataObject;
     const currentCapabilities = data.capabilities;
-    // const capabilities: WebDriver.DesiredCapabilities = browser.options.capabilities as WebDriver.DesiredCapabilities;
     const optsCaps = browser?.options?.capabilities;
-    // const { capabilities: optsCaps = {}, requestedCapabilities = {} } = browser.options;
     const currentConfigCapabilities = data?.capabilities;
     const w3cCaps = browser?.options?.requestedCapabilities ;
-    // const { w3cCaps = {} } = requestedCapabilities;
-    const metadata: cjson_metadata = currentConfigCapabilities?.cjson_metadata // For WDIO V6
+    const metadata: cjson_metadata = <cjson_metadata>currentConfigCapabilities?.cjson_metadata // For WDIO V6
             || w3cCaps?.cjson_metadata // When an app is used to test
-            || optsCaps?.cjson_metadata // devtools
+            || ( <Capabilities.DesiredCapabilities>optsCaps )?.cjson_metadata // devtools
             || {} as cjson_metadata;
 
     // When an app is used to test
-    // eslint-disable-next-line @typescript-eslint/tslint/config
     if ( currentConfigCapabilities?.app || currentConfigCapabilities?.testobject_app_id || metadata?.app ) {
       instanceData = this.determineAppData( currentConfigCapabilities, metadata );
     } else {
@@ -169,5 +166,3 @@ export class Metadata {
     };
   }
 }
-
-

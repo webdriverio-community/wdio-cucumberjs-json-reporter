@@ -1,8 +1,6 @@
-import { HookStats, RunnerStats, SuiteStats , TestStats } from '@wdio/reporter';
+import { Argument, HookStats, RunnerStats, SuiteStats , TestStats } from '@wdio/reporter';
 import { Scenario, cjson_metadata } from '../../models';
-import WebDriver from 'webdriver';
 import { WriteStream } from 'fs';
-import { pickle } from 'cucumber';
 
 export const EMPTY_FEATURE = {
   keyword: 'Feature',
@@ -28,6 +26,8 @@ export const SMALL_RUNNER_STATS: RunnerStats = {
   duration: 0,
   complete: (): void => {},
   cid: '0-0',
+  sessionId: '',
+  instanceOptions: {},
   capabilities:
         {
           browserName: 'chrome',
@@ -50,7 +50,8 @@ export const SMALL_RUNNER_STATS: RunnerStats = {
     cjson_metadata: {} as cjson_metadata,
     logFile: '',
     stdout: true,
-    writeStream: {} as WriteStream
+    writeStream: {} as WriteStream,
+    capabilities:{}
   },
   isMultiremote: false
 };
@@ -61,13 +62,14 @@ export const FULL_RUNNER_STATS: RunnerStats = {
   duration: 0,
   complete: (): void => {},
   cid: '0-0',
+  instanceOptions: {},
   capabilities:
         {
           cjson_metadata: {
             app:{
               name: 'test',
               version: '1'
-            }
+            },
           } as cjson_metadata,
           app: '',
           acceptInsecureCerts: false,
@@ -91,7 +93,7 @@ export const FULL_RUNNER_STATS: RunnerStats = {
           mobileEmulationEnabled: false,
           nativeEvents: true,
           //   networkConnectionEnabled: false,
-          pageLoadStrategy: 'normal' as WebDriver.PageLoadingStrategy,
+        //   pageLoadStrategy: 'normal' as WebDriver.PageLoadingStrategy,
           platform: 'Mac OS X',
           proxy: {},
           rotatable: false,
@@ -121,7 +123,8 @@ export const FULL_RUNNER_STATS: RunnerStats = {
     } as cjson_metadata,
     logFile: '',
     stdout: true,
-    writeStream: {} as WriteStream
+    writeStream: {} as WriteStream,
+    capabilities: {}
   },
   specs: ['/Users/wswebcreation/Sauce/Git/webdriverio-cucumberjs/__tests__/features/passed.feature'],
   sessionId: 'b2e560a6ed31a6551fa3509109b71f14',
@@ -135,6 +138,7 @@ export const WDIO6_RUNNER_STATS: RunnerStats = {
   duration: 0,
   complete: (): void => {},
   cid: '0-0',
+  instanceOptions: {},
   capabilities: {
     cjson_metadata: {} as cjson_metadata,
     acceptInsecureCerts: false,
@@ -164,7 +168,8 @@ export const WDIO6_RUNNER_STATS: RunnerStats = {
     cjson_metadata: {} as cjson_metadata,
     logFile: '',
     stdout: true,
-    writeStream: {} as WriteStream
+    writeStream: {} as WriteStream,
+    capabilities:{}
   },
   specs: ['/Users/wimselles/Git/cucumberjs-json-demo/google.feature'],
   sessionId: '27e5b2b068aa1612e60d90a9e5164a7d',
@@ -184,7 +189,8 @@ export const SUITE_FEATURE_STATS: SuiteStats = {
   hooks: [] as HookStats[],
   suites: [] as SuiteStats[],
   hooksAndTests: [] as HookStats[],
-  complete: () => {}
+  complete: () => {},
+  file: ''
 };
 export const STEP_TEST_ONSTART_STATS: TestStats = {
   'type': 'test',
@@ -200,7 +206,8 @@ export const STEP_TEST_ONSTART_STATS: TestStats = {
   pass: () => {},
   skip: () => {},
   fail: () => {},
-  complete: () => {}
+  complete: () => {},
+  parent: ''
 };
 export const STEP_TEST_ONSTART_ARGUMENT_STATS: TestStats = {
   'type': 'test',
@@ -213,11 +220,12 @@ export const STEP_TEST_ONSTART_ARGUMENT_STATS: TestStats = {
   'fullTitle': 'Create failed feature: Open website: Given I open "http://webdriver.io/"',
   'output': [],
   'state': 'pending',
-  'argument': {} as pickle.Argument,
+  'argument': {} as Argument,
   pass: () => {},
   skip: () => {},
   fail: () => {},
-  complete: () => {}
+  complete: () => {},
+  parent: ''
 };
 export const STEP_HOOK_ONSTART_STATS: HookStats = {
   'type': 'hook',
@@ -272,7 +280,8 @@ export const TEST_SCENARIO_STATS_ERROR: TestStats = {
     name: 'Error',
     message: '\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\nExpected: \u001b[32m"bar"\u001b[39m\nReceived: \u001b[31m"foo"\u001b[39m',
     stack: 'Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\nExpected: \u001b[32m"bar"\u001b[39m\nReceived: \u001b[31m"foo"\u001b[39m\n    at World.<anonymous> (/Users/wimselles/Git/cucumberjs-json-demo/steps.js:17:19)'
-  }
+  },
+  parent: ''
 };
 export const TEST_EMPTY_STATS: HookStats = {
   title: '',
