@@ -93,7 +93,7 @@ export const FULL_RUNNER_STATS: RunnerStats = {
           mobileEmulationEnabled: false,
           nativeEvents: true,
           //   networkConnectionEnabled: false,
-        //   pageLoadStrategy: 'normal' as WebDriver.PageLoadingStrategy,
+          //   pageLoadStrategy: 'normal' as WebDriver.PageLoadingStrategy,
           platform: 'Mac OS X',
           proxy: {},
           rotatable: false,

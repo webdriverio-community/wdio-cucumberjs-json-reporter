@@ -75,12 +75,12 @@ Object {
 exports[`reporter getScenarioDataObject should be able to to create a scenario JSON data object 1`] = `
 Object {
   "description": "",
-  "id": "create-passed-feature;create-passed-feature",
+  "id": "create-passed-feature;hook-this-is-doing-nothing-because-it's-a-background\\"",
   "keyword": "Scenario",
-  "name": "Create passed feature",
+  "name": "Hook This is doing nothing because it's a background\\"",
   "steps": Array [],
   "tags": Array [],
-  "type": "suite",
+  "type": "test",
 }
 `;
 

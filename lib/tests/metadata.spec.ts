@@ -3,7 +3,7 @@ import { Browser } from 'webdriverio';
 import { Metadata } from '../metadata';
 import { NOT_KNOWN } from '../constants';
 import { Options } from '@wdio/types';
-import WebDriver from 'webdriver';
+// import WebDriver from 'webdriver';
 import { cjson_metadata } from '../models';
 
 describe( 'metadata', () => {

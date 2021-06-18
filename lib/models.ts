@@ -59,7 +59,7 @@ export interface Scenario{
 }
 
 export interface Step{
-  arguments?: (string | Argument)[];
+  arguments?: ( string | Argument )[];
   keyword?: string;
   name?: string;
   result?: {

@@ -6,7 +6,7 @@ import {
   STEP_TEST_ONSTART_STATS,
   SUITE_FEATURE_STATS,
   TEST_EMPTY_STATS,
-//   TEST_SCENARIO_STATS,
+  TEST_SCENARIO_STATS,
 } from './__mocks__/mocks';
 import { HookStats, RunnerStats, SuiteStats, TestStats } from '@wdio/reporter';
 import { copySync, readJsonSync, readdirSync, removeSync } from 'fs-extra';
@@ -259,7 +259,7 @@ describe( 'reporter', () => {
     it( 'should be able to to create a scenario JSON data object', () => {
 
       expect( tmpReporter.getScenarioDataObject(
-        SUITE_FEATURE_STATS,
+        TEST_SCENARIO_STATS,
         'create-passed-feature',
       ) ).toMatchSnapshot();
     } );

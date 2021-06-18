@@ -285,7 +285,7 @@ export class CucumberJsJsonReporter extends WDIOReporter {
    *  }
    * }
    */
-  public getScenarioDataObject( scenarioData: SuiteStats, id: string ): Scenario {
+  public getScenarioDataObject( scenarioData: TestStats | SuiteStats | HookStats, id: string ): Scenario {
     const scenarioName = scenarioData.title;
 
     return {
