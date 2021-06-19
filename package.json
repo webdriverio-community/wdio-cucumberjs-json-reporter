@@ -20,7 +20,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "url": "git+https://github.com/webdriverio-community/wdio-cucumberjs-json-reporter.git"
+    "url": "git+https://github.com/webdriverio-community/wdio-cucumberjs-json-reporter.git"
   },
   "keywords": [
     "cucumberjs",
