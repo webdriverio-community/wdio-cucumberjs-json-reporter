@@ -101,7 +101,22 @@ Object {
 exports[`reporter getStepDataObject should be able to add arguments to the step if they are present 1`] = `
 Object {
   "arguments": Array [
-    Object {},
+    Object {
+      "rows": Array [
+        Object {
+          "cells": Array [
+            "Cucumber",
+            "Cucumis sativus",
+          ],
+        },
+        Object {
+          "cells": Array [
+            "Burr Gherkin",
+            "Cucumis anguria",
+          ],
+        },
+      ],
+    },
   ],
   "keyword": "Given",
   "line": 6,
@@ -227,10 +242,12 @@ Object {
         "tags": "",
       },
     ],
-    "foo": "bar",
     "id": "empty-feature",
     "keyword": "Feature",
     "line": 2,
+    "metadata": Object {
+      "foo": "bar",
+    },
     "name": "Empty feature",
     "tags": "",
   },
@@ -243,6 +260,7 @@ exports[`reporter onSuiteStart should add the CucumberJS feature object if it is
 Object {
   "feature": Object {
     "keyword": "feature",
+    "metadata": Object {},
   },
 }
 `;

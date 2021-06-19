@@ -1,9 +1,10 @@
-import { Argument, HookStats, RunnerStats, SuiteStats , TestStats } from '@wdio/reporter';
-import { Scenario, cjson_metadata } from '../../models';
-import { Options } from '@wdio/types';
+import { Argument, HookStats, RunnerStats, SuiteStats, TestStats } from '@wdio/reporter';
+// import { Options } from '@wdio/types';
+import type { Capabilities, Options } from '@wdio/types';
+import { Feature, Scenario, cjson_metadata } from '../../models';
 import { WriteStream } from 'fs';
 
-export const EMPTY_FEATURE = {
+export const EMPTY_FEATURE: Feature = {
     keyword: 'Feature',
     description: '',
     line: 2,
@@ -12,7 +13,7 @@ export const EMPTY_FEATURE = {
     elements: [] as Scenario[],
     id: 'empty-feature',
 };
-export const EMPTY_SCENARIO = {
+export const EMPTY_SCENARIO: Scenario = {
     keyword: 'Scenario',
     description: '',
     name: 'Open website',
@@ -22,25 +23,25 @@ export const EMPTY_SCENARIO = {
 };
 export const SMALL_RUNNER_STATS: RunnerStats = {
     capabilities:
-          {
-              browserName: 'chrome',
-              chromedriverVersion: '2.46.628411 (3324f4c8be9ff2f70a05a30ebc72ffb013e1a71e)',
-              chromeOptions:{
-                  args:[ 'user-data-dir=/var/folders/rb/_hbqv7fn5114b206t2s05fs40000gn/T/.org.chromium.Chromium.uwkY0A'],
-              },
-              'goog:chromeOptions': {
-                  debuggerAddress: 'localhost:53158'
-              },
-              platform: 'Mac OS X',
-              proxy: {},
-              version: '75.0.3770.100',
-          },
+    {
+        browserName: 'chrome',
+        chromedriverVersion: '2.46.628411 (3324f4c8be9ff2f70a05a30ebc72ffb013e1a71e)',
+        chromeOptions: {
+            args: ['user-data-dir=/var/folders/rb/_hbqv7fn5114b206t2s05fs40000gn/T/.org.chromium.Chromium.uwkY0A'],
+        },
+        'goog:chromeOptions': {
+            debuggerAddress: 'localhost:53158'
+        },
+        platform: 'Mac OS X',
+        proxy: {},
+        version: '75.0.3770.100',
+    },
     config: <Options.Testrunner>{},
     type: 'runner',
     start: new Date( '2019-07-14T07:25:20.897Z' ),
     _duration: 0,
     duration: 0,
-    complete: (): void => {},
+    complete: (): void => { },
     cid: '0-0',
     sessionId: '',
     instanceOptions: {},
@@ -54,55 +55,99 @@ export const FULL_RUNNER_STATS: RunnerStats = {
     _duration: 0,
     cid: '0-0',
     capabilities:
-        {
-            cjson_metadata: {
-                app:{
-                    name: 'test',
-                    version: '1'
-                },
-            } as cjson_metadata,
-            app: '',
-            acceptInsecureCerts: false,
-            acceptSslCerts: false,
-            applicationCacheEnabled: false,
-            browserConnectionEnabled: false,
-            browserName: 'chrome',
-            chromedriverVersion: '2.46.628411 (3324f4c8be9ff2f70a05a30ebc72ffb013e1a71e)',
-            chromeOptions:{
-                args:[ 'user-data-dir=/var/folders/rb/_hbqv7fn5114b206t2s05fs40000gn/T/.org.chromium.Chromium.uwkY0A'],
-            },
-            cssSelectorsEnabled: true,
-            databaseEnabled: false,
-            'goog:chromeOptions': {
-                debuggerAddress: 'localhost:53158'
-            },
-            handlesAlerts: true,
-            //   hasTouchScreen: false,
-            javascriptEnabled: true,
-            locationContextEnabled: true,
-            mobileEmulationEnabled: false,
-            nativeEvents: true,
-            //   networkConnectionEnabled: false,
-            //   pageLoadStrategy: 'normal' as WebDriver.PageLoadingStrategy,
-            platform: 'Mac OS X',
-            proxy: {},
-            rotatable: false,
-            setWindowRect: true,
-            strictFileInteractability: false,
-            //   takesHeapSnapshot: true,
-            //   takesScreenshot: true,
-            timeouts: {
-                implicit: 0,
-                pageLoad: 300000,
-                script: 30000,
-            },
-            unexpectedAlertBehaviour: 'ignore',
-            version: '75.0.3770.100',
-            webStorageEnabled: true,
-            'webdriver.remote.sessionid': 'b2e560a6ed31a6551fa3509109b71f14'
+    {
+        cjson_metadata: {} as cjson_metadata,
+        acceptInsecureCerts: false,
+        acceptSslCerts: false,
+        applicationCacheEnabled: false,
+        browserConnectionEnabled: false,
+        browserName: 'chrome',
+        chromedriverVersion: '2.46.628411 (3324f4c8be9ff2f70a05a30ebc72ffb013e1a71e)',
+        chromeOptions: {
+            args: ['user-data-dir=/var/folders/rb/_hbqv7fn5114b206t2s05fs40000gn/T/.org.chromium.Chromium.uwkY0A'],
         },
+        cssSelectorsEnabled: true,
+        databaseEnabled: false,
+        'goog:chromeOptions': {
+            debuggerAddress: 'localhost:53158'
+        },
+        handlesAlerts: true,
+        javascriptEnabled: true,
+        locationContextEnabled: true,
+        mobileEmulationEnabled: false,
+        nativeEvents: true,
+        pageLoadStrategy: 'normal' as Capabilities.PageLoadingStrategy,
+        platform: 'Mac OS X',
+        proxy: {},
+        rotatable: false,
+        setWindowRect: true,
+        strictFileInteractability: false,
+        timeouts: {
+            implicit: 0,
+            pageLoad: 300000,
+            script: 30000,
+        },
+        unexpectedAlertBehaviour: 'ignore',
+        version: '75.0.3770.100',
+        webStorageEnabled: true,
+        'webdriver.remote.sessionid': 'b2e560a6ed31a6551fa3509109b71f14'
+    },
     sanitizedCapabilities: 'chrome.75_0_3770_100.macosx',
-    config:{
+    config: {
+        hostname: '127.0.0.1',
+        port: 4444,
+        protocol: 'http',
+        specs: ['/Users/wswebcreation/Sauce/Git/webdriverio-cucumberjs/__tests__/**/passed.feature'],
+        suites: {},
+        exclude: [],
+        outputDir: undefined,
+        logLevel: 'silent',
+        logLevels: {},
+        baseUrl: 'http://webdriver.io',
+        bail: 0,
+        waitforInterval: 500,
+        waitforTimeout: 20000,
+        framework: 'cucumber',
+        reporters: ['spec'],
+        maxInstances: 100,
+        maxInstancesPerCapability: 100,
+        filesToWatch: [],
+        connectionRetryTimeout: 90000,
+        connectionRetryCount: 3,
+        execArgv: [],
+        runnerEnv: {},
+        runner: 'local',
+        mochaOpts: {
+            timeout: 10000,
+        },
+        cucumberOpts:
+        {
+            timeout: 60000,
+            backtrace: false,
+            colors: true,
+            snippets: true,
+            source: true,
+            tagExpression: 'not @wip and not @ignore',
+            failAmbiguousDefinitions: false,
+            ignoreUndefinedDefinitions: false
+        },
+        onPrepare: [],
+        before: [],
+        beforeSession: [],
+        beforeSuite: [],
+        beforeHook: [],
+        beforeTest: [],
+        beforeCommand: [],
+        afterCommand: [],
+        afterTest: [],
+        afterHook: [],
+        afterSuite: [],
+        afterSession: [],
+        after: [],
+        onComplete: [],
+        onReload: [],
+        services: [],
+        capabilities: {},
         jsonFolder: '',
         language: 'en',
         cjson_metadata: {
@@ -114,7 +159,6 @@ export const FULL_RUNNER_STATS: RunnerStats = {
         logFile: '',
         stdout: true,
         writeStream: {} as WriteStream,
-        capabilities: {}
     },
     specs: ['/Users/wswebcreation/Sauce/Git/webdriverio-cucumberjs/__tests__/features/passed.feature'],
     sessionId: 'b2e560a6ed31a6551fa3509109b71f14',
@@ -130,16 +174,14 @@ export const WDIO6_RUNNER_STATS: RunnerStats = {
     _duration: 0,
     cid: '0-0',
     capabilities: {
-        cjson_metadata: {} as cjson_metadata,
         acceptInsecureCerts: false,
         browserName: 'chrome',
         browserVersion: '81.0.4044.122',
         chromedriverVersion: '2.46.628411 (3324f4c8be9ff2f70a05a30ebc72ffb013e1a71e)',
-        chromeOptions:{
-            args:[ 'user-data-dir=/var/folders/rb/_hbqv7fn5114b206t2s05fs40000gn/T/.org.chromium.Chromium.uwkY0A'],
+        chromeOptions: {
+            args: ['user-data-dir=/var/folders/rb/_hbqv7fn5114b206t2s05fs40000gn/T/.org.chromium.Chromium.uwkY0A'],
         },
         'goog:chromeOptions': { debuggerAddress: 'localhost:56189' },
-        // networkConnectionEnabled: false,
         pageLoadStrategy: 'normal',
         platformName: 'mac os x',
         proxy: {},
@@ -147,9 +189,7 @@ export const WDIO6_RUNNER_STATS: RunnerStats = {
         strictFileInteractability: false,
         timeouts: { implicit: 0, pageLoad: 300000, script: 30000 },
         unhandledPromptBehavior: 'dismiss and notify',
-        // 'webauthn:virtualAuthenticators': true,
         'webdriver.remote.sessionid': '27e5b2b068aa1612e60d90a9e5164a7d',
-    // sessionId: '27e5b2b068aa1612e60d90a9e5164a7d'
     },
     sanitizedCapabilities: 'chrome.81_0_4044_122.macosx',
     config: {
@@ -159,14 +199,14 @@ export const WDIO6_RUNNER_STATS: RunnerStats = {
         logFile: '',
         stdout: true,
         writeStream: {} as WriteStream,
-        capabilities:{}
+        capabilities: {}
     },
     specs: ['/Users/wimselles/Git/cucumberjs-json-demo/google.feature'],
     sessionId: '27e5b2b068aa1612e60d90a9e5164a7d',
     isMultiremote: false,
     retry: 0,
     duration: 0,
-    complete: (): void => {},
+    complete: (): void => { },
     instanceOptions: {},
 };
 export const SUITE_FEATURE_STATS: SuiteStats = {
@@ -182,7 +222,7 @@ export const SUITE_FEATURE_STATS: SuiteStats = {
     duration: 0,
     _duration: 0,
     hooksAndTests: [] as HookStats[],
-    complete: () => {},
+    complete: () => { },
     file: ''
 };
 
@@ -198,7 +238,7 @@ export const SUITE_FEATURE_UID: SuiteStats = {
     hooks: [],
     suites: [],
     hooksAndTests: [] as HookStats[],
-    complete: () => {},
+    complete: () => { },
     file: '',
     duration: 0
 };
@@ -214,10 +254,10 @@ export const STEP_TEST_ONSTART_STATS: TestStats = {
     'output': [],
     'state': 'pending',
     'duration': 0,
-    pass: () => {},
-    skip: () => {},
-    fail: () => {},
-    complete: () => {},
+    pass: () => { },
+    skip: () => { },
+    fail: () => { },
+    complete: () => { },
     parent: ''
 };
 export const STEP_TEST_ONSTART_ARGUMENT_STATS: TestStats = {
@@ -230,12 +270,27 @@ export const STEP_TEST_ONSTART_ARGUMENT_STATS: TestStats = {
     'fullTitle': 'Create failed feature: Open website: Given I open "http://webdriver.io/"',
     'output': [],
     'state': 'pending',
-    'argument': {} as Argument,
+    'argument': {
+        'rows': [
+            {
+                'cells': [
+                    'Cucumber',
+                    'Cucumis sativus'
+                ]
+            },
+            {
+                'cells': [
+                    'Burr Gherkin',
+                    'Cucumis anguria'
+                ]
+            }
+        ]
+    },
     duration: 0,
-    pass: () => {},
-    skip: () => {},
-    fail: () => {},
-    complete: () => {},
+    pass: () => { },
+    skip: () => { },
+    fail: () => { },
+    complete: () => { },
     parent: ''
 };
 export const STEP_HOOK_ONSTART_STATS: HookStats = {
@@ -248,11 +303,11 @@ export const STEP_HOOK_ONSTART_STATS: HookStats = {
     'parent': 'Create failed feature: Open website',
     'keyword': '',
     duration: 0,
-    complete: () => {}
+    complete: () => { }
 };
 export const TEST_SCENARIO_STATS: TestStats = {
     type: 'test',
-    start: new Date ( '2019-07-16T05:50:02.080Z' ),
+    start: new Date( '2019-07-16T05:50:02.080Z' ),
     _duration: 1534,
     uid: 'I open "http://webdriver.io/"6',
     cid: '0-0',
@@ -262,18 +317,18 @@ export const TEST_SCENARIO_STATS: TestStats = {
     keyword: 'Before',
     errors: [],
     end: new Date( '2020-05-24T06:32:50.002Z' ),
-    duration:1534,
+    duration: 1534,
     fullTitle: '',
     output: [],
-    pass:() => {},
-    skip:() => {},
-    fail:() => {},
-    complete: (): void => {}
+    pass: () => { },
+    skip: () => { },
+    fail: () => { },
+    complete: (): void => { }
 };
 
 export const TEST_NO_KEYWORD_STATS: TestStats = {
     type: 'test',
-    start: new Date ( '2021-02-13T15:52:15.079Z' ),
+    start: new Date( '2021-02-13T15:52:15.079Z' ),
     _duration: 555,
     uid: '13',
     cid: '0-0',
@@ -297,12 +352,12 @@ export const TEST_NO_KEYWORD_STATS: TestStats = {
     argument: undefined,
     retries: 0,
     state: 'passed',
-    end: new Date ( '2021-02-13T15:52:15.634Z' ),
-    pass:() => {},
-    skip:() => {},
-    fail:() => {},
+    end: new Date( '2021-02-13T15:52:15.634Z' ),
+    pass: () => { },
+    skip: () => { },
+    fail: () => { },
     parent: '',
-    complete: (): void => {},
+    complete: (): void => { },
     duration: 0
 };
 
@@ -328,10 +383,10 @@ export const TEST_SCENARIO_STATS_ERROR: TestStats = {
         stack: 'Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\nExpected: \u001b[32m"bar"\u001b[39m\nReceived: \u001b[31m"foo"\u001b[39m\n    at World.<anonymous> (/Users/wimselles/Git/cucumberjs-json-demo/steps.js:17:19)'
     },
     duration: 5,
-    pass: () => {},
-    skip: () => {},
-    fail: () => {},
-    complete: () => {},
+    pass: () => { },
+    skip: () => { },
+    fail: () => { },
+    complete: () => { },
     parent: ''
 };
 export const TEST_EMPTY_STATS: TestStats = {
@@ -341,16 +396,16 @@ export const TEST_EMPTY_STATS: TestStats = {
     fullTitle: '',
     output: [],
     state: 'pending',
-    pass:() => {},
-    skip:() => {},
-    fail:() => {},
+    pass: () => { },
+    skip: () => { },
+    fail: () => { },
     type: '',
     start: new Date(),
     parent: '',
     keyword: '',
     _duration: 0,
     cid: '',
-    complete: () => {},
+    complete: () => { },
 };
 
 // PAYLOADS

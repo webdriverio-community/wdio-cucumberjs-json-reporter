@@ -16,26 +16,24 @@ export interface AppData{
 }
 
 export interface MetadataObject {
-    foo?: string;
+    app?: {
+        name: string;
+        version: string;
+    };
+    browser?: {
+        name: string;
+        version: string;
+    };
+    device?: string;
+    platform?: {
+        name: string;
+        version: string;
+    };
     keyword?: string;
     type?: string;
-    metadata?: {
-        app?: {
-            name: string;
-            version: string;
-        };
-        browser?: {
-            name: string;
-            version: string;
-        };
-        device?: string;
-        platform?: {
-            name: string;
-            version: string;
-        };
-        foo?: string;
-    };
+    foo?: string;
 }
+
 
 export interface Report {
     feature: Feature;
@@ -47,6 +45,9 @@ export interface FeatureMetadata {
 }
 
 export interface Feature {
+    report?: {
+        keyword: string;
+    };
     keyword?: string;
     type?: string;
     metadata?: MetadataObject;

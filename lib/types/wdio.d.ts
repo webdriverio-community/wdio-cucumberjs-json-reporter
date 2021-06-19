@@ -48,8 +48,10 @@ declare module '@wdio/reporter' {
     export interface HookStats {
         description?: string;
         tags?: string[] | Tag[] | string;
-        keyword: string;
+        keyword?: string;
         argument?: Argument;
+        line?: number;
+        name?: string;
     // state?: 'failed' | 'passed' | 'pending';
     }
 
@@ -57,6 +59,8 @@ declare module '@wdio/reporter' {
         description?: string;
         tags?: string[] | Tag[] | string;
         keyword?: string;
+        name?: string;
+        id?: string;
         foo?: string | boolean;
         bar?: boolean;
     }
@@ -65,6 +69,13 @@ declare module '@wdio/reporter' {
         metadata?: {
             foo?: string;
         };
+    }
+
+    export interface SuiteStats{
+        keyword?: string;
+        line?: number;
+        name?: string;
+        id?: string;
     }
 }
 

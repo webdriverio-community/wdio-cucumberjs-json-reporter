@@ -89,112 +89,98 @@ exports[`metadata determineDeviceName should be able to return the not known dev
 
 exports[`metadata determineMetadata should be able to return browser metadata 1`] = `
 Object {
-  "metadata": Object {
-    "browser": Object {
-      "name": "mock-browserName",
-      "version": "mock-browserVersion",
-    },
-    "device": "not known",
-    "platform": Object {
-      "name": "not known",
-      "version": "not known",
-    },
+  "browser": Object {
+    "name": "mock-browserName",
+    "version": "mock-browserVersion",
+  },
+  "device": "not known",
+  "platform": Object {
+    "name": "not known",
+    "version": "not known",
   },
 }
 `;
 
 exports[`metadata determineMetadata should return app metadata based on the current.config.capabilities['cjson:metadata'].app 1`] = `
 Object {
-  "metadata": Object {
-    "app": Object {
-      "name": "mock-appName",
-      "version": "mock-appVersion",
-    },
-    "device": "not known",
-    "platform": Object {
-      "name": "not known",
-      "version": "not known",
-    },
+  "app": Object {
+    "name": "mock-appName",
+    "version": "mock-appVersion",
+  },
+  "device": "not known",
+  "platform": Object {
+    "name": "not known",
+    "version": "not known",
   },
 }
 `;
 
 exports[`metadata determineMetadata should return app metadata based on the currentCapabilities.app 1`] = `
 Object {
-  "metadata": Object {
-    "app": Object {
-      "name": "mock-appName",
-      "version": "mock-appVersion",
-    },
-    "device": "not known",
-    "platform": Object {
-      "name": "not known",
-      "version": "not known",
-    },
+  "app": Object {
+    "name": "mock-appName",
+    "version": "mock-appVersion",
+  },
+  "device": "not known",
+  "platform": Object {
+    "name": "not known",
+    "version": "not known",
   },
 }
 `;
 
 exports[`metadata determineMetadata should return app metadata based on the currentCapabilities.testobject_app_id 1`] = `
 Object {
-  "metadata": Object {
-    "app": Object {
-      "name": "mock-appName",
-      "version": "mock-appVersion",
-    },
-    "device": "not known",
-    "platform": Object {
-      "name": "not known",
-      "version": "not known",
-    },
+  "app": Object {
+    "name": "mock-appName",
+    "version": "mock-appVersion",
+  },
+  "device": "not known",
+  "platform": Object {
+    "name": "not known",
+    "version": "not known",
   },
 }
 `;
 
 exports[`metadata determineMetadata should return metadata based on the browser.options.capabilities 1`] = `
 Object {
-  "metadata": Object {
-    "browser": Object {
-      "name": "mock-browserName",
-      "version": "mock-browserVersion",
-    },
-    "device": "not known",
-    "platform": Object {
-      "name": "not known",
-      "version": "not known",
-    },
+  "browser": Object {
+    "name": "mock-browserName",
+    "version": "mock-browserVersion",
+  },
+  "device": "not known",
+  "platform": Object {
+    "name": "not known",
+    "version": "not known",
   },
 }
 `;
 
 exports[`metadata determineMetadata should return metadata based on the browser.options.capabilities if w3cCaps is empty 1`] = `
 Object {
-  "metadata": Object {
-    "browser": Object {
-      "name": "mock-browserName",
-      "version": "mock-browserVersion",
-    },
-    "device": "not known",
-    "platform": Object {
-      "name": "not known",
-      "version": "not known",
-    },
+  "browser": Object {
+    "name": "mock-browserName",
+    "version": "mock-browserVersion",
+  },
+  "device": "not known",
+  "platform": Object {
+    "name": "not known",
+    "version": "not known",
   },
 }
 `;
 
 exports[`metadata determineMetadata should return metadata based on the requestedCapabilities.w3cCaps.alwaysMatch 1`] = `
 Object {
-  "metadata": Object {
-    "browser": Object {
-      "name": "mock-browserName",
-      "version": "mock-browserVersion",
-    },
-    "device": "not known",
-    "platform": Object {
-      "name": "not known",
-      "version": "not known",
-    },
+  "browser": Object {
+    "name": "mock-browserName",
+    "version": "mock-browserVersion",
+  },
+  "device": "not known",
+  "platform": Object {
+    "name": "not known",
+    "version": "not known",
   },
 }
 `;

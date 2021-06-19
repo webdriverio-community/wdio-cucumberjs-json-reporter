@@ -53,14 +53,12 @@ export class Metadata {
         }
 
         return <MetadataObject>{
-            metadata:{
-                ...instanceData,
-                device: this.determineDeviceName( metadata, currentConfigCapabilities ),
-                platform: {
-                    name: this.determinePlatformName( metadata, currentCapabilities ),
-                    version: this.determinePlatformVersion( metadata ),
-                },
-            }
+            ...instanceData,
+            device: this.determineDeviceName( metadata, currentConfigCapabilities ),
+            platform: {
+                name: this.determinePlatformName( metadata, currentCapabilities ),
+                version: this.determinePlatformVersion( metadata ),
+            },
         };
     }
 

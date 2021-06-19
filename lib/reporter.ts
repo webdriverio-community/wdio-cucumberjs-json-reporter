@@ -111,7 +111,7 @@ export class CucumberJsJsonReporter extends WDIOReporter {
 
         /* istanbul ignore else */
         if ( !this.report.feature.metadata ) {
-            this.report.feature = { ...this.report.feature, ...this.instanceMetadata };
+            this.report.feature = { ...this.report.feature, metadata: { ...this.instanceMetadata } };
         }
 
         if( typeof this.report.feature.elements !== 'undefined' ){

@@ -253,7 +253,6 @@ describe( 'metadata', () => {
                 'version': 'mock-appVersion',
             };
 
-
             determineAppDataSpy = jest.spyOn( metadataClassObject, 'determineAppData' ).mockReturnValue( appMockData );
 
             expect( metadataClassObject.determineMetadata( FULL_RUNNER_STATS ) ).toMatchSnapshot();
