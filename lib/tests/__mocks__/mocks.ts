@@ -1,7 +1,6 @@
-import { Argument, HookStats, RunnerStats, SuiteStats, TestStats } from '@wdio/reporter';
-// import { Options } from '@wdio/types';
 import type { Capabilities, Options } from '@wdio/types';
 import { Feature, Scenario, cjson_metadata } from '../../models';
+import { HookStats, RunnerStats, SuiteStats, TestStats } from '@wdio/reporter';
 import { WriteStream } from 'fs';
 
 export const EMPTY_FEATURE: Feature = {

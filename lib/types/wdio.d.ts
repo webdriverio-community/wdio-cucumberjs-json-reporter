@@ -52,7 +52,6 @@ declare module '@wdio/reporter' {
         argument?: Argument;
         line?: number;
         name?: string;
-    // state?: 'failed' | 'passed' | 'pending';
     }
 
     export interface TestStats {
@@ -78,11 +77,3 @@ declare module '@wdio/reporter' {
         id?: string;
     }
 }
-
-// declare module 'webdriverio' {
-// //   export namespace sync {
-//   export interface WebdriverIOSync{
-//     test?: string;
-//   }
-// //   }
-// }

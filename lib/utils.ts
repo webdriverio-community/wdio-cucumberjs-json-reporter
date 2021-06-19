@@ -5,12 +5,6 @@ import { dialects } from '@cucumber/gherkin';
 import stripAnsi from 'strip-ansi';
 
 export default class Utils {
-    // readonly utilFunctions = {
-    //     containsSteps,
-    //     getFailedMessage,
-    //     keywordStartsWith,
-    // };
-
     /**
      * Return the list of step keywords in the specified language
      *
@@ -72,4 +66,3 @@ export default class Utils {
         return ( regex.exec( title ) || [] ).pop() as string;
     }
 }
-
