@@ -1,6 +1,6 @@
 {
-  "name": "wdio-cucumberjs-json-reporter-with-typescript-reporter",
-  "version": "3.0.8",
+  "name": "wdio-cucumberjs-json-reporter",
+  "version": "2.0.4",
   "description": "A WDIO reporter that creates CucumberJS JSON files for WebdriverIO V5+",
   "main": "./dist/lib/reporter.js",
   "scripts": {
@@ -20,7 +20,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/wswebcreation/wdio-cucumberjs-json-reporter.git"
+    "url": "url": "git+https://github.com/webdriverio-community/wdio-cucumberjs-json-reporter.git"
   },
   "keywords": [
     "cucumberjs",
@@ -33,9 +33,9 @@
   "author": "Wim Selles <wim@wswebcreation.nl>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/wswebcreation/wdio-cucumberjs-json-reporter/issues"
+    "url": "https://github.com/webdriverio-community/wdio-cucumberjs-json-reporter/issues"
   },
-  "homepage": "https://github.com/wswebcreation/wdio-cucumberjs-json-reporter#readme",
+  "homepage": "https://github.com/webdriverio-community/wdio-cucumberjs-json-reporter#readme",
   "dependencies": {
     "@cucumber/gherkin": "19.0.3",
     "@wdio/logger": "7.7.0",
