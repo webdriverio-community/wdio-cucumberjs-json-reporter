@@ -22,11 +22,3 @@ yarn.lock
 
 # Some folders
 .tmp/
-.github/
-lib/tests/
-.idea/
-.tmp/
-coverage/
-reports/
-test/
-docs/
