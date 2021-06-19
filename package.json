@@ -1,6 +1,6 @@
 {
   "name": "wdio-cucumberjs-json-reporter-with-typescript-reporter",
-  "version": "3.0.7",
+  "version": "3.0.8",
   "description": "A WDIO reporter that creates CucumberJS JSON files for WebdriverIO V5+",
   "main": "./dist/lib/reporter.js",
   "scripts": {
