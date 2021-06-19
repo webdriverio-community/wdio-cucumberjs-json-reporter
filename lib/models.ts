@@ -1,41 +1,55 @@
 import { Argument, Tag } from '@wdio/reporter';
 
 
-export interface BrowserData{
+export interface BrowserData {
   browser: {
     name: string;
     version: string;
   };
 }
 
-export interface MetadataObject{
+export interface AppData{
   app?: {
     name: string;
     version: string;
   };
-  browser?: {
-    name: string;
-    version: string;
-  };
-  device?: string;
-  platform?: {
-    name: string;
-    version: string;
-  };
+}
+
+export interface MetadataObject {
   foo?: string;
-}
-
-export interface Report{
-  feature: Feature;
-}
-
-export interface Feature{
   keyword?: string;
   type?: string;
   metadata?: {
-    keyword: string;
-    type: string;
+    app?: {
+      name: string;
+      version: string;
+    };
+    browser?: {
+      name: string;
+      version: string;
+    };
+    device?: string;
+    platform?: {
+      name: string;
+      version: string;
+    };
+    foo?: string;
   };
+}
+
+export interface Report {
+  feature: Feature;
+}
+
+export interface FeatureMetadata {
+  keyword: string;
+  type: string;
+}
+
+export interface Feature {
+  keyword?: string;
+  type?: string;
+  metadata?: MetadataObject;
   description?: string;
   line?: number;
   name?: string;
@@ -45,7 +59,7 @@ export interface Feature{
   id?: string;
 }
 
-export interface Scenario{
+export interface Scenario {
   keyword?: string;
   type?: string;
   description?: string;
@@ -58,7 +72,7 @@ export interface Scenario{
   foobar?: string;
 }
 
-export interface Step{
+export interface Step {
   arguments?: ( string | Argument )[];
   keyword?: string;
   name?: string;
@@ -75,26 +89,26 @@ export interface Step{
   foo?: string;
 }
 
-export interface Result extends ErrorMessage{
+export interface Result extends ErrorMessage {
   status: string;
   duration: number;
 }
 
-export interface CucumberJsAttachment{
+export interface CucumberJsAttachment {
   data: string;
   type: string;
 }
 
-export interface Embedding{
+export interface Embedding {
   data: string;
   mime_type: string;
 }
 
-export interface ErrorMessage{
+export interface ErrorMessage {
   error_message?: string;
 }
 
-export interface cjson_metadata{
+export interface cjson_metadata {
   browser?: {
     name: string;
     version: string;

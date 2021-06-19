@@ -1,4 +1,4 @@
-import { BrowserData , MetadataObject, cjson_metadata } from './models';
+import { AppData, BrowserData, MetadataObject, cjson_metadata } from './models';
 import { Capabilities } from '@wdio/types';
 import { NOT_KNOWN } from './constants';
 import { RunnerStats } from '@wdio/reporter';
@@ -33,11 +33,11 @@ export class Metadata {
    * ```
    */
   public determineMetadata ( data: RunnerStats ): MetadataObject {
-    let instanceData: MetadataObject;
+    let instanceData: AppData | BrowserData;
     const currentCapabilities = data.capabilities;
     const optsCaps = browser?.options?.capabilities;
     const currentConfigCapabilities = data?.capabilities;
-    const w3cCaps = browser?.options?.requestedCapabilities ;
+    const w3cCaps = browser?.options?.requestedCapabilities;
     const metadata: cjson_metadata = <cjson_metadata>currentConfigCapabilities?.cjson_metadata // For WDIO V6
             || w3cCaps?.cjson_metadata // When an app is used to test
             || ( <Capabilities.DesiredCapabilities>optsCaps )?.cjson_metadata // devtools
@@ -51,13 +51,15 @@ export class Metadata {
       instanceData = this.determineBrowserData( currentCapabilities, currentConfigCapabilities, metadata );
     }
 
-    return <MetadataObject> {
-      ...instanceData,
-      device: this.determineDeviceName( metadata, currentConfigCapabilities ),
-      platform: {
-        name: this.determinePlatformName( metadata, currentCapabilities ),
-        version: this.determinePlatformVersion( metadata ),
-      },
+    return <MetadataObject>{
+      metadata:{
+        ...instanceData,
+        device: this.determineDeviceName( metadata, currentConfigCapabilities ),
+        platform: {
+          name: this.determinePlatformName( metadata, currentCapabilities ),
+          version: this.determinePlatformVersion( metadata ),
+        },
+      }
     };
   }
 
@@ -119,7 +121,7 @@ export class Metadata {
    *  }
    * }
    */
-  public determineAppData ( currentConfigCapabilities: WebDriver.DesiredCapabilities, metadata: cjson_metadata ): MetadataObject {
+  public determineAppData ( currentConfigCapabilities: WebDriver.DesiredCapabilities, metadata: cjson_metadata ): AppData {
     const metaAppName: string = ( metadata?.app && metadata.app?.name ) ? metadata?.app?.name : 'No metadata.app.name available';
     const metaAppVersion: string = ( metadata?.app && metadata.app.version ) ? metadata.app.version : 'No metadata.app.version available';
     const appPath = ( currentConfigCapabilities.app || currentConfigCapabilities.testobject_app_id || metaAppName );
