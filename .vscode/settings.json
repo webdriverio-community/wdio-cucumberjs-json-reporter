@@ -7,53 +7,18 @@
     "**/CVS": true,
     "**/.DS_Store": true,
     "**/node_modules": true,
-    // "**/dist": true
+    "**/dist": true
   },
   "editor.tabSize": 6,
   "javascript.format.insertSpaceBeforeFunctionParenthesis": true,
   "typescript.format.insertSpaceBeforeFunctionParenthesis": true,
   "typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis": true,
   "prettier.bracketSpacing": true,
-  "cucumberautocomplete.strictGherkinValidation": true,
-  "cucumberautocomplete.customParameters": [
-      {
-        "parameter":"{ab}",
-        "value":"(a|b)"
-      },
-      {
-        "parameter": "/\{a.*\}/",
-        "value": "a"
-      },
-      {
-        "parameter": "{string}",
-        "value": "'[^']+'"
-      }
-    ],
-  "cucumberautocomplete.pages": {
-      "users": "test/features/page_objects/users.storage.js",
-      "pathes": "test/features/page_objects/pathes.storage.js",
-      "main": "test/features/support/page_objects/main.page.js"
-  },
-  "cucumberautocomplete.stepRegExSymbol": "'",
-  // "cucumberautocomplete.steps": [
-  //     "test/cucumber/step-definitions/*.ts"
-  // ],
-  "cucumberautocomplete.syncfeatures": "test/cucumber/features/*feature",
-  "cucumberautocomplete.strictGherkinCompletion": true,
-  "cucumberautocomplete.smartSnippets": true,
-  "cucumberautocomplete.stepsInvariants": true,
-  "cucumberautocomplete.skipDocStringsFormat": true,
-  "cucumberautocomplete.formatConfOverride": {
-      // "And": 3,
-      "But": "relative"
-  },
-  "cucumberautocomplete.onTypeFormat": true,
   "editor.quickSuggestions": {
       "comments": false,
       "strings": true,
       "other": true
   },
-  "cucumberautocomplete.gherkinDefinitionPart": "(Given|When|Then)\\(",
   "eslint.validate": [
     "javascript",
     "typescript",
@@ -76,8 +41,4 @@
     "editor.codeActionsOnSave": {
       "source.fixAll.eslint": true
     },
-    "wdioAdapterExplorer.logpanel": true,
-    "wdioAdapterExplorer.featuresPath": "test/cucumber/features",
-    "wdioAdapterExplorer.featuresLanguage": "en"
-
 }

@@ -95,7 +95,7 @@ module.exports = {
         "@typescript-eslint/explicit-module-boundary-types": "warn",
         "@typescript-eslint/indent": [
             "error",
-            2,
+            4,
             {
                 "ObjectExpression": "first",
                 "FunctionDeclaration": {
