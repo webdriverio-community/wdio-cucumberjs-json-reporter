@@ -44,6 +44,7 @@ export class Metadata {
             || {} as cjson_metadata;
 
     // When an app is used to test
+    // eslint-disable-next-line @typescript-eslint/tslint/config
     if ( currentConfigCapabilities?.app || currentConfigCapabilities?.testobject_app_id || metadata?.app ) {
       instanceData = this.determineAppData( currentConfigCapabilities, metadata );
     } else {

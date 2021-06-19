@@ -5,8 +5,10 @@ import {
   STEP_TEST_ONSTART_ARGUMENT_STATS,
   STEP_TEST_ONSTART_STATS,
   SUITE_FEATURE_STATS,
+  SUITE_FEATURE_UID,
   TEST_EMPTY_STATS,
-  TEST_SCENARIO_STATS,
+  TEST_NO_KEYWORD_STATS,
+  TEST_SCENARIO_STATS
 } from './__mocks__/mocks';
 import { HookStats, RunnerStats, SuiteStats, TestStats } from '@wdio/reporter';
 import { copySync, readJsonSync, readdirSync, removeSync } from 'fs-extra';
@@ -253,6 +255,11 @@ describe( 'reporter', () => {
 
       expect( tmpReporter.getFeatureDataObject( SUITE_FEATURE_STATS ) ).toMatchSnapshot();
     } );
+
+    it( 'should be able to to create a feature JSON data object with no line data', () => {
+
+      expect( tmpReporter.getFeatureDataObject( SUITE_FEATURE_UID ) ).toMatchSnapshot();
+    } );
   } );
 
   describe( 'getScenarioDataObject', () => {
@@ -290,6 +297,11 @@ describe( 'reporter', () => {
 
     it( 'should be able to to create a step JSON data object based on malformed data', () => {
       expect( tmpReporter.getStepDataObject( TEST_EMPTY_STATS ) ).toMatchSnapshot();
+      expect( getFailedMessageSpy ).toHaveBeenCalled();
+    } );
+
+    it( 'should be able to to create a step JSON data object based on missing keyword data', () => {
+      expect( tmpReporter.getStepDataObject( TEST_NO_KEYWORD_STATS ) ).toMatchSnapshot();
       expect( getFailedMessageSpy ).toHaveBeenCalled();
     } );
   } );

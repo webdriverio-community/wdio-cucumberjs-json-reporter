@@ -72,6 +72,20 @@ Object {
 }
 `;
 
+exports[`reporter getFeatureDataObject should be able to to create a feature JSON data object with no line data 1`] = `
+Object {
+  "description": "",
+  "elements": Array [],
+  "id": "create-passed-feature",
+  "keyword": "Feature",
+  "line": NaN,
+  "name": "Create passed feature",
+  "tags": Array [],
+  "type": "suite",
+  "uri": "Can not be determined",
+}
+`;
+
 exports[`reporter getScenarioDataObject should be able to to create a scenario JSON data object 1`] = `
 Object {
   "description": "",
@@ -145,7 +159,23 @@ Object {
   "name": "",
   "result": Object {
     "duration": 0,
-    "status": "",
+    "status": "pending",
+  },
+}
+`;
+
+exports[`reporter getStepDataObject should be able to to create a step JSON data object based on missing keyword data 1`] = `
+Object {
+  "arguments": Array [],
+  "keyword": "",
+  "line": 3,
+  "match": Object {
+    "location": "can not be determined with webdriver.io",
+  },
+  "name": "e",
+  "result": Object {
+    "duration": 555000000,
+    "status": "passed",
   },
 }
 `;
