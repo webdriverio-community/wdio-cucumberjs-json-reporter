@@ -2,7 +2,7 @@
   "name": "wdio-cucumberjs-json-reporter",
   "version": "2.0.4",
   "description": "A WDIO reporter that creates CucumberJS JSON files for WebdriverIO V5+",
-  "main": "./dist/lib/reporter.js",
+  "main": "./dist/reporter.js",
   "scripts": {
     "build": "npm run-script clean && tsc",
     "clean": "rimraf coverage dist .tmp",
