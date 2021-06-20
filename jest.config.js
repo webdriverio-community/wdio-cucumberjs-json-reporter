@@ -1,7 +1,7 @@
 module.exports = {
 roots: [
-        "<rootDir>/lib"
-      ],
+    "<rootDir>/lib".
+  ],
   preset: 'ts-jest',
   testEnvironment: 'node',
   testMatch: [
@@ -29,4 +29,3 @@ roots: [
     "^.+\\.(ts|tsx)$": "ts-jest"
   },
 };
-
