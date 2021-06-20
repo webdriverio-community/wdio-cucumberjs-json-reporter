@@ -1,6 +1,6 @@
 module.exports = {
 roots: [
-    "<rootDir>/lib".
+    "<rootDir>/lib"
   ],
   preset: 'ts-jest',
   testEnvironment: 'node',

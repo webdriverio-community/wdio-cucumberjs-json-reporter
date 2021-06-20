@@ -1,8 +1,8 @@
 import { FULL_RUNNER_STATS, SMALL_RUNNER_STATS, WDIO6_RUNNER_STATS } from './__mocks__/mocks';
+import { Options, W3CCapabilitiesExtended, WebdriverIOExtended } from '@wdio/types';
 import { Browser } from 'webdriverio';
 import { Metadata } from '../metadata';
 import { NOT_KNOWN } from '../constants';
-import { Options } from '@wdio/types';
 import WebDriver from 'webdriver';
 import { cjson_metadata } from '../models';
 
@@ -195,13 +195,13 @@ describe( 'metadata', () => {
             global.browser = {
                 options: {
                     requestedCapabilities: {
-                        w3cCaps:{
-                            alwaysMatch:{
+                        w3cCaps: {
+                            alwaysMatch: {
                                 foo: true,
                             }
                         }
                     },
-                },
+                } as WebdriverIOExtended,
             } as Browser<'sync'>;
             determineAppDataSpy = jest.spyOn( metadataClassObject, 'determineAppData' );
             determineBrowserDataSpy = jest.spyOn( metadataClassObject, 'determineBrowserData' ).mockReturnValue( browserMockData );
@@ -216,7 +216,7 @@ describe( 'metadata', () => {
         } );
 
         it( 'should return app metadata based on the currentCapabilities.app', () => {
-            FULL_RUNNER_STATS.capabilities.app = 'current.config.capabilities.app';
+            ( FULL_RUNNER_STATS.capabilities as W3CCapabilitiesExtended ).app = 'current.config.capabilities.app';
 
             determineAppDataSpy = jest.spyOn( metadataClassObject, 'determineAppData' ).mockReturnValue( appMockData );
 
@@ -227,12 +227,12 @@ describe( 'metadata', () => {
             expect( determinePlatformNameSpy ).toHaveBeenCalledTimes( 1 );
             expect( determinePlatformVersionSpy ).toHaveBeenCalledTimes( 1 );
 
-            delete FULL_RUNNER_STATS.capabilities.app;
+            delete ( FULL_RUNNER_STATS.capabilities as W3CCapabilitiesExtended ).app;
             determineAppDataSpy.mockClear();
         } );
 
         it( 'should return app metadata based on the currentCapabilities.testobject_app_id', () => {
-            FULL_RUNNER_STATS.capabilities.testobject_app_id = 'current.config.capabilities.testobject_app_id';
+            ( FULL_RUNNER_STATS.capabilities as W3CCapabilitiesExtended ).testobject_app_id = 'current.config.capabilities.testobject_app_id';
 
             determineAppDataSpy = jest.spyOn( metadataClassObject, 'determineAppData' ).mockReturnValue( appMockData );
 
@@ -243,12 +243,12 @@ describe( 'metadata', () => {
             expect( determinePlatformNameSpy ).toHaveBeenCalledTimes( 1 );
             expect( determinePlatformVersionSpy ).toHaveBeenCalledTimes( 1 );
 
-            delete FULL_RUNNER_STATS.capabilities.testobject_app_id;
+            delete ( FULL_RUNNER_STATS.capabilities as W3CCapabilitiesExtended ).testobject_app_id;
             determineAppDataSpy.mockClear();
         } );
 
         it( 'should return app metadata based on the current.config.capabilities[\'cjson:metadata\'].app', () => {
-            FULL_RUNNER_STATS.capabilities.cjson_metadata.app = {
+            ( FULL_RUNNER_STATS.capabilities as W3CCapabilitiesExtended ).cjson_metadata.app = {
                 'name': 'mock-appName',
                 'version': 'mock-appVersion',
             };
@@ -262,7 +262,7 @@ describe( 'metadata', () => {
             expect( determinePlatformNameSpy ).toHaveBeenCalledTimes( 1 );
             expect( determinePlatformVersionSpy ).toHaveBeenCalledTimes( 1 );
 
-            delete FULL_RUNNER_STATS.capabilities.cjson_metadata.app;
+            delete ( FULL_RUNNER_STATS.capabilities as W3CCapabilitiesExtended ).cjson_metadata.app;
             determineAppDataSpy.mockClear();
         } );
 
@@ -290,7 +290,7 @@ describe( 'metadata', () => {
             global.browser = {
                 options: {
                     requestedCapabilities: {
-                        w3cCaps:{
+                        w3cCaps: {
 
                         }
                     },
@@ -298,7 +298,7 @@ describe( 'metadata', () => {
                         browserName: 'chrome',
                         'cjson_metadata': {},
                     }
-                },
+                } as WebdriverIOExtended,
             } as Browser<'sync'>;
 
             determineAppDataSpy = jest.spyOn( metadataClassObject, 'determineBrowserData' ).mockReturnValue( browserMockData );
@@ -314,7 +314,7 @@ describe( 'metadata', () => {
                         browserName: 'chrome',
                         'cjson_metadata': {},
                     },
-                },
+                } as WebdriverIOExtended,
 
             } as Browser<'sync'>;
 

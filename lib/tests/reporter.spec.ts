@@ -10,7 +10,7 @@ import {
     TEST_NO_KEYWORD_STATS,
     TEST_SCENARIO_STATS
 } from './__mocks__/mocks';
-import { HookStats, RunnerStats, SuiteStats, TestStats } from '@wdio/reporter';
+import { HookStatsExtended, RunnerStatsExtended, SuiteStatsExtended, TestStatsExtended } from '@wdio/reporter';
 import { copySync, readJsonSync, readdirSync, removeSync } from 'fs-extra';
 import { Metadata } from '../metadata';
 import { Step } from '../models';
@@ -22,7 +22,7 @@ describe( 'reporter', () => {
 
     beforeEach( () => {
         tmpReporter = new WdioCucumberJsJsonReporter( {
-            jsonFolder:  '.tmp/json-folder/',
+            jsonFolder: '.tmp/json-folder/',
             language: 'en',
             logFile: 'tmp/logfile.json'
         } );
@@ -57,7 +57,7 @@ describe( 'reporter', () => {
 
             expect( tmpReporter.instanceMetadata ).toBeNull();
 
-            tmpReporter.onRunnerStart( {} as RunnerStats );
+            tmpReporter.onRunnerStart( {} as RunnerStatsExtended );
 
             expect( determineMetadataSpy ).toHaveBeenCalled();
             expect( tmpReporter.instanceMetadata ).toEqual( metadata );
@@ -70,7 +70,7 @@ describe( 'reporter', () => {
             tmpReporter.instanceMetadata = metadata;
             expect( tmpReporter.instanceMetadata ).toEqual( metadata );
 
-            tmpReporter.onRunnerStart( {} as RunnerStats );
+            tmpReporter.onRunnerStart( {} as RunnerStatsExtended );
 
             expect( determineMetadataSpy ).not.toHaveBeenCalled();
         } );
@@ -83,7 +83,7 @@ describe( 'reporter', () => {
 
             expect( tmpReporter.report ).toMatchSnapshot();
 
-            tmpReporter.onSuiteStart( {} as SuiteStats );
+            tmpReporter.onSuiteStart( {} as SuiteStatsExtended );
 
             expect( getFeatureDataObjectSpy ).toHaveBeenCalled();
             expect( tmpReporter.report ).toMatchSnapshot();
@@ -99,7 +99,7 @@ describe( 'reporter', () => {
 
             tmpReporter.instanceMetadata = metadata;
             tmpReporter.report.feature = EMPTY_FEATURE;
-            tmpReporter.onSuiteStart( {} as SuiteStats );
+            tmpReporter.onSuiteStart( {} as SuiteStatsExtended );
 
             expect( getFeatureDataObjectSpy ).not.toHaveBeenCalled();
             expect( tmpReporter.report ).toMatchSnapshot();
@@ -113,7 +113,7 @@ describe( 'reporter', () => {
 
             expect( tmpReporter.report.feature.elements.length ).toEqual( 0 );
 
-            tmpReporter.onSuiteStart( {} as SuiteStats );
+            tmpReporter.onSuiteStart( {} as SuiteStatsExtended );
 
             expect( getFeatureDataObjectSpy ).not.toHaveBeenCalled();
             expect( getScenarioDataObjectSpy ).toHaveBeenCalledWith( {}, EMPTY_FEATURE.id );
@@ -125,9 +125,9 @@ describe( 'reporter', () => {
         it( 'should call `addStepData` to add a pending before step', () => {
             const getCurrentScenarioSpy = jest.spyOn( tmpReporter, 'getCurrentScenario' ).mockReturnValue( EMPTY_SCENARIO );
             const containsStepsSpy = jest.spyOn( tmpReporter.utilsObject, 'containsSteps' ).mockReturnValue( false );
-            const addStepDataSpy = jest.spyOn( tmpReporter, 'addStepData' ).mockReturnValue( );
+            const addStepDataSpy = jest.spyOn( tmpReporter, 'addStepData' ).mockReturnValue();
 
-            tmpReporter.onHookStart( {} as HookStats );
+            tmpReporter.onHookStart( {} as HookStatsExtended );
 
             expect( getCurrentScenarioSpy ).toHaveBeenCalledTimes( 1 );
             expect( containsStepsSpy ).toHaveBeenCalledTimes( 1 );
@@ -137,9 +137,9 @@ describe( 'reporter', () => {
         it( 'should call `addStepData` to add a pending after step', () => {
             const getCurrentScenarioSpy = jest.spyOn( tmpReporter, 'getCurrentScenario' ).mockReturnValue( EMPTY_SCENARIO );
             const containsStepsSpy = jest.spyOn( tmpReporter.utilsObject, 'containsSteps' ).mockReturnValue( true );
-            const addStepDataSpy = jest.spyOn( tmpReporter, 'addStepData' ).mockReturnValue( );
+            const addStepDataSpy = jest.spyOn( tmpReporter, 'addStepData' ).mockReturnValue();
 
-            tmpReporter.onHookStart( {} as HookStats );
+            tmpReporter.onHookStart( {} as HookStatsExtended );
 
             expect( getCurrentScenarioSpy ).toHaveBeenCalledTimes( 1 );
             expect( containsStepsSpy ).toHaveBeenCalledTimes( 1 );
@@ -149,18 +149,18 @@ describe( 'reporter', () => {
 
     describe( 'onHookEnd', () => {
         it( 'should call update a hook step to passed', () => {
-            const updateStepStatusSpy = jest.spyOn( tmpReporter, 'updateStepStatus' ).mockReturnValue( );
+            const updateStepStatusSpy = jest.spyOn( tmpReporter, 'updateStepStatus' ).mockReturnValue();
 
-            tmpReporter.onHookEnd( {} as HookStats );
+            tmpReporter.onHookEnd( {} as HookStatsExtended );
 
             expect( updateStepStatusSpy ).toHaveBeenCalledWith( { state: PASSED } );
         } );
 
         it( 'should call update a hook step to the current state when there is an error', () => {
 
-            const updateStepStatusSpy = jest.spyOn( tmpReporter, 'updateStepStatus' ).mockReturnValue( );
+            const updateStepStatusSpy = jest.spyOn( tmpReporter, 'updateStepStatus' ).mockReturnValue();
 
-            tmpReporter.onHookEnd( { state: FAILED, error: {} as Error } as HookStats );
+            tmpReporter.onHookEnd( { state: FAILED, error: {} as Error } as HookStatsExtended );
 
             expect( updateStepStatusSpy ).toHaveBeenCalledWith( { state: FAILED, error: {} } );
         } );
@@ -168,9 +168,9 @@ describe( 'reporter', () => {
 
     describe( 'onTestStart', () => {
         it( 'should call `addStepDataSpy` to add a step when a test is started', () => {
-            const addStepDataSpy = jest.spyOn( tmpReporter, 'addStepData' ).mockReturnValue( );
+            const addStepDataSpy = jest.spyOn( tmpReporter, 'addStepData' ).mockReturnValue();
 
-            tmpReporter.onTestStart( { foo: 'bar' } as TestStats );
+            tmpReporter.onTestStart( { foo: 'bar' } as TestStatsExtended );
 
             expect( addStepDataSpy ).toHaveBeenCalledWith( { foo: 'bar' } );
         } );
@@ -178,9 +178,9 @@ describe( 'reporter', () => {
 
     describe( 'onTestPass', () => {
         it( 'should call update a step', () => {
-            const updateStepStatusSpy = jest.spyOn( tmpReporter, 'updateStepStatus' ).mockReturnValue( );
+            const updateStepStatusSpy = jest.spyOn( tmpReporter, 'updateStepStatus' ).mockReturnValue();
 
-            tmpReporter.onTestPass( { foo: true } as TestStats );
+            tmpReporter.onTestPass( { foo: true } as TestStatsExtended );
 
             expect( updateStepStatusSpy ).toHaveBeenCalledWith( { foo: true } );
         } );
@@ -188,9 +188,9 @@ describe( 'reporter', () => {
 
     describe( 'onTestFail', () => {
         it( 'should call update a step', () => {
-            const updateStepStatusSpy = jest.spyOn( tmpReporter, 'updateStepStatus' ).mockReturnValue( );
+            const updateStepStatusSpy = jest.spyOn( tmpReporter, 'updateStepStatus' ).mockReturnValue();
 
-            tmpReporter.onTestFail( { bar: true } as TestStats );
+            tmpReporter.onTestFail( { bar: true } as TestStatsExtended );
 
             expect( updateStepStatusSpy ).toHaveBeenCalledWith( { bar: true } );
         } );
@@ -198,9 +198,9 @@ describe( 'reporter', () => {
 
     describe( 'onTestSkip', () => {
         it( 'should call update a step', () => {
-            const updateStepStatusSpy = jest.spyOn( tmpReporter, 'updateStepStatus' ).mockReturnValue( );
+            const updateStepStatusSpy = jest.spyOn( tmpReporter, 'updateStepStatus' ).mockReturnValue();
 
-            tmpReporter.onTestSkip( { bar: false } as TestStats );
+            tmpReporter.onTestSkip( { bar: false } as TestStatsExtended );
 
             expect( updateStepStatusSpy ).toHaveBeenCalledWith( { bar: false } );
         } );
@@ -342,7 +342,7 @@ describe( 'reporter', () => {
 
             expect( tmpReporter.report.feature.elements[0].steps.length ).toEqual( 0 );
 
-            tmpReporter.addStepData( {} as HookStats );
+            tmpReporter.addStepData( {} as HookStatsExtended );
 
             expect( tmpReporter.report.feature.elements[0].steps.length ).toEqual( 1 );
             expect( tmpReporter.report.feature.elements[0].steps ).toMatchSnapshot();
@@ -366,7 +366,7 @@ describe( 'reporter', () => {
             expect( tmpReporter.report.feature.elements[0].steps ).toMatchSnapshot();
             expect( tmpReporter.report.feature.elements[0].steps.length ).toEqual( 1 );
 
-            tmpReporter.updateStepStatus( {} as TestStats );
+            tmpReporter.updateStepStatus( {} as TestStatsExtended );
 
             expect( tmpReporter.report.feature.elements[0].steps ).toMatchSnapshot();
             expect( tmpReporter.report.feature.elements[0].steps.length ).toEqual( 1 );
@@ -380,7 +380,7 @@ describe( 'reporter', () => {
         let mockStdout: jest.SpyInstance;
         beforeAll( () => {
             //   process.emit = jest.fn();
-            mockStdout = jest.spyOn( process, 'emit' ).mockImplementation( );
+            mockStdout = jest.spyOn( process, 'emit' ).mockImplementation();
 
 
         } );

@@ -1,6 +1,6 @@
-import type { Capabilities, Options } from '@wdio/types';
+import type { Capabilities, DesiredCapabilitiesExtended, Options, TestrunnerExtended } from '@wdio/types';
 import { Feature, Scenario, cjson_metadata } from '../../models';
-import { HookStats, RunnerStats, SuiteStats, TestStats } from '@wdio/reporter';
+import { HookStats, HookStatsExtended, RunnerStats, RunnerStatsExtended, SuiteStats, SuiteStatsExtended, TestStats, TestStatsExtended } from '@wdio/reporter';
 import { WriteStream } from 'fs';
 
 export const EMPTY_FEATURE: Feature = {
@@ -48,51 +48,51 @@ export const SMALL_RUNNER_STATS: RunnerStats = {
     specs: ['/Users/wswebcreation/Sauce/Git/webdriverio-cucumberjs/__tests__/features/passed.feature'],
     isMultiremote: false
 };
-export const FULL_RUNNER_STATS: RunnerStats = {
+export const FULL_RUNNER_STATS: RunnerStatsExtended = {
     type: 'runner',
     start: new Date( '2019-07-14T07:25:20.897Z' ),
     _duration: 0,
     cid: '0-0',
     capabilities:
-    {
-        cjson_metadata: {} as cjson_metadata,
-        acceptInsecureCerts: false,
-        acceptSslCerts: false,
-        applicationCacheEnabled: false,
-        browserConnectionEnabled: false,
-        browserName: 'chrome',
-        chromedriverVersion: '2.46.628411 (3324f4c8be9ff2f70a05a30ebc72ffb013e1a71e)',
-        chromeOptions: {
-            args: ['user-data-dir=/var/folders/rb/_hbqv7fn5114b206t2s05fs40000gn/T/.org.chromium.Chromium.uwkY0A'],
+        <DesiredCapabilitiesExtended>{
+            cjson_metadata: {} as cjson_metadata,
+            acceptInsecureCerts: false,
+            acceptSslCerts: false,
+            applicationCacheEnabled: false,
+            browserConnectionEnabled: false,
+            browserName: 'chrome',
+            chromedriverVersion: '2.46.628411 (3324f4c8be9ff2f70a05a30ebc72ffb013e1a71e)',
+            chromeOptions: {
+                args: ['user-data-dir=/var/folders/rb/_hbqv7fn5114b206t2s05fs40000gn/T/.org.chromium.Chromium.uwkY0A'],
+            },
+            cssSelectorsEnabled: true,
+            databaseEnabled: false,
+            'goog:chromeOptions': {
+                debuggerAddress: 'localhost:53158'
+            },
+            handlesAlerts: true,
+            javascriptEnabled: true,
+            locationContextEnabled: true,
+            mobileEmulationEnabled: false,
+            nativeEvents: true,
+            pageLoadStrategy: 'normal' as Capabilities.PageLoadingStrategy,
+            platform: 'Mac OS X',
+            proxy: {},
+            rotatable: false,
+            setWindowRect: true,
+            strictFileInteractability: false,
+            timeouts: {
+                implicit: 0,
+                pageLoad: 300000,
+                script: 30000,
+            },
+            unexpectedAlertBehaviour: 'ignore',
+            version: '75.0.3770.100',
+            webStorageEnabled: true,
+            'webdriver.remote.sessionid': 'b2e560a6ed31a6551fa3509109b71f14'
         },
-        cssSelectorsEnabled: true,
-        databaseEnabled: false,
-        'goog:chromeOptions': {
-            debuggerAddress: 'localhost:53158'
-        },
-        handlesAlerts: true,
-        javascriptEnabled: true,
-        locationContextEnabled: true,
-        mobileEmulationEnabled: false,
-        nativeEvents: true,
-        pageLoadStrategy: 'normal' as Capabilities.PageLoadingStrategy,
-        platform: 'Mac OS X',
-        proxy: {},
-        rotatable: false,
-        setWindowRect: true,
-        strictFileInteractability: false,
-        timeouts: {
-            implicit: 0,
-            pageLoad: 300000,
-            script: 30000,
-        },
-        unexpectedAlertBehaviour: 'ignore',
-        version: '75.0.3770.100',
-        webStorageEnabled: true,
-        'webdriver.remote.sessionid': 'b2e560a6ed31a6551fa3509109b71f14'
-    },
     sanitizedCapabilities: 'chrome.75_0_3770_100.macosx',
-    config: {
+    config: <TestrunnerExtended>{
         hostname: '127.0.0.1',
         port: 4444,
         protocol: 'http',
@@ -150,7 +150,7 @@ export const FULL_RUNNER_STATS: RunnerStats = {
         jsonFolder: '',
         language: 'en',
         cjson_metadata: {
-            app:{
+            app: {
                 name: 'test',
                 version: '1'
             }
@@ -164,10 +164,10 @@ export const FULL_RUNNER_STATS: RunnerStats = {
     isMultiremote: false,
     retry: 0,
     duration: 0,
-    complete: (): void => {},
+    complete: (): void => { },
     instanceOptions: {}
 };
-export const WDIO6_RUNNER_STATS: RunnerStats = {
+export const WDIO6_RUNNER_STATS: RunnerStatsExtended = {
     type: 'runner',
     start: new Date( '2020-04-27T13:24:19.166Z' ),
     _duration: 0,
@@ -191,7 +191,7 @@ export const WDIO6_RUNNER_STATS: RunnerStats = {
         'webdriver.remote.sessionid': '27e5b2b068aa1612e60d90a9e5164a7d',
     },
     sanitizedCapabilities: 'chrome.81_0_4044_122.macosx',
-    config: {
+    config: <TestrunnerExtended>{
         jsonFolder: '',
         language: 'en',
         cjson_metadata: {} as cjson_metadata,
@@ -208,7 +208,7 @@ export const WDIO6_RUNNER_STATS: RunnerStats = {
     complete: (): void => { },
     instanceOptions: {},
 };
-export const SUITE_FEATURE_STATS: SuiteStats = {
+export const SUITE_FEATURE_STATS: SuiteStatsExtended = {
     type: 'suite',
     start: new Date( '2019-07-15T14:40:50.761Z' ),
     uid: 'Create passed feature2',
@@ -225,7 +225,7 @@ export const SUITE_FEATURE_STATS: SuiteStats = {
     file: ''
 };
 
-export const SUITE_FEATURE_UID: SuiteStats = {
+export const SUITE_FEATURE_UID: SuiteStatsExtended = {
     type: 'suite',
     start: new Date( '2019-07-15T14:40:50.761Z' ),
     _duration: 0,
@@ -242,7 +242,7 @@ export const SUITE_FEATURE_UID: SuiteStats = {
     duration: 0
 };
 
-export const STEP_TEST_ONSTART_STATS: TestStats = {
+export const STEP_TEST_ONSTART_STATS: TestStatsExtended = {
     'type': 'test',
     'start': new Date( '2019-07-19T21:15:01.176Z' ),
     '_duration': 0,
@@ -259,7 +259,7 @@ export const STEP_TEST_ONSTART_STATS: TestStats = {
     complete: () => { },
     parent: ''
 };
-export const STEP_TEST_ONSTART_ARGUMENT_STATS: TestStats = {
+export const STEP_TEST_ONSTART_ARGUMENT_STATS: TestStatsExtended = {
     'type': 'test',
     'start': new Date( '2019-07-19T21:15:01.176Z' ),
     '_duration': 0,
@@ -292,7 +292,7 @@ export const STEP_TEST_ONSTART_ARGUMENT_STATS: TestStats = {
     complete: () => { },
     parent: ''
 };
-export const STEP_HOOK_ONSTART_STATS: HookStats = {
+export const STEP_HOOK_ONSTART_STATS: HookStatsExtended = {
     'type': 'hook',
     'start': new Date( '2019-07-19T21:15:01.172Z' ),
     '_duration': 0,
@@ -304,7 +304,7 @@ export const STEP_HOOK_ONSTART_STATS: HookStats = {
     duration: 0,
     complete: () => { }
 };
-export const TEST_SCENARIO_STATS: TestStats = {
+export const TEST_SCENARIO_STATS: TestStatsExtended = {
     type: 'test',
     start: new Date( '2019-07-16T05:50:02.080Z' ),
     _duration: 1534,
@@ -325,7 +325,7 @@ export const TEST_SCENARIO_STATS: TestStats = {
     complete: (): void => { }
 };
 
-export const TEST_NO_KEYWORD_STATS: TestStats = {
+export const TEST_NO_KEYWORD_STATS: TestStatsExtended = {
     type: 'test',
     start: new Date( '2021-02-13T15:52:15.079Z' ),
     _duration: 555,
@@ -360,7 +360,7 @@ export const TEST_NO_KEYWORD_STATS: TestStats = {
     duration: 0
 };
 
-export const TEST_SCENARIO_STATS_ERROR: TestStats = {
+export const TEST_SCENARIO_STATS_ERROR: TestStatsExtended = {
     type: 'test',
     start: new Date( '2020-05-24T06:32:50.004Z' ),
     _duration: 5,
@@ -388,7 +388,7 @@ export const TEST_SCENARIO_STATS_ERROR: TestStats = {
     complete: () => { },
     parent: ''
 };
-export const TEST_EMPTY_STATS: TestStats = {
+export const TEST_EMPTY_STATS: TestStatsExtended = {
     title: '',
     uid: '',
     duration: 0,

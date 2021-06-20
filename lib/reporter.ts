@@ -10,7 +10,7 @@ import {
     TEXT_PLAIN,
 } from './constants';
 import { CucumberJsAttachment, Feature, MetadataObject, Report, Scenario, Step } from './models';
-import WDIOReporter, { HookStats, RunnerStats, SuiteStats,TestStats } from '@wdio/reporter';
+import WDIOReporter, { HookStats, HookStatsExtended, RunnerStats, SuiteStats,SuiteStatsExtended,TestStats, TestStatsExtended } from '@wdio/reporter';
 import { existsSync, outputJsonSync, readJsonSync } from 'fs-extra';
 import { Metadata } from './metadata';
 import { Reporters } from '@wdio/types';
@@ -125,7 +125,7 @@ export class CucumberJsJsonReporter extends WDIOReporter {
      *
      * @param payload
      */
-    public onHookStart( payload: HookStats ): void {
+    public onHookStart( payload: HookStatsExtended ): void {
     // There is always a scenario, take the last one
         const currentSteps = this.getCurrentScenario().steps;
         payload.state = PASSED;
@@ -285,7 +285,7 @@ export class CucumberJsJsonReporter extends WDIOReporter {
      *  }
      * }
      */
-    public getScenarioDataObject( scenarioData: TestStats | SuiteStats | HookStats, id: string ): Scenario {
+    public getScenarioDataObject( scenarioData: TestStatsExtended | SuiteStatsExtended | HookStatsExtended, id: string ): Scenario {
         const scenarioName = scenarioData.title;
 
         return {
@@ -321,7 +321,7 @@ export class CucumberJsJsonReporter extends WDIOReporter {
      * }
      * ```
      */
-    public getStepDataObject( stepData: TestStats | HookStats ): Step {
+    public getStepDataObject( stepData: TestStatsExtended | HookStatsExtended ): Step {
         const keyword = stepData?.keyword
             || this.utilsObject.keywordStartsWith( stepData.title, this.options.language )
             || '';

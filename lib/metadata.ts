@@ -1,7 +1,7 @@
 import { AppData, BrowserData, MetadataObject, cjson_metadata } from './models';
-import { Capabilities } from '@wdio/types';
+import { DesiredCapabilitiesExtended, W3CCapabilitiesExtended, WebdriverIOExtended } from '@wdio/types';
 import { NOT_KNOWN } from './constants';
-import { RunnerStats } from '@wdio/reporter';
+import { RunnerStatsExtended } from '@wdio/reporter';
 import WebDriver from 'webdriver';
 
 export class Metadata {
@@ -32,20 +32,20 @@ export class Metadata {
      * }
      * ```
      */
-    public determineMetadata ( data: RunnerStats ): MetadataObject {
+    public determineMetadata ( data: RunnerStatsExtended ): MetadataObject {
         let instanceData: AppData | BrowserData;
-        const currentCapabilities = data.capabilities;
+        const currentCapabilities = data.capabilities as W3CCapabilitiesExtended;
         const optsCaps = browser?.options?.capabilities;
-        const currentConfigCapabilities = data?.capabilities;
-        const w3cCaps = browser?.options?.requestedCapabilities;
-        const metadata: cjson_metadata = <cjson_metadata>currentConfigCapabilities?.cjson_metadata // For WDIO V6
+        const currentConfigCapabilities = data?.capabilities as DesiredCapabilitiesExtended;
+        const w3cCaps = ( browser?.options as WebdriverIOExtended )?.requestedCapabilities;
+        const metadata: cjson_metadata = ( currentConfigCapabilities as W3CCapabilitiesExtended )?.cjson_metadata // For WDIO V6
             || w3cCaps?.cjson_metadata // When an app is used to test
-            || ( <Capabilities.DesiredCapabilities>optsCaps )?.cjson_metadata // devtools
+            || ( optsCaps as DesiredCapabilitiesExtended )?.cjson_metadata // devtools
             || {} as cjson_metadata;
 
         // When an app is used to test
         // eslint-disable-next-line @typescript-eslint/tslint/config
-        if ( currentConfigCapabilities?.app || currentConfigCapabilities?.testobject_app_id || metadata?.app ) {
+        if ( currentConfigCapabilities?.app || ( currentConfigCapabilities )?.testobject_app_id || metadata?.app ) {
             instanceData = this.determineAppData( currentConfigCapabilities, metadata );
         } else {
             // Then a browser
@@ -120,10 +120,10 @@ export class Metadata {
      *  }
      * }
      */
-    public determineAppData ( currentConfigCapabilities: WebDriver.DesiredCapabilities, metadata: cjson_metadata ): AppData {
+    public determineAppData ( currentConfigCapabilities: DesiredCapabilitiesExtended, metadata: cjson_metadata ): AppData {
         const metaAppName: string = ( metadata?.app && metadata.app?.name ) ? metadata?.app?.name : 'No metadata.app.name available';
         const metaAppVersion: string = ( metadata?.app && metadata.app.version ) ? metadata.app.version : 'No metadata.app.version available';
-        const appPath = ( currentConfigCapabilities.app || currentConfigCapabilities.testobject_app_id || metaAppName );
+        const appPath = currentConfigCapabilities.app || currentConfigCapabilities.testobject_app_id || metaAppName;
         const appName = appPath.substring( appPath.replace( '\\', '/' ).lastIndexOf( '/' ) ).replace( '/', '' );
 
         return {
