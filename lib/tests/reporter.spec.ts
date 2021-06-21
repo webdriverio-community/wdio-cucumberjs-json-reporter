@@ -21,10 +21,11 @@ import path from 'path';
 
 describe( 'reporter', () => {
     let tmpReporter: WdioCucumberJsJsonReporter = null;
-    let logFilePath = '';
+    const logFolder = '.tmp';
+    const logFileName = 'logFile.json';
     beforeAll( () => {
-        const logFolderPath = path.join( __dirname, '../../', '.tmp' );
-        logFilePath = path.join( logFolderPath, 'logFile.json' );
+        const logFolderPath = path.join( __dirname, '../../', logFolder );
+        const logFilePath = path.join( logFolderPath, logFileName );
         if ( !fs.existsSync( logFolderPath ) ) {
             fs.mkdirSync( logFolderPath );
             fs.closeSync( fs.openSync( logFilePath, 'w' ) );
@@ -35,7 +36,7 @@ describe( 'reporter', () => {
         tmpReporter = new WdioCucumberJsJsonReporter( {
             jsonFolder: '.tmp/json-folder/',
             language: 'en',
-            logFile: '.tmp/logFile.json'
+            logFile: `${logFolder}/${logFileName}`
         } );
     } );
 
