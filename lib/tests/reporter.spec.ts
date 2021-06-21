@@ -21,7 +21,7 @@ import path from 'path';
 
 describe( 'reporter', () => {
     let tmpReporter: WdioCucumberJsJsonReporter = null;
-    const logFolder = '.tmp';
+    const logFolder = 'tmp';
     const logFileName = 'logFile.json';
     beforeAll( () => {
         const logFolderPath = path.join( __dirname, '../../', logFolder );
