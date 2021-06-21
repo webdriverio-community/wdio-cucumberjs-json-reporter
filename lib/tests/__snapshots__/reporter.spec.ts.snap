@@ -207,7 +207,7 @@ exports[`reporter on create should verify initial properties 1`] = `
 Object {
   "jsonFolder": ".tmp/json-folder/",
   "language": "en",
-  "logFile": "tmp/logfile.json",
+  "logFile": ".tmp/logFile.json",
 }
 `;
 

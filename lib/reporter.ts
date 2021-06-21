@@ -10,7 +10,8 @@ import {
     TEXT_PLAIN,
 } from './constants';
 import { CucumberJsAttachment, Feature, MetadataObject, Report, Scenario, Step } from './models';
-import WDIOReporter, { HookStats, HookStatsExtended, RunnerStats, SuiteStats,SuiteStatsExtended,TestStats, TestStatsExtended } from '@wdio/reporter';
+import { HookStatsExtended, SuiteStatsExtended, TestStatsExtended } from './types/wdio';
+import WDIOReporter, { HookStats, RunnerStats, SuiteStats, TestStats } from '@wdio/reporter';
 import { existsSync, outputJsonSync, readJsonSync } from 'fs-extra';
 import { Metadata } from './metadata';
 import { Reporters } from '@wdio/types';
@@ -56,15 +57,15 @@ export class CucumberJsJsonReporter extends WDIOReporter {
      * @param {string|object} data
      * @param {string} type Default is `text/plain`, otherwise what people deliver as a MIME type, like `application/json`, `image/png`
      */
-    public static attach( data: string, type = TEXT_PLAIN ): void {
-    // eslint-disable-next-line @typescript-eslint/ban-types
+    public static attach ( data: string, type = TEXT_PLAIN ): void {
+        // eslint-disable-next-line @typescript-eslint/ban-types
         ( process.emit as Function )( 'wdioCucumberJsReporter:attachment', { data, type } );
     }
 
     /**
      * Add a customer listener for the attachments
      */
-    public registerListeners(): void {
+    public registerListeners (): void {
         process.on( 'wdioCucumberJsReporter:attachment', this.cucumberJsAttachment.bind( this ) );
     }
 
@@ -91,7 +92,7 @@ export class CucumberJsJsonReporter extends WDIOReporter {
      *
      * @param {object} runnerData
      */
-    public onRunnerStart( runnerData: RunnerStats ): void {
+    public onRunnerStart ( runnerData: RunnerStats ): void {
         if ( !this.instanceMetadata ) {
             this.instanceMetadata = this.metadataClassObject.determineMetadata( runnerData );
         }
@@ -104,7 +105,7 @@ export class CucumberJsJsonReporter extends WDIOReporter {
      *
      * @param {object} payload
      */
-    public onSuiteStart( payload: SuiteStats ): void {
+    public onSuiteStart ( payload: SuiteStats ): void {
         if ( !this.report.feature ) {
             this.report.feature = this.getFeatureDataObject( payload );
         }
@@ -114,7 +115,7 @@ export class CucumberJsJsonReporter extends WDIOReporter {
             this.report.feature = { ...this.report.feature, metadata: { ...this.instanceMetadata } };
         }
 
-        if( typeof this.report.feature.elements !== 'undefined' ){
+        if ( typeof this.report.feature.elements !== 'undefined' ) {
             this.report.feature.elements.push( this.getScenarioDataObject( payload, this.report.feature.id ) );
         }
     }
@@ -125,8 +126,8 @@ export class CucumberJsJsonReporter extends WDIOReporter {
      *
      * @param payload
      */
-    public onHookStart( payload: HookStatsExtended ): void {
-    // There is always a scenario, take the last one
+    public onHookStart ( payload: HookStatsExtended ): void {
+        // There is always a scenario, take the last one
         const currentSteps = this.getCurrentScenario().steps;
         payload.state = PASSED;
         payload.keyword = this.utilsObject.containsSteps( currentSteps, this.options.language ) ? AFTER : BEFORE;
@@ -140,7 +141,7 @@ export class CucumberJsJsonReporter extends WDIOReporter {
      *
      * @param payload
      */
-    public onHookEnd( payload: HookStats ): void {
+    public onHookEnd ( payload: HookStats ): void {
         payload.state = payload.error ? payload.state : PASSED;
 
         return this.updateStepStatus( payload );
@@ -151,7 +152,7 @@ export class CucumberJsJsonReporter extends WDIOReporter {
      *
      * @param {object} payload
      */
-    public onTestStart( payload: TestStats ): void {
+    public onTestStart ( payload: TestStats ): void {
         this.addStepData( payload );
     }
 
@@ -182,7 +183,7 @@ export class CucumberJsJsonReporter extends WDIOReporter {
      *
      * @param payload
      */
-    public onTestPass( payload: TestStats ): void {
+    public onTestPass ( payload: TestStats ): void {
         this.updateStepStatus( payload );
     }
 
@@ -191,7 +192,7 @@ export class CucumberJsJsonReporter extends WDIOReporter {
      *
      * @param payload
      */
-    public onTestFail( payload: TestStats ): void {
+    public onTestFail ( payload: TestStats ): void {
         this.updateStepStatus( payload );
     }
 
@@ -200,7 +201,7 @@ export class CucumberJsJsonReporter extends WDIOReporter {
      *
      * @param payload
      */
-    public onTestSkip( payload: TestStats ): void {
+    public onTestSkip ( payload: TestStats ): void {
         this.updateStepStatus( payload );
     }
 
@@ -220,12 +221,12 @@ export class CucumberJsJsonReporter extends WDIOReporter {
     /**
      * Runner is done, write the file
      */
-    public onRunnerEnd(): void {
+    public onRunnerEnd (): void {
         const jsonFolder = resolve( process.cwd(), this.options.jsonFolder );
         const jsonFile = resolve( jsonFolder, `${this.report.feature.id}.json` );
         const json = [this.report.feature];
         // Check if there is an existing file, if so concat the data, else add the new
-        const output = existsSync( jsonFile ) ? json.concat( readJsonSync( jsonFile ) ): json;
+        const output = existsSync( jsonFile ) ? json.concat( readJsonSync( jsonFile ) ) : json;
 
         outputJsonSync( jsonFile, output );
     }
@@ -252,14 +253,14 @@ export class CucumberJsJsonReporter extends WDIOReporter {
      * }
      * ```
      */
-    public getFeatureDataObject( featureData: SuiteStats ): Feature {
+    public getFeatureDataObject ( featureData: SuiteStats ): Feature {
         const featureName = featureData.title;
 
         return {
             keyword: FEATURE,
             type: featureData.type,
             description: ( featureData.description || '' ),
-            line: parseInt( featureData.uid.substring( featureName.length, featureData.uid.length ) ,10 ),
+            line: parseInt( featureData.uid.substring( featureName.length, featureData.uid.length ), 10 ),
             name: featureName,
             uri: 'Can not be determined',
             tags: featureData.tags || [],
@@ -285,7 +286,7 @@ export class CucumberJsJsonReporter extends WDIOReporter {
      *  }
      * }
      */
-    public getScenarioDataObject( scenarioData: TestStatsExtended | SuiteStatsExtended | HookStatsExtended, id: string ): Scenario {
+    public getScenarioDataObject ( scenarioData: TestStatsExtended | SuiteStatsExtended | HookStatsExtended, id: string ): Scenario {
         const scenarioName = scenarioData.title;
 
         return {
@@ -321,7 +322,7 @@ export class CucumberJsJsonReporter extends WDIOReporter {
      * }
      * ```
      */
-    public getStepDataObject( stepData: TestStatsExtended | HookStatsExtended ): Step {
+    public getStepDataObject ( stepData: TestStatsExtended | HookStatsExtended ): Step {
         const keyword = stepData?.keyword
             || this.utilsObject.keywordStartsWith( stepData.title, this.options.language )
             || '';
@@ -349,7 +350,7 @@ export class CucumberJsJsonReporter extends WDIOReporter {
      *
      * @return {object}
      */
-    public getCurrentScenario(): Scenario {
+    public getCurrentScenario (): Scenario {
         return this.report.feature.elements[this.report.feature.elements.length - 1];
     }
 
@@ -358,7 +359,7 @@ export class CucumberJsJsonReporter extends WDIOReporter {
      *
      * @return {object}
      */
-    public getCurrentStep(): Step {
+    public getCurrentStep (): Step {
         const currentScenario = this.getCurrentScenario();
 
         return currentScenario.steps[currentScenario.steps.length - 1];
@@ -369,9 +370,9 @@ export class CucumberJsJsonReporter extends WDIOReporter {
      *
      * @param {object} test
      */
-    public addStepData( test: TestStats | HookStats ): void {
-    // Always add the finished step to the end of the steps
-    // of the last current scenario that is running
+    public addStepData ( test: TestStats | HookStats ): void {
+        // Always add the finished step to the end of the steps
+        // of the last current scenario that is running
         this.getCurrentScenario().steps.push( this.getStepDataObject( test ) );
     }
 
@@ -380,8 +381,8 @@ export class CucumberJsJsonReporter extends WDIOReporter {
      *
      * @param {object} test
      */
-    public updateStepStatus( test: TestStats | HookStats ): void {
-    // There is always a scenario, take the last one
+    public updateStepStatus ( test: TestStats | HookStats ): void {
+        // There is always a scenario, take the last one
         const currentSteps = this.getCurrentScenario().steps;
         const currentStepsLength = currentSteps.length;
         const stepData = this.getStepDataObject( test );
@@ -397,8 +398,8 @@ export class CucumberJsJsonReporter extends WDIOReporter {
      * @param {string|object} data
      * @param {string} type
      */
-    public cucumberJsAttachment( attachment: CucumberJsAttachment ): void {
-    // The attachment can be added to the current running scenario step
+    public cucumberJsAttachment ( attachment: CucumberJsAttachment ): void {
+        // The attachment can be added to the current running scenario step
         const currentStep = this.getCurrentStep();
         const embeddings = {
             data: attachment?.data,

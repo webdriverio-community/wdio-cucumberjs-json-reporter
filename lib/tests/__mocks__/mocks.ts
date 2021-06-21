@@ -1,6 +1,7 @@
-import type { Capabilities, DesiredCapabilitiesExtended, Options, TestrunnerExtended } from '@wdio/types';
+import type { Capabilities, Options } from '@wdio/types';
+import { DesiredCapabilitiesExtended, HookStatsExtended, RunnerStatsExtended, SuiteStatsExtended, TestStatsExtended, TestrunnerExtended } from '../../types/wdio';
 import { Feature, Scenario, cjson_metadata } from '../../models';
-import { HookStats, HookStatsExtended, RunnerStats, RunnerStatsExtended, SuiteStats, SuiteStatsExtended, TestStats, TestStatsExtended } from '@wdio/reporter';
+import { HookStats, RunnerStats, SuiteStats, TestStats } from '@wdio/reporter';
 import { WriteStream } from 'fs';
 
 export const EMPTY_FEATURE: Feature = {

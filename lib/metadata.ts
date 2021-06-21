@@ -1,7 +1,6 @@
 import { AppData, BrowserData, MetadataObject, cjson_metadata } from './models';
-import { DesiredCapabilitiesExtended, W3CCapabilitiesExtended, WebdriverIOExtended } from '@wdio/types';
+import { DesiredCapabilitiesExtended, RunnerStatsExtended, W3CCapabilitiesExtended, WebdriverIOExtended } from './types/wdio';
 import { NOT_KNOWN } from './constants';
-import { RunnerStatsExtended } from '@wdio/reporter';
 import WebDriver from 'webdriver';
 
 export class Metadata {

@@ -1,8 +1,9 @@
 import { FULL_RUNNER_STATS, SMALL_RUNNER_STATS, WDIO6_RUNNER_STATS } from './__mocks__/mocks';
-import { Options, W3CCapabilitiesExtended, WebdriverIOExtended } from '@wdio/types';
+import { W3CCapabilitiesExtended, WebdriverIOExtended } from '../types/wdio';
 import { Browser } from 'webdriverio';
 import { Metadata } from '../metadata';
 import { NOT_KNOWN } from '../constants';
+import { Options } from '@wdio/types';
 import WebDriver from 'webdriver';
 import { cjson_metadata } from '../models';
 

@@ -1,6 +1,6 @@
 import { Browser } from 'webdriverio';
 import { cjson_metadata } from '../models';
-export {};
+export { };
 
 declare global {
     namespace NodeJS {
@@ -9,13 +9,13 @@ declare global {
             attachment: string;
         }
 
-        export interface Global{
+        export interface Global {
             browser: Browser<'sync'>;
         }
     }
 
-    namespace WebDriver{
-        export interface W3CCapabilities{
+    namespace WebDriver {
+        export interface W3CCapabilities {
             cjson_metadata: cjson_metadata;
         }
     }

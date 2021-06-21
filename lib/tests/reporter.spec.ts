@@ -1,3 +1,4 @@
+import * as fs from 'fs';
 import { AFTER, BEFORE, FAILED, PASSED, PENDING, TEXT_PLAIN } from '../constants';
 import {
     EMPTY_FEATURE, EMPTY_SCENARIO,
@@ -10,21 +11,31 @@ import {
     TEST_NO_KEYWORD_STATS,
     TEST_SCENARIO_STATS
 } from './__mocks__/mocks';
-import { HookStatsExtended, RunnerStatsExtended, SuiteStatsExtended, TestStatsExtended } from '@wdio/reporter';
+import { HookStatsExtended, RunnerStatsExtended, SuiteStatsExtended, TestStatsExtended } from '../types/wdio';
 import { copySync, readJsonSync, readdirSync, removeSync } from 'fs-extra';
 import { Metadata } from '../metadata';
 import { Step } from '../models';
 import WdioCucumberJsJsonReporter from '../reporter';
 import { fileExists } from './fileExists';
+import path from 'path';
 
 describe( 'reporter', () => {
     let tmpReporter: WdioCucumberJsJsonReporter = null;
+    let logFilePath = '';
+    beforeAll( () => {
+        const logFolderPath = path.join( __dirname, '../../', '.tmp' );
+        logFilePath = path.join( logFolderPath, 'logFile.json' );
+        if ( !fs.existsSync( logFolderPath ) ) {
+            fs.mkdirSync( logFolderPath );
+            fs.closeSync( fs.openSync( logFilePath, 'w' ) );
+        }
+    } );
 
     beforeEach( () => {
         tmpReporter = new WdioCucumberJsJsonReporter( {
             jsonFolder: '.tmp/json-folder/',
             language: 'en',
-            logFile: 'tmp/logfile.json'
+            logFile: '.tmp/logFile.json'
         } );
     } );
 
