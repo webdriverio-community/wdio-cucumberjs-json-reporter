@@ -23,9 +23,9 @@ describe( 'reporter', () => {
     let tmpReporter: WdioCucumberJsJsonReporter = null;
     const logFolder = 'tmp';
     const logFileName = 'logFile.json';
+    const logFolderPath = path.join( __dirname, '../../', logFolder );
+    const logFilePath = path.join( logFolderPath, logFileName );
     beforeAll( () => {
-        const logFolderPath = path.join( __dirname, '../../', logFolder );
-        const logFilePath = path.join( logFolderPath, logFileName );
         if ( !fs.existsSync( logFolderPath ) ) {
             fs.mkdirSync( logFolderPath );
             fs.closeSync( fs.openSync( logFilePath, 'w' ) );
@@ -49,7 +49,7 @@ describe( 'reporter', () => {
 
     describe( 'on create', () => {
         it( 'should set the defaults if only the logfile option is provided', () => {
-            const noOptionsReporter = new WdioCucumberJsJsonReporter( { logFile: 'tmp/logfile.json' } );
+            const noOptionsReporter = new WdioCucumberJsJsonReporter( { logFile: path.join( logFolder, logFileName ) } );
 
             expect( noOptionsReporter.options ).toMatchSnapshot();
         } );
