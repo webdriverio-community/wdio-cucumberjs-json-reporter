@@ -10,10 +10,14 @@
     "compile": "npm run-script clean && tsc",
     "test.lint": "eslint lib",
     "test": "jest --coverage",
-    "release": "np",
     "precompile": "npm run clean",
     "prerelease": "npm run compile",
     "prepublish": "npm run compile",
+    "release": "release-it --github.release",
+    "release:ci": "npm run release -- --ci --npm.skipChecks --no-git.requireCleanWorkingDir",
+    "release:patch": "npm run release -- patch",
+    "release:minor": "npm run release -- minor",
+    "release:major": "npm run release -- major",
     "watch": "npm run compile -- --watch",
     "coveralls": "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage",
     "update-package-json-dependencies": "npx ncu -u && npm i",
@@ -38,10 +42,10 @@
   },
   "homepage": "https://github.com/webdriverio-community/wdio-cucumberjs-json-reporter#readme",
   "dependencies": {
-    "@cucumber/gherkin": "19.0.3",
-    "@wdio/logger": "7.7.0",
-    "@wdio/reporter": "7.7.3",
-    "fs-extra": "10.0.0"
+    "@cucumber/gherkin": "~19.0.3",
+    "@wdio/logger": "~7.7.0",
+    "@wdio/reporter": "~7.7.3",
+    "fs-extra": "~10.0.0"
   },
   "peerDependencies": {
     "@wdio/cucumber-framework": "7.7.3"
@@ -69,8 +73,7 @@
     "eslint-plugin-prettier": "3.4.0",
     "eslint-plugin-tslint": "3.1.0",
     "husky": "6.0.0",
-    "jest": "27.0.4",
-    "np": "7.5.0",
+    "jest": "^27.0.5",
     "npm-check-updates": "11.7.1",
     "rimraf": "3.0.2",
     "strip-ansi": "6.0.0",
