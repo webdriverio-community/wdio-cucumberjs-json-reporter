@@ -75,6 +75,7 @@
     "husky": "^6.0.0",
     "jest": "^27.0.5",
     "npm-check-updates": "^11.7.1",
+    "release-it": "^14.10.0",
     "rimraf": "^3.0.2",
     "strip-ansi": "^6.0.0",
     "ts-jest": "^27.0.3",
