@@ -66,7 +66,7 @@ Object {
   "keyword": "Feature",
   "line": 2,
   "name": "Create passed feature",
-  "tags": "",
+  "tags": Array [],
   "type": "suite",
   "uri": "Can not be determined",
 }
@@ -78,9 +78,9 @@ Object {
   "elements": Array [],
   "id": "create-passed-feature",
   "keyword": "Feature",
-  "line": 0,
+  "line": NaN,
   "name": "Create passed feature",
-  "tags": "",
+  "tags": Array [],
   "type": "suite",
   "uri": "Can not be determined",
 }
@@ -91,10 +91,9 @@ Object {
   "description": "",
   "id": "create-passed-feature;hook-this-is-doing-nothing-because-it's-a-background\\"",
   "keyword": "Scenario",
-  "line": 0,
   "name": "Hook This is doing nothing because it's a background\\"",
   "steps": Array [],
-  "tags": "",
+  "tags": Array [],
   "type": "test",
 }
 `;
@@ -152,7 +151,7 @@ exports[`reporter getStepDataObject should be able to to create a step JSON data
 Object {
   "arguments": Array [],
   "keyword": "Before",
-  "line": 0,
+  "line": "",
   "match": Object {
     "location": "can not be determined with webdriver.io",
   },
@@ -168,14 +167,14 @@ exports[`reporter getStepDataObject should be able to to create a step JSON data
 Object {
   "arguments": Array [],
   "keyword": "",
-  "line": 0,
+  "line": "",
   "match": Object {
     "location": "can not be determined with webdriver.io",
   },
   "name": "",
   "result": Object {
     "duration": 0,
-    "status": "",
+    "status": "pending",
   },
 }
 `;
@@ -184,11 +183,11 @@ exports[`reporter getStepDataObject should be able to to create a step JSON data
 Object {
   "arguments": Array [],
   "keyword": "",
-  "line": 13,
+  "line": 3,
   "match": Object {
     "location": "can not be determined with webdriver.io",
   },
-  "name": "I load the Swag Labs demo website",
+  "name": "e",
   "result": Object {
     "duration": 555000000,
     "status": "passed",
@@ -196,10 +195,11 @@ Object {
 }
 `;
 
-exports[`reporter on create should set the defaults  if no options are provided 1`] = `
+exports[`reporter on create should set the defaults if only the logfile option is provided 1`] = `
 Object {
   "jsonFolder": ".tmp/json/",
   "language": "en",
+  "logFile": "tmp/logFile.json",
 }
 `;
 
@@ -207,6 +207,7 @@ exports[`reporter on create should verify initial properties 1`] = `
 Object {
   "jsonFolder": ".tmp/json-folder/",
   "language": "en",
+  "logFile": "tmp/logFile.json",
 }
 `;
 
@@ -258,9 +259,8 @@ exports[`reporter onSuiteStart should add the CucumberJS feature object if it is
 exports[`reporter onSuiteStart should add the CucumberJS feature object if it is not available 2`] = `
 Object {
   "feature": Object {
-    "report": Object {
-      "keyword": "feature",
-    },
+    "keyword": "feature",
+    "metadata": Object {},
   },
 }
 `;

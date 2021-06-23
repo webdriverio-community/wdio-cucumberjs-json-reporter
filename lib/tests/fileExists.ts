@@ -3,11 +3,11 @@ import { accessSync } from 'fs-extra';
 /**
  * Check if a file exists
  */
-export default function fileExists(filePath) {
+export const fileExists = ( filePath: string ): boolean => {
     try {
-        accessSync(filePath);
+        accessSync( filePath );
         return true;
-    } catch (err) {
+    } catch ( err ) {
         return false;
     }
-}
+};

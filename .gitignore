@@ -71,3 +71,4 @@ yarn.lock
 # Some folders
 .tmp/
 build/
+dist
