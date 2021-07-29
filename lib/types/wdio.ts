@@ -49,14 +49,14 @@ export interface HookStatsExtended extends HookStats {
     name?: string;
 }
 
-export interface TestStatsExtended extends TestStats {
-    description?: string;
-    tags?: string[] | Tag[] | string;
-    keyword?: string;
-    name?: string;
-    id?: string;
-    foo?: string | boolean;
-    bar?: boolean;
+export class TestStatsExtended extends TestStats {
+    public description?: string;
+    public tags?: string[] | Tag[] | string;
+    public keyword?: string;
+    public name?: string;
+    public id?: string;
+    public foo?: string | boolean;
+    public bar?: boolean;
 }
 
 export interface RunnerStatsExtended extends RunnerStats {
