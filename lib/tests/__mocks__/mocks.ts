@@ -1,7 +1,7 @@
 import type { Capabilities, Options } from '@wdio/types';
 import { DesiredCapabilitiesExtended, HookStatsExtended, RunnerStatsExtended, SuiteStatsExtended, TestStatsExtended, TestrunnerExtended } from '../../types/wdio';
 import { Feature, Scenario, cjson_metadata } from '../../models';
-import { HookStats, RunnerStats, SuiteStats, TestStats } from '@wdio/reporter';
+import { HookStats, RunnerStats, SuiteStats, Test, TestStats } from '@wdio/reporter';
 import { WriteStream } from 'fs';
 
 export const EMPTY_FEATURE: Feature = {
@@ -243,56 +243,48 @@ export const SUITE_FEATURE_UID: SuiteStatsExtended = {
     duration: 0
 };
 
-export const STEP_TEST_ONSTART_STATS: TestStatsExtended = {
-    'type': 'test',
-    'start': new Date( '2019-07-19T21:15:01.176Z' ),
-    '_duration': 0,
-    'uid': 'I open "http://webdriver.io/"6',
-    'cid': '0-0',
-    'title': 'Given I open "http://webdriver.io/"',
-    'fullTitle': 'Create failed feature: Open website: Given I open "http://webdriver.io/"',
-    'output': [],
-    'state': 'pending',
-    'duration': 0,
-    pass: () => { },
-    skip: () => { },
-    fail: () => { },
-    complete: () => { },
-    parent: ''
+const test: Test = {
+    type: 'test:start',
+    title: '',
+    parent: '',
+    fullTitle: '',
+    pending: false,
+    cid: '',
+    specs: [],
+    uid: '',
 };
-export const STEP_TEST_ONSTART_ARGUMENT_STATS: TestStatsExtended = {
-    'type': 'test',
-    'start': new Date( '2019-07-19T21:15:01.176Z' ),
-    '_duration': 0,
-    'uid': 'I open "http://webdriver.io/"6',
-    'cid': '0-0',
-    'title': 'Given I open "http://webdriver.io/"',
-    'fullTitle': 'Create failed feature: Open website: Given I open "http://webdriver.io/"',
-    'output': [],
-    'state': 'pending',
-    'argument': {
-        'rows': [
-            {
-                'cells': [
-                    'Cucumber',
-                    'Cucumis sativus'
-                ]
-            },
-            {
-                'cells': [
-                    'Burr Gherkin',
-                    'Cucumis anguria'
-                ]
-            }
-        ]
-    },
-    duration: 0,
-    pass: () => { },
-    skip: () => { },
-    fail: () => { },
-    complete: () => { },
-    parent: ''
+
+const STEP_TEST_ONSTART_STATS_Initial = new TestStatsExtended( test );
+STEP_TEST_ONSTART_STATS_Initial.id = "create-passed-feature;hook-this-is-doing-nothing-because-it's-a-background\"";
+STEP_TEST_ONSTART_STATS_Initial.keyword = 'Given';
+STEP_TEST_ONSTART_STATS_Initial.uid = 'I open "http://webdriver.io/"6';
+STEP_TEST_ONSTART_STATS_Initial.title = 'Given I open "http://webdriver.io/"';
+STEP_TEST_ONSTART_STATS_Initial.name = 'I open "http://webdriver.io/"6';
+
+export const STEP_TEST_ONSTART_STATS = STEP_TEST_ONSTART_STATS_Initial;
+const STEP_TEST_ONSTART_ARGUMENT_STATS_Initial = new TestStatsExtended( test );
+STEP_TEST_ONSTART_ARGUMENT_STATS_Initial.argument = {
+    'rows': [
+        {
+            'cells': [
+                'Cucumber',
+                'Cucumis sativus'
+            ]
+        },
+        {
+            'cells': [
+                'Burr Gherkin',
+                'Cucumis anguria'
+            ]
+        }
+    ]
 };
+STEP_TEST_ONSTART_ARGUMENT_STATS_Initial.keyword = 'Given';
+STEP_TEST_ONSTART_ARGUMENT_STATS_Initial.uid = 'I open "http://webdriver.io/"6';
+STEP_TEST_ONSTART_ARGUMENT_STATS_Initial.title = 'Given I open "http://webdriver.io/"';
+STEP_TEST_ONSTART_ARGUMENT_STATS_Initial.name = 'Given I open "http://webdriver.io/"';
+
+export const STEP_TEST_ONSTART_ARGUMENT_STATS = STEP_TEST_ONSTART_ARGUMENT_STATS_Initial;
 export const STEP_HOOK_ONSTART_STATS: HookStatsExtended = {
     'type': 'hook',
     'start': new Date( '2019-07-19T21:15:01.172Z' ),
@@ -305,108 +297,35 @@ export const STEP_HOOK_ONSTART_STATS: HookStatsExtended = {
     duration: 0,
     complete: () => { }
 };
-export const TEST_SCENARIO_STATS: TestStatsExtended = {
-    type: 'test',
-    start: new Date( '2019-07-16T05:50:02.080Z' ),
-    _duration: 1534,
-    uid: 'I open "http://webdriver.io/"6',
-    cid: '0-0',
-    title: 'Hook This is doing nothing because it\'s a background"',
-    parent: 'Google: A failed step',
-    state: 'passed',
-    keyword: 'Before',
-    errors: [],
-    end: new Date( '2020-05-24T06:32:50.002Z' ),
-    duration: 1534,
-    fullTitle: '',
-    output: [],
-    pass: () => { },
-    skip: () => { },
-    fail: () => { },
-    complete: (): void => { }
-};
 
-export const TEST_NO_KEYWORD_STATS: TestStatsExtended = {
-    type: 'test',
-    start: new Date( '2021-02-13T15:52:15.079Z' ),
-    _duration: 555,
-    uid: '13',
-    cid: '0-0',
-    title: 'I load the Swag Labs demo website',
-    fullTitle: '0: I load the Swag Labs demo website',
-    output: [
-        {
-            method: 'POST',
-            endpoint: '/session/:sessionId/url',
-            body: [Object],
-            sessionId: 'd08a0caa81ced6e50aa901f3651ad7ac',
-            cid: '0-0',
-            type: 'command',
-            command: '',
-            params: '',
-            result: {
-                value: ''
-            }
-        }
-    ],
-    argument: undefined,
-    retries: 0,
-    state: 'passed',
-    end: new Date( '2021-02-13T15:52:15.634Z' ),
-    pass: () => { },
-    skip: () => { },
-    fail: () => { },
-    parent: '',
-    complete: (): void => { },
-    duration: 0
-};
+test.title = "Hook This is doing nothing because it's a background\"";
+export const TEST_SCENARIO_STATS = new TestStats( test );
 
-export const TEST_SCENARIO_STATS_ERROR: TestStatsExtended = {
-    type: 'test',
-    start: new Date( '2020-05-24T06:32:50.004Z' ),
-    _duration: 5,
-    uid: 'I am a failed step23',
-    cid: '0-0',
-    title: 'Given I am a failed step',
-    fullTitle: 'Google: A failed step: Given I am a failed step',
-    output: [],
-    state: 'failed',
-    end: new Date( '2020-05-24T06:32:50.009Z' ),
-    errors: [{
-        name: 'Error',
-        message: '\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\nExpected: \u001b[32m"bar"\u001b[39m\nReceived: \u001b[31m"foo"\u001b[39m',
-        stack: 'Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\nExpected: \u001b[32m"bar"\u001b[39m\nReceived: \u001b[31m"foo"\u001b[39m\n    at World.<anonymous> (/Users/wimselles/Git/cucumberjs-json-demo/steps.js:17:19)'
-    }],
-    error: {
-        name: 'Error',
-        message: '\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\nExpected: \u001b[32m"bar"\u001b[39m\nReceived: \u001b[31m"foo"\u001b[39m',
-        stack: 'Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\nExpected: \u001b[32m"bar"\u001b[39m\nReceived: \u001b[31m"foo"\u001b[39m\n    at World.<anonymous> (/Users/wimselles/Git/cucumberjs-json-demo/steps.js:17:19)'
-    },
-    duration: 5,
-    pass: () => { },
-    skip: () => { },
-    fail: () => { },
-    complete: () => { },
-    parent: ''
+const TEST_NO_KEYWORD_STATS_Initial: TestStatsExtended = new TestStats( test );
+TEST_NO_KEYWORD_STATS_Initial.uid = '13';
+TEST_NO_KEYWORD_STATS_Initial.title = 'I load the Swag Labs demo website';
+TEST_NO_KEYWORD_STATS_Initial.state = 'passed';
+TEST_NO_KEYWORD_STATS_Initial._duration = 555;
+export const TEST_NO_KEYWORD_STATS: TestStatsExtended = TEST_NO_KEYWORD_STATS_Initial;
+
+const TEST_SCENARIO_STATS_ERROR_Initial: TestStatsExtended = new TestStats( test );
+TEST_SCENARIO_STATS_ERROR_Initial.state = 'failed';
+TEST_SCENARIO_STATS_ERROR_Initial.errors = [{
+    name: 'Error',
+    message: '\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\nExpected: \u001b[32m"bar"\u001b[39m\nReceived: \u001b[31m"foo"\u001b[39m',
+    stack: 'Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\nExpected: \u001b[32m"bar"\u001b[39m\nReceived: \u001b[31m"foo"\u001b[39m\n    at World.<anonymous> (/Users/wimselles/Git/cucumberjs-json-demo/steps.js:17:19)'
+}];
+TEST_SCENARIO_STATS_ERROR_Initial.error = {
+    name: 'Error',
+    message: '\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\nExpected: \u001b[32m"bar"\u001b[39m\nReceived: \u001b[31m"foo"\u001b[39m',
+    stack: 'Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\nExpected: \u001b[32m"bar"\u001b[39m\nReceived: \u001b[31m"foo"\u001b[39m\n    at World.<anonymous> (/Users/wimselles/Git/cucumberjs-json-demo/steps.js:17:19)'
 };
-export const TEST_EMPTY_STATS: TestStatsExtended = {
-    title: '',
-    uid: '',
-    duration: 0,
-    fullTitle: '',
-    output: [],
-    state: 'pending',
-    pass: () => { },
-    skip: () => { },
-    fail: () => { },
-    type: '',
-    start: new Date(),
-    parent: '',
-    keyword: '',
-    _duration: 0,
-    cid: '',
-    complete: () => { },
-};
+export const TEST_SCENARIO_STATS_ERROR: TestStatsExtended = TEST_SCENARIO_STATS_ERROR_Initial;
+test.title = '';
+const TEST_EMPTY_STATS_Initial: TestStatsExtended = new TestStats( test );
+TEST_EMPTY_STATS_Initial.title = '';
+export const TEST_EMPTY_STATS: TestStatsExtended = TEST_EMPTY_STATS_Initial;
+
 
 // PAYLOADS
 
