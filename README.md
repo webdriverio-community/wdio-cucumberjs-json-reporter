@@ -2,7 +2,7 @@
 A WDIO reporter that creates CucumberJS JSON files for WebdriverIO V6+
 
 [![dependencies Status](https://david-dm.org/webdriverio-community/wdio-cucumberjs-json-reporter/status.svg)](https://david-dm.org/webdriverio-community/wdio-cucumberjs-json-reporter)
-![example workflow](https://github.com/webdriverio-community/wdio-cucumberjs-json-reporter/actions/workflows/wdio-cucumberjs-json-reporter.yml/badge.svg)
+![example workflow](https://github.com/webdriverio-community/wdio-cucumberjs-json-reporter/actions/workflows/test.yml/badge.svg)
 [![MIT license](http://img.shields.io/badge/license-MIT-brightgreen.svg)](http://opensource.org/licenses/MIT)
 
 [![NPM](https://nodei.co/npm/wdio-cucumberjs-json-reporter.png)](https://nodei.co/npm/wdio-cucumberjs-json-reporter/)
