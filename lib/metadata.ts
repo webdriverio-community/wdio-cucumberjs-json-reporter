@@ -37,7 +37,7 @@ export class Metadata {
         const optsCaps = browser?.options?.capabilities;
         const currentConfigCapabilities = data?.capabilities as DesiredCapabilitiesExtended;
         const w3cCaps = ( browser?.options as WebdriverIOExtended )?.requestedCapabilities;
-        const metadata: cjson_metadata = ( currentConfigCapabilities as W3CCapabilitiesExtended )?.cjson_metadata // For WDIO V6
+        const metadata: cjson_metadata = ( currentConfigCapabilities as W3CCapabilitiesExtended )?.['cjson:metadata'] // For WDIO
             || w3cCaps?.cjson_metadata // When an app is used to test
             || ( optsCaps as DesiredCapabilitiesExtended )?.cjson_metadata // devtools
             || {} as cjson_metadata;

@@ -4,7 +4,7 @@ import { WriteStream } from 'fs';
 import { cjson_metadata } from '../models';
 
 export interface W3CCapabilitiesExtended extends Capabilities.W3CCapabilities {
-    cjson_metadata?: cjson_metadata;
+    'cjson:metadata'?: cjson_metadata;
     testobject_app_id?: string;
     app?: string;
 }

@@ -83,11 +83,11 @@ The language in which the Gherkin scenarios are written (defaults to English). T
 ## Metadata
 
 > **Note:**\
-> This is currently not supported if you are using WebdriverIO V6, WebdriverIO V5 still supports this
+> This is currently not supported if you are using WebdriverIO V6, WebdriverIO V5 still supports this and WebdriverIO V7 supports it again
 
 As said, this report can automatically store the metadata of the current machine / device the feature has been executed on.
 
-To customize this you can add IT by adding the following object to your `capabilities`
+To customize this you can add it by adding the following object to your `capabilities`
 
 ```js
 // Example wdio.conf.js
