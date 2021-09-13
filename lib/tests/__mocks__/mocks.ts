@@ -56,7 +56,7 @@ export const FULL_RUNNER_STATS: RunnerStatsExtended = {
     cid: '0-0',
     capabilities:
         <DesiredCapabilitiesExtended>{
-            cjson_metadata: {} as cjson_metadata,
+            'cjson:metadata': {} as cjson_metadata,
             acceptInsecureCerts: false,
             acceptSslCerts: false,
             applicationCacheEnabled: false,

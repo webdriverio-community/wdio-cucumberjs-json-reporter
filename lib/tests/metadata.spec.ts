@@ -249,7 +249,7 @@ describe( 'metadata', () => {
         } );
 
         it( 'should return app metadata based on the current.config.capabilities[\'cjson:metadata\'].app', () => {
-            ( FULL_RUNNER_STATS.capabilities as W3CCapabilitiesExtended ).cjson_metadata.app = {
+            ( FULL_RUNNER_STATS.capabilities as W3CCapabilitiesExtended )['cjson:metadata'].app = {
                 'name': 'mock-appName',
                 'version': 'mock-appVersion',
             };
@@ -263,7 +263,7 @@ describe( 'metadata', () => {
             expect( determinePlatformNameSpy ).toHaveBeenCalledTimes( 1 );
             expect( determinePlatformVersionSpy ).toHaveBeenCalledTimes( 1 );
 
-            delete ( FULL_RUNNER_STATS.capabilities as W3CCapabilitiesExtended ).cjson_metadata.app;
+            delete ( FULL_RUNNER_STATS.capabilities as W3CCapabilitiesExtended )['cjson:metadata'].app;
             determineAppDataSpy.mockClear();
         } );
 
