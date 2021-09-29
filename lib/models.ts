@@ -52,7 +52,7 @@ export interface Feature {
     type?: string;
     metadata?: MetadataObject;
     description?: string;
-    line?: number;
+    line?: number | null;
     name?: string;
     uri?: string;
     tags?: string[] | Tag[] | string;
@@ -82,7 +82,7 @@ export interface Step {
         duration: number;
         error_message?: string;
     };
-    line?: number | string;
+    line?: number | null;
     match?: {
         location: number | string;
     };

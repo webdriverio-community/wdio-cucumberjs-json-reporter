@@ -18,7 +18,7 @@
     "removeComments": true,
     "moduleResolution": "node",
     "baseUrl": ".",
-    "types": [ "jest","node", "webdriverio/sync","@types/fs-extra", "long"],
+    "types": [ "jest","node", "webdriverio/async", "@types/fs-extra", "long"],
     "allowSyntheticDefaultImports": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,

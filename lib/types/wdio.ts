@@ -4,14 +4,12 @@ import { WriteStream } from 'fs';
 import { cjson_metadata } from '../models';
 
 export interface W3CCapabilitiesExtended extends Capabilities.W3CCapabilities {
-    'cjson:metadata'?: cjson_metadata;
-    testobject_app_id?: string;
+    cjson_metadata?: cjson_metadata;
     app?: string;
 }
 
 export interface DesiredCapabilitiesExtended extends Capabilities.DesiredCapabilities {
     cjson_metadata?: cjson_metadata;
-    testobject_app_id?: string;
     app?: string;
 }
 
@@ -70,4 +68,19 @@ export interface SuiteStatsExtended extends SuiteStats {
     line?: number;
     name?: string;
     id?: string;
+}
+
+export interface ConfigCapabilities {
+    browserName?: string;
+    'cjson:metadata'?: {
+        device?: string;
+        browser?: {
+            name?: string;
+            version?: string;
+        };
+        platform?: {
+            name?: string;
+            version?: string;
+        };
+    };
 }

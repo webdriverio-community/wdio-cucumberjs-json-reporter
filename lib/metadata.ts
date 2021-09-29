@@ -1,50 +1,31 @@
 import { AppData, BrowserData, MetadataObject, cjson_metadata } from './models';
 import { DesiredCapabilitiesExtended, RunnerStatsExtended, W3CCapabilitiesExtended, WebdriverIOExtended } from './types/wdio';
+import { Browser } from 'webdriverio';
 import { NOT_KNOWN } from './constants';
 import WebDriver from 'webdriver';
 
 export class Metadata {
     /**
-     * ```
      * Determine the metadata that needs to be added
-     *
-     * @param {object} data instance data
-     *
-     * @returns {
-     *  {
-     *      metadata: {
-     *          app: {
-     *              name: string,
-     *              version: string
-     *          },
-     *          browser: {
-     *              name: string,
-     *              version: string
-     *          },
-     *          device: string,
-     *          platform: {
-     *              name: string,
-     *              version: string
-     *          }
-     *      }
-     *  }
-     * }
-     * ```
      */
     public determineMetadata ( data: RunnerStatsExtended ): MetadataObject {
         let instanceData: AppData | BrowserData;
         const currentCapabilities = data.capabilities as W3CCapabilitiesExtended;
-        const optsCaps = browser?.options?.capabilities;
+        const optsCaps = ( browser as Browser<'async'> ).options.capabilities as W3CCapabilitiesExtended;
         const currentConfigCapabilities = data?.capabilities as DesiredCapabilitiesExtended;
-        const w3cCaps = ( browser?.options as WebdriverIOExtended )?.requestedCapabilities;
-        const metadata: cjson_metadata = ( currentConfigCapabilities as W3CCapabilitiesExtended )?.['cjson:metadata'] // For WDIO
-            || w3cCaps?.cjson_metadata // When an app is used to test
+        const w3cCaps: cjson_metadata = Object.prototype.hasOwnProperty.call( data.config.capabilities, 'cjson:metadata' )
+            // Fixes: https://github.com/webdriverio-community/wdio-cucumberjs-json-reporter/issues/73
+            ? data.config.capabilities['cjson:metadata'] as cjson_metadata
+            // Fallback
+            : ( ( browser as Browser<'async'> ).options as WebdriverIOExtended )?.requestedCapabilities?.cjson_metadata;
+        const metadata: cjson_metadata = ( currentConfigCapabilities as W3CCapabilitiesExtended )?.cjson_metadata
+            || w3cCaps // When an app is used to test
             || ( optsCaps as DesiredCapabilitiesExtended )?.cjson_metadata // devtools
             || {} as cjson_metadata;
 
         // When an app is used to test
         // eslint-disable-next-line @typescript-eslint/tslint/config
-        if ( currentConfigCapabilities?.app || ( currentConfigCapabilities )?.testobject_app_id || metadata?.app ) {
+        if ( currentConfigCapabilities?.app || metadata?.app ) {
             instanceData = this.determineAppData( currentConfigCapabilities, metadata );
         } else {
             // Then a browser
@@ -63,10 +44,6 @@ export class Metadata {
 
     /**
      * Determine the device name
-     *
-     * @param {object} metadata
-     * @param {object} currentConfigCapabilities
-     * @return {string}
      */
     public determineDeviceName ( metadata: cjson_metadata, currentConfigCapabilities: WebDriver.DesiredCapabilities ): string {
         return ( metadata?.device || currentConfigCapabilities?.deviceName || `Device name ${NOT_KNOWN}` );
@@ -74,10 +51,6 @@ export class Metadata {
 
     /**
      * Determine the platform name
-     *
-     * @param {object} metadata
-     * @param {object} currentCapabilities
-     * @return {string}
      */
     public determinePlatformName ( metadata: cjson_metadata, currentCapabilities: WebDriver.DesiredCapabilities ): string {
         const currentPlatformName = currentCapabilities?.platformName
@@ -94,9 +67,6 @@ export class Metadata {
 
     /**
      * Determine the platform version
-     *
-     * @param {object} metadata
-     * @return {string}
      */
     public determinePlatformVersion ( metadata: cjson_metadata ): string {
         return ( metadata && metadata.platform && metadata.platform?.version )
@@ -106,23 +76,11 @@ export class Metadata {
 
     /**
      * Determine the app data
-     *
-     * @param {object} currentConfigCapabilities The capabilities from the configured capabilities
-     * @param {object} metadata The custom set capabilities
-     *
-     * @returns {
-     * {
-     * app: {
-     *          name: string,
-     *          version: string,
-     *      },
-     *  }
-     * }
      */
     public determineAppData ( currentConfigCapabilities: DesiredCapabilitiesExtended, metadata: cjson_metadata ): AppData {
         const metaAppName: string = ( metadata?.app && metadata.app?.name ) ? metadata?.app?.name : 'No metadata.app.name available';
         const metaAppVersion: string = ( metadata?.app && metadata.app.version ) ? metadata.app.version : 'No metadata.app.version available';
-        const appPath = currentConfigCapabilities.app || currentConfigCapabilities.testobject_app_id || metaAppName;
+        const appPath = currentConfigCapabilities.app || metaAppName;
         const appName = appPath.substring( appPath.replace( '\\', '/' ).lastIndexOf( '/' ) ).replace( '/', '' );
 
         return {
@@ -135,19 +93,6 @@ export class Metadata {
 
     /**
      * Determine the browser data
-     *
-     * @param {object} currentCapabilities The capabilities of the current run, that holds the most actual data
-     * @param {object} currentConfigCapabilities The capabilities from the configured capabilities
-     * @param {object} metadata The custom set capabilities
-     *
-     * @returns {
-     *  {
-     *      browser: {
-     *          name: string,
-     *          version: string,
-     *      },
-     *  }
-     * }
      */
     public determineBrowserData ( currentCapabilities: WebDriver.DesiredCapabilities, currentConfigCapabilities: WebDriver.DesiredCapabilities, metadata: cjson_metadata ): BrowserData {
         const browserName = currentCapabilities?.browserName
