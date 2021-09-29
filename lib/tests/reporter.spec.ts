@@ -7,6 +7,7 @@ import {
     STEP_TEST_ONSTART_STATS,
     SUITE_FEATURE_STATS,
     SUITE_FEATURE_UID,
+    SUITE_SCENARIO_STATS,
     TEST_EMPTY_STATS,
     TEST_NO_KEYWORD_STATS,
     TEST_SCENARIO_STATS
@@ -111,7 +112,7 @@ describe( 'reporter', () => {
 
             tmpReporter.instanceMetadata = metadata;
             tmpReporter.report.feature = EMPTY_FEATURE;
-            tmpReporter.onSuiteStart( {} as SuiteStatsExtended );
+            tmpReporter.onSuiteStart( SUITE_SCENARIO_STATS );
 
             expect( getFeatureDataObjectSpy ).not.toHaveBeenCalled();
             expect( tmpReporter.report ).toMatchSnapshot();
@@ -125,10 +126,10 @@ describe( 'reporter', () => {
 
             expect( tmpReporter.report.feature.elements.length ).toEqual( 0 );
 
-            tmpReporter.onSuiteStart( {} as SuiteStatsExtended );
+            tmpReporter.onSuiteStart( SUITE_SCENARIO_STATS );
 
             expect( getFeatureDataObjectSpy ).not.toHaveBeenCalled();
-            expect( getScenarioDataObjectSpy ).toHaveBeenCalledWith( {}, EMPTY_FEATURE.id );
+            expect( getScenarioDataObjectSpy ).toHaveBeenCalledWith( SUITE_SCENARIO_STATS, EMPTY_FEATURE.id );
             expect( tmpReporter.report.feature.elements ).toMatchSnapshot();
         } );
     } );
@@ -264,12 +265,10 @@ describe( 'reporter', () => {
 
     describe( 'getFeatureDataObject', () => {
         it( 'should be able to to create a feature JSON data object', () => {
-
             expect( tmpReporter.getFeatureDataObject( SUITE_FEATURE_STATS ) ).toMatchSnapshot();
         } );
 
         it( 'should be able to to create a feature JSON data object with no line data', () => {
-
             expect( tmpReporter.getFeatureDataObject( SUITE_FEATURE_UID ) ).toMatchSnapshot();
         } );
     } );

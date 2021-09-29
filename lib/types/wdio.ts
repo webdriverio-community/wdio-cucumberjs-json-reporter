@@ -71,3 +71,18 @@ export interface SuiteStatsExtended extends SuiteStats {
     name?: string;
     id?: string;
 }
+
+export interface ConfigCapabilities {
+    browserName?: string;
+    'cjson:metadata'?: {
+        device?: string;
+        browser?: {
+            name?: string;
+            version?: string;
+        };
+        platform?: {
+            name?: string;
+            version?: string;
+        };
+    };
+}

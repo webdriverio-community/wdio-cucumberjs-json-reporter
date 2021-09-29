@@ -64,10 +64,10 @@ Object {
   "elements": Array [],
   "id": "create-passed-feature",
   "keyword": "Feature",
-  "line": 2,
+  "line": null,
   "name": "Create passed feature",
   "tags": Array [],
-  "type": "suite",
+  "type": "feature",
   "uri": "Can not be determined",
 }
 `;
@@ -78,10 +78,10 @@ Object {
   "elements": Array [],
   "id": "create-passed-feature",
   "keyword": "Feature",
-  "line": NaN,
+  "line": null,
   "name": "Create passed feature",
   "tags": Array [],
-  "type": "suite",
+  "type": "feature",
   "uri": "Can not be determined",
 }
 `;
@@ -119,7 +119,7 @@ Object {
     },
   ],
   "keyword": "Given",
-  "line": 6,
+  "line": null,
   "match": Object {
     "location": "can not be determined with webdriver.io",
   },
@@ -135,7 +135,7 @@ exports[`reporter getStepDataObject should be able to to create a step JSON data
 Object {
   "arguments": Array [],
   "keyword": "Given",
-  "line": 6,
+  "line": null,
   "match": Object {
     "location": "can not be determined with webdriver.io",
   },
@@ -151,7 +151,7 @@ exports[`reporter getStepDataObject should be able to to create a step JSON data
 Object {
   "arguments": Array [],
   "keyword": "Before",
-  "line": "",
+  "line": null,
   "match": Object {
     "location": "can not be determined with webdriver.io",
   },
@@ -167,7 +167,7 @@ exports[`reporter getStepDataObject should be able to to create a step JSON data
 Object {
   "arguments": Array [],
   "keyword": "",
-  "line": "",
+  "line": null,
   "match": Object {
     "location": "can not be determined with webdriver.io",
   },
@@ -183,7 +183,7 @@ exports[`reporter getStepDataObject should be able to to create a step JSON data
 Object {
   "arguments": Array [],
   "keyword": "",
-  "line": 3,
+  "line": null,
   "match": Object {
     "location": "can not be determined with webdriver.io",
   },

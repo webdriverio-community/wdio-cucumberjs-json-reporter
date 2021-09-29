@@ -1,5 +1,6 @@
 import { AppData, BrowserData, MetadataObject, cjson_metadata } from './models';
 import { DesiredCapabilitiesExtended, RunnerStatsExtended, W3CCapabilitiesExtended, WebdriverIOExtended } from './types/wdio';
+import { Browser } from 'webdriverio';
 import { NOT_KNOWN } from './constants';
 import WebDriver from 'webdriver';
 
@@ -34,17 +35,21 @@ export class Metadata {
     public determineMetadata ( data: RunnerStatsExtended ): MetadataObject {
         let instanceData: AppData | BrowserData;
         const currentCapabilities = data.capabilities as W3CCapabilitiesExtended;
-        const optsCaps = browser?.options?.capabilities;
+        const optsCaps = ( browser as Browser<'async'> ).options.capabilities as W3CCapabilitiesExtended;
         const currentConfigCapabilities = data?.capabilities as DesiredCapabilitiesExtended;
-        const w3cCaps = ( browser?.options as WebdriverIOExtended )?.requestedCapabilities;
+        const w3cCaps: cjson_metadata = Object.prototype.hasOwnProperty.call( data.config.capabilities, 'cjson:metadata' )
+            // Fixes: https://github.com/webdriverio-community/wdio-cucumberjs-json-reporter/issues/73
+            ? data.config.capabilities['cjson:metadata'] as cjson_metadata
+            // Fallback
+            : ( ( browser as Browser<'async'> ).options as WebdriverIOExtended )?.requestedCapabilities?.cjson_metadata;
         const metadata: cjson_metadata = ( currentConfigCapabilities as W3CCapabilitiesExtended )?.cjson_metadata // For WDIO V6
-            || w3cCaps?.cjson_metadata // When an app is used to test
+            || w3cCaps // When an app is used to test
             || ( optsCaps as DesiredCapabilitiesExtended )?.cjson_metadata // devtools
             || {} as cjson_metadata;
 
         // When an app is used to test
         // eslint-disable-next-line @typescript-eslint/tslint/config
-        if ( currentConfigCapabilities?.app || ( currentConfigCapabilities )?.testobject_app_id || metadata?.app ) {
+        if ( currentConfigCapabilities?.app || metadata?.app ) {
             instanceData = this.determineAppData( currentConfigCapabilities, metadata );
         } else {
             // Then a browser

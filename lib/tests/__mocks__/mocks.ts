@@ -1,7 +1,15 @@
-import type { Capabilities, Options } from '@wdio/types';
-import { DesiredCapabilitiesExtended, HookStatsExtended, RunnerStatsExtended, SuiteStatsExtended, TestStatsExtended, TestrunnerExtended } from '../../types/wdio';
+import {
+    ConfigCapabilities,
+    DesiredCapabilitiesExtended,
+    HookStatsExtended,
+    RunnerStatsExtended,
+    SuiteStatsExtended,
+    TestStatsExtended,
+    TestrunnerExtended,
+} from '../../types/wdio';
 import { Feature, Scenario, cjson_metadata } from '../../models';
 import { HookStats, RunnerStats, SuiteStats, Test, TestStats } from '@wdio/reporter';
+import { Capabilities } from '@wdio/types';
 import { WriteStream } from 'fs';
 
 export const EMPTY_FEATURE: Feature = {
@@ -23,25 +31,28 @@ export const EMPTY_SCENARIO: Scenario = {
 };
 export const SMALL_RUNNER_STATS: RunnerStats = {
     capabilities:
-    {
-        browserName: 'chrome',
-        chromedriverVersion: '2.46.628411 (3324f4c8be9ff2f70a05a30ebc72ffb013e1a71e)',
-        chromeOptions: {
-            args: ['user-data-dir=/var/folders/rb/_hbqv7fn5114b206t2s05fs40000gn/T/.org.chromium.Chromium.uwkY0A'],
+        {
+            browserName: 'chrome',
+            chromedriverVersion: '2.46.628411 (3324f4c8be9ff2f70a05a30ebc72ffb013e1a71e)',
+            chromeOptions: {
+                args: ['user-data-dir=/var/folders/rb/_hbqv7fn5114b206t2s05fs40000gn/T/.org.chromium.Chromium.uwkY0A'],
+            },
+            'goog:chromeOptions': {
+                debuggerAddress: 'localhost:53158'
+            },
+            platform: 'Mac OS X',
+            proxy: {},
+            version: '75.0.3770.100',
         },
-        'goog:chromeOptions': {
-            debuggerAddress: 'localhost:53158'
-        },
-        platform: 'Mac OS X',
-        proxy: {},
-        version: '75.0.3770.100',
+    config: {
+        capabilities: {},
     },
-    config: <Options.Testrunner>{},
     type: 'runner',
     start: new Date( '2019-07-14T07:25:20.897Z' ),
     _duration: 0,
     duration: 0,
-    complete: (): void => { },
+    complete: (): void => {
+    },
     cid: '0-0',
     sessionId: '',
     instanceOptions: {},
@@ -121,16 +132,16 @@ export const FULL_RUNNER_STATS: RunnerStatsExtended = {
             timeout: 10000,
         },
         cucumberOpts:
-        {
-            timeout: 60000,
-            backtrace: false,
-            colors: true,
-            snippets: true,
-            source: true,
-            tagExpression: 'not @wip and not @ignore',
-            failAmbiguousDefinitions: false,
-            ignoreUndefinedDefinitions: false
-        },
+            {
+                timeout: 60000,
+                backtrace: false,
+                colors: true,
+                snippets: true,
+                source: true,
+                tagExpression: 'not @wip and not @ignore',
+                failAmbiguousDefinitions: false,
+                ignoreUndefinedDefinitions: false
+            },
         onPrepare: [],
         before: [],
         beforeSession: [],
@@ -165,7 +176,8 @@ export const FULL_RUNNER_STATS: RunnerStatsExtended = {
     isMultiremote: false,
     retry: 0,
     duration: 0,
-    complete: (): void => { },
+    complete: (): void => {
+    },
     instanceOptions: {}
 };
 export const WDIO6_RUNNER_STATS: RunnerStatsExtended = {
@@ -206,11 +218,44 @@ export const WDIO6_RUNNER_STATS: RunnerStatsExtended = {
     isMultiremote: false,
     retry: 0,
     duration: 0,
-    complete: (): void => { },
+    complete: (): void => {
+    },
+    instanceOptions: {},
+};
+export const CAPS_METADATA_RUNNER_STATS: RunnerStatsExtended = {
+    type: 'runner',
+    start: new Date( '2020-04-27T13:24:19.166Z' ),
+    _duration: 0,
+    cid: '0-0',
+    capabilities: {},
+    sanitizedCapabilities: 'chrome.81_0_4044_122.macosx',
+    config: <TestrunnerExtended>{
+        capabilities: <ConfigCapabilities>{
+            browserName: 'chrome',
+            'cjson:metadata': {
+                device: 'Test Device',
+                browser: {
+                    name: 'safari',
+                    version: '14.1',
+                },
+                platform: {
+                    name: 'ios',
+                    version: '14',
+                }
+            }
+        }
+    },
+    specs: ['/Users/wimselles/Git/cucumberjs-json-demo/google.feature'],
+    sessionId: '27e5b2b068aa1612e60d90a9e5164a7d',
+    isMultiremote: false,
+    retry: 0,
+    duration: 0,
+    complete: (): void => {
+    },
     instanceOptions: {},
 };
 export const SUITE_FEATURE_STATS: SuiteStatsExtended = {
-    type: 'suite',
+    type: 'feature',
     start: new Date( '2019-07-15T14:40:50.761Z' ),
     uid: 'Create passed feature2',
     cid: '0-0',
@@ -222,12 +267,14 @@ export const SUITE_FEATURE_STATS: SuiteStatsExtended = {
     duration: 0,
     _duration: 0,
     hooksAndTests: [] as HookStats[],
-    complete: () => { },
-    file: ''
+    complete: () => {
+    },
+    file: '',
+    parent: undefined,
+    description: '',
 };
-
 export const SUITE_FEATURE_UID: SuiteStatsExtended = {
-    type: 'suite',
+    type: 'feature',
     start: new Date( '2019-07-15T14:40:50.761Z' ),
     _duration: 0,
     uid: '',
@@ -238,11 +285,32 @@ export const SUITE_FEATURE_UID: SuiteStatsExtended = {
     hooks: [],
     suites: [],
     hooksAndTests: [] as HookStats[],
-    complete: () => { },
+    complete: () => {
+    },
     file: '',
-    duration: 0
+    duration: 0,
+    parent: undefined,
+    description: '',
 };
-
+export const SUITE_SCENARIO_STATS: SuiteStatsExtended = {
+    type: 'scenario',
+    start: new Date( '2019-07-15T14:40:50.761Z' ),
+    uid: 'Open website2',
+    cid: '0-0',
+    title: 'Open website',
+    fullTitle: undefined,
+    tests: [] as TestStats[],
+    hooks: [] as HookStats[],
+    suites: [] as SuiteStats[],
+    duration: 0,
+    _duration: 0,
+    hooksAndTests: [] as HookStats[],
+    complete: () => {
+    },
+    file: '',
+    parent: 'sample.feature:2:1',
+    description: '',
+};
 const test: Test = {
     type: 'test:start',
     title: '',
@@ -260,7 +328,6 @@ STEP_TEST_ONSTART_STATS_Initial.keyword = 'Given';
 STEP_TEST_ONSTART_STATS_Initial.uid = 'I open "http://webdriver.io/"6';
 STEP_TEST_ONSTART_STATS_Initial.title = 'Given I open "http://webdriver.io/"';
 STEP_TEST_ONSTART_STATS_Initial.name = 'I open "http://webdriver.io/"6';
-
 export const STEP_TEST_ONSTART_STATS = STEP_TEST_ONSTART_STATS_Initial;
 const STEP_TEST_ONSTART_ARGUMENT_STATS_Initial = new TestStatsExtended( test );
 STEP_TEST_ONSTART_ARGUMENT_STATS_Initial.argument = {
@@ -295,7 +362,8 @@ export const STEP_HOOK_ONSTART_STATS: HookStatsExtended = {
     'parent': 'Create failed feature: Open website',
     'keyword': '',
     duration: 0,
-    complete: () => { }
+    complete: () => {
+    }
 };
 
 test.title = "Hook This is doing nothing because it's a background\"";

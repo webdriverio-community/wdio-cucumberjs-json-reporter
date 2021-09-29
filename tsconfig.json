@@ -20,7 +20,7 @@
     "module": "commonjs",
     "moduleResolution": "node",
     "baseUrl": ".",
-    "types": [ "jest","node", "webdriverio/sync","@types/fs-extra", "long"],
+    "types": [ "jest","node", "webdriverio/async", "@types/fs-extra", "long"],
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "experimentalDecorators": true,
