@@ -6,31 +6,7 @@ import WebDriver from 'webdriver';
 
 export class Metadata {
     /**
-     * ```
      * Determine the metadata that needs to be added
-     *
-     * @param {object} data instance data
-     *
-     * @returns {
-     *  {
-     *      metadata: {
-     *          app: {
-     *              name: string,
-     *              version: string
-     *          },
-     *          browser: {
-     *              name: string,
-     *              version: string
-     *          },
-     *          device: string,
-     *          platform: {
-     *              name: string,
-     *              version: string
-     *          }
-     *      }
-     *  }
-     * }
-     * ```
      */
     public determineMetadata ( data: RunnerStatsExtended ): MetadataObject {
         let instanceData: AppData | BrowserData;
@@ -42,7 +18,7 @@ export class Metadata {
             ? data.config.capabilities['cjson:metadata'] as cjson_metadata
             // Fallback
             : ( ( browser as Browser<'async'> ).options as WebdriverIOExtended )?.requestedCapabilities?.cjson_metadata;
-        const metadata: cjson_metadata = ( currentConfigCapabilities as W3CCapabilitiesExtended )?.cjson_metadata // For WDIO V6
+        const metadata: cjson_metadata = ( currentConfigCapabilities as W3CCapabilitiesExtended )?.cjson_metadata
             || w3cCaps // When an app is used to test
             || ( optsCaps as DesiredCapabilitiesExtended )?.cjson_metadata // devtools
             || {} as cjson_metadata;
@@ -68,10 +44,6 @@ export class Metadata {
 
     /**
      * Determine the device name
-     *
-     * @param {object} metadata
-     * @param {object} currentConfigCapabilities
-     * @return {string}
      */
     public determineDeviceName ( metadata: cjson_metadata, currentConfigCapabilities: WebDriver.DesiredCapabilities ): string {
         return ( metadata?.device || currentConfigCapabilities?.deviceName || `Device name ${NOT_KNOWN}` );
@@ -79,10 +51,6 @@ export class Metadata {
 
     /**
      * Determine the platform name
-     *
-     * @param {object} metadata
-     * @param {object} currentCapabilities
-     * @return {string}
      */
     public determinePlatformName ( metadata: cjson_metadata, currentCapabilities: WebDriver.DesiredCapabilities ): string {
         const currentPlatformName = currentCapabilities?.platformName
@@ -99,9 +67,6 @@ export class Metadata {
 
     /**
      * Determine the platform version
-     *
-     * @param {object} metadata
-     * @return {string}
      */
     public determinePlatformVersion ( metadata: cjson_metadata ): string {
         return ( metadata && metadata.platform && metadata.platform?.version )
@@ -111,23 +76,11 @@ export class Metadata {
 
     /**
      * Determine the app data
-     *
-     * @param {object} currentConfigCapabilities The capabilities from the configured capabilities
-     * @param {object} metadata The custom set capabilities
-     *
-     * @returns {
-     * {
-     * app: {
-     *          name: string,
-     *          version: string,
-     *      },
-     *  }
-     * }
      */
     public determineAppData ( currentConfigCapabilities: DesiredCapabilitiesExtended, metadata: cjson_metadata ): AppData {
         const metaAppName: string = ( metadata?.app && metadata.app?.name ) ? metadata?.app?.name : 'No metadata.app.name available';
         const metaAppVersion: string = ( metadata?.app && metadata.app.version ) ? metadata.app.version : 'No metadata.app.version available';
-        const appPath = currentConfigCapabilities.app || currentConfigCapabilities.testobject_app_id || metaAppName;
+        const appPath = currentConfigCapabilities.app || metaAppName;
         const appName = appPath.substring( appPath.replace( '\\', '/' ).lastIndexOf( '/' ) ).replace( '/', '' );
 
         return {
@@ -140,19 +93,6 @@ export class Metadata {
 
     /**
      * Determine the browser data
-     *
-     * @param {object} currentCapabilities The capabilities of the current run, that holds the most actual data
-     * @param {object} currentConfigCapabilities The capabilities from the configured capabilities
-     * @param {object} metadata The custom set capabilities
-     *
-     * @returns {
-     *  {
-     *      browser: {
-     *          name: string,
-     *          version: string,
-     *      },
-     *  }
-     * }
      */
     public determineBrowserData ( currentCapabilities: WebDriver.DesiredCapabilities, currentConfigCapabilities: WebDriver.DesiredCapabilities, metadata: cjson_metadata ): BrowserData {
         const browserName = currentCapabilities?.browserName

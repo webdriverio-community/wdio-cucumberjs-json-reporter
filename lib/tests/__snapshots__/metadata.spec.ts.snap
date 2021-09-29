@@ -27,15 +27,6 @@ Object {
 }
 `;
 
-exports[`metadata determineAppData should return that the app name based on the testobject_app_id 1`] = `
-Object {
-  "app": Object {
-    "name": "1",
-    "version": "No metadata.app.version available",
-  },
-}
-`;
-
 exports[`metadata determineBrowserData should return that no browser metadata could be determined 1`] = `
 Object {
   "browser": Object {

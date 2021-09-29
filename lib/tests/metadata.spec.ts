@@ -41,15 +41,6 @@ describe( 'metadata', () => {
                 {} as cjson_metadata,
             ) ).toMatchSnapshot();
         } );
-
-        it( 'should return that the app name based on the testobject_app_id', () => {
-            expect( metadataClassObject.determineAppData(
-                {
-                    testobject_app_id: '1',
-                } as WebDriver.DesiredCapabilities,
-                {} as cjson_metadata,
-            ) ).toMatchSnapshot();
-        } );
     } );
 
     describe( 'determineBrowserData', () => {

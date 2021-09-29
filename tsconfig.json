@@ -1,10 +1,10 @@
 {
+  "extends": "@tsconfig/node12/tsconfig.json",
   "compileOnSave": true,
   "compilerOptions": {
     "noFallthroughCasesInSwitch": true,
     "allowUnreachableCode": false,
     "allowUnusedLabels": false,
-    "strict": true,
     "strictNullChecks": false,
     "noImplicitAny" : false,
     "preserveSymlinks": true,
@@ -15,14 +15,11 @@
     "inlineSources": true,
     "typeRoots": ["./node_modules/@types","./lib/types" ],
     "rootDir": "./lib",
-    "target": "ES2020",
     "removeComments": true,
-    "module": "commonjs",
     "moduleResolution": "node",
     "baseUrl": ".",
     "types": [ "jest","node", "webdriverio/async", "@types/fs-extra", "long"],
     "allowSyntheticDefaultImports": true,
-    "esModuleInterop": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "outDir": "./dist"

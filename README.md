@@ -2,7 +2,7 @@
 A WDIO reporter that creates CucumberJS JSON files for WebdriverIO V6+
 
 [![dependencies Status](https://david-dm.org/webdriverio-community/wdio-cucumberjs-json-reporter/status.svg)](https://david-dm.org/webdriverio-community/wdio-cucumberjs-json-reporter)
-![example workflow](https://github.com/webdriverio-community/wdio-cucumberjs-json-reporter/actions/workflows/wdio-cucumberjs-json-reporter.yml/badge.svg)
+![example workflow](https://github.com/webdriverio-community/wdio-cucumberjs-json-reporter/actions/workflows/test.yml/badge.svg)
 [![MIT license](http://img.shields.io/badge/license-MIT-brightgreen.svg)](http://opensource.org/licenses/MIT)
 
 [![NPM](https://nodei.co/npm/wdio-cucumberjs-json-reporter.png)](https://nodei.co/npm/wdio-cucumberjs-json-reporter/)
@@ -83,11 +83,11 @@ The language in which the Gherkin scenarios are written (defaults to English). T
 ## Metadata
 
 > **Note:**\
-> This is currently not supported if you are using WebdriverIO V6, WebdriverIO V5 still supports this
+> This is currently not supported if you are using WebdriverIO V6, WebdriverIO V5 still supports this and WebdriverIO V7 supports it again
 
 As said, this report can automatically store the metadata of the current machine / device the feature has been executed on.
 
-To customize this you can add IT by adding the following object to your `capabilities`
+To customize this you can add it by adding the following object to your `capabilities`
 
 ```js
 // Example wdio.conf.js

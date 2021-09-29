@@ -5,13 +5,11 @@ import { cjson_metadata } from '../models';
 
 export interface W3CCapabilitiesExtended extends Capabilities.W3CCapabilities {
     cjson_metadata?: cjson_metadata;
-    testobject_app_id?: string;
     app?: string;
 }
 
 export interface DesiredCapabilitiesExtended extends Capabilities.DesiredCapabilities {
     cjson_metadata?: cjson_metadata;
-    testobject_app_id?: string;
     app?: string;
 }
 
