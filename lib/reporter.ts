@@ -13,35 +13,33 @@ import { CucumberJsAttachment, Feature, MetadataObject, Report, Scenario, Step }
 import { HookStatsExtended, SuiteStatsExtended, TestStatsExtended } from './types/wdio';
 import WDIOReporter, { HookStats, RunnerStats, SuiteStats, TestStats } from '@wdio/reporter';
 import { existsSync, outputJsonSync, readJsonSync } from 'fs-extra';
+import { CucumberJsJsonReporterInterface } from './types';
 import { Metadata } from './metadata';
-import { Reporters } from '@wdio/types';
 import Utils from './utils';
 import logger from '@wdio/logger';
 import { resolve } from 'path';
-// Set Options = Reporters.Options;
 
 const log = logger( 'wdio-multiple-cucumber-html-reporter' );
 
 export class CucumberJsJsonReporter extends WDIOReporter {
-    public options: Partial<Reporters.Options>;
     public instanceMetadata: MetadataObject;
     public report: Report;
     public metadataClassObject: Metadata;
     public utilsObject: Utils;
 
-    public constructor( options: Partial<Reporters.Options> ) {
+    public constructor( public options: CucumberJsJsonReporterInterface ) {
         super( options );
+        this.options = options;
 
-        if ( !options.jsonFolder ) {
-            options.jsonFolder = DEFAULT_JSON_FOLDER;
+        if ( !this.options.jsonFolder ) {
+            this.options.jsonFolder = DEFAULT_JSON_FOLDER;
             log.info( `The 'jsonFolder' was not set, it has been set to the default '${DEFAULT_JSON_FOLDER}'` );
         }
-        if ( !options.language ) {
-            options.language = DEFAULT_LANGUAGE;
+        if ( !this.options.language ) {
+            this.options.language = DEFAULT_LANGUAGE;
             log.info( `The 'language' was not set, it has been set to the default '${DEFAULT_LANGUAGE}'` );
         }
 
-        this.options = options;
         this.instanceMetadata = null;
         this.report = <Report>{};
 
@@ -206,6 +204,7 @@ export class CucumberJsJsonReporter extends WDIOReporter {
         const jsonFile = resolve( jsonFolder, `${this.report.feature.id}.json` );
         const json = [this.report.feature];
         // Check if there is an existing file, if so concat the data, else add the new
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
         const output = existsSync( jsonFile ) ? json.concat( readJsonSync( jsonFile ) ) : json;
 
         outputJsonSync( jsonFile, output );
@@ -225,9 +224,15 @@ export class CucumberJsJsonReporter extends WDIOReporter {
             keyword: FEATURE,
             type: featureData.type,
             description: ( featureData.description || '' ),
-            line: null,
+            // Sample  `uid: 'sample.feature:2:1'`, where:
+            // - [0]: file name
+            // - [1]: line in file
+            // - [2]: column
+            line: featureData.uid && featureData.uid.includes( ':' )
+                ? parseInt( featureData.uid.split( ':' )[1], 10 )
+                : null,
             name: featureName,
-            uri: 'Can not be determined',
+            uri: featureData.file || 'Can not be determined',
             tags: featureData.tags || [],
             elements: [],
             id: featureName.replace( /[\\/?%*:|"<> ]/g, '-' ).toLowerCase(),
