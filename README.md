@@ -80,6 +80,16 @@ where the script is executed. Executing it from the root of your project will al
 
 The language in which the Gherkin scenarios are written (defaults to English). The list of language codes and its keywords can be found [here](https://cucumber.io/docs/gherkin/reference/#overview).
 
+### `disableHooks`
+- **Type:** `boolean`
+- **Mandatory:** No
+- **Default:** `false`
+
+Hook details will not be part of generation if this property sets to `true`.
+
+**Example**:
+`['cucumberjs-json', { jsonFolder: '.tmp/new/', language: 'en', disableHooks:true}]`
+
 ## Metadata
 
 > **Note:**\
