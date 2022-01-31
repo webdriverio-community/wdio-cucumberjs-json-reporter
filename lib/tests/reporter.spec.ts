@@ -158,6 +158,13 @@ describe( 'reporter', () => {
             expect( containsStepsSpy ).toHaveBeenCalledTimes( 1 );
             expect( addStepDataSpy ).toHaveBeenCalledWith( { state: PASSED, keyword: AFTER } );
         } );
+        it( 'should not call `addStepData` to add a pending after step', () => {
+            tmpReporter.options.disableHooks = true;
+            const withDisabledHooks = jest.spyOn( tmpReporter, 'addStepData' ).mockReturnValue();
+            tmpReporter.onHookStart( {} as HookStatsExtended );
+
+            expect( withDisabledHooks ).toHaveBeenCalledTimes( 0 );
+        } );
     } );
 
     describe( 'onHookEnd', () => {
@@ -170,12 +177,20 @@ describe( 'reporter', () => {
         } );
 
         it( 'should call update a hook step to the current state when there is an error', () => {
-
             const updateStepStatusSpy = jest.spyOn( tmpReporter, 'updateStepStatus' ).mockReturnValue();
 
             tmpReporter.onHookEnd( { state: FAILED, error: {} as Error } as HookStatsExtended );
 
             expect( updateStepStatusSpy ).toHaveBeenCalledWith( { state: FAILED, error: {} } );
+        } );
+
+        it( 'should not call `addUpdateStepStatus` to add a pending after step', () => {
+            tmpReporter.options.disableHooks = true;
+            const withDisabledHooks = jest.spyOn( tmpReporter, 'updateStepStatus' ).mockReturnValue();
+
+            tmpReporter.onHookEnd( {} as HookStatsExtended );
+
+            expect( withDisabledHooks ).toHaveBeenCalledTimes( 0 );
         } );
     } );
 
