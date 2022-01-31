@@ -201,7 +201,8 @@ export class CucumberJsJsonReporter extends WDIOReporter {
      */
     public onRunnerEnd (): void {
         const jsonFolder = resolve( process.cwd(), this.options.jsonFolder );
-        const jsonFile = resolve( jsonFolder, `${this.report.feature.id}.json` );
+        const date = new Date(Date.now()).toISOString().replace(/:/g,"-").split(".")[0];
+        const jsonFile = (0, path_1.resolve)(jsonFolder, `${this.report.feature.id}_${date}.json`);
         const json = [this.report.feature];
         // Check if there is an existing file, if so concat the data, else add the new
         // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
