@@ -116,9 +116,6 @@ export class CucumberJsJsonReporter extends WDIOReporter {
      */
     public onHookStart ( payload: HookStatsExtended ): void {
         // There is always a scenario, take the last one
-        if ( this.options.disableHooks ) {
-            return;
-        }
         const currentSteps = this.getCurrentScenario().steps;
         payload.state = PASSED;
         payload.keyword = this.utilsObject.containsSteps( currentSteps, this.options.language ) ? AFTER : BEFORE;
@@ -131,9 +128,6 @@ export class CucumberJsJsonReporter extends WDIOReporter {
      * A hook is the same  as a 'normal' step, so use the update step
      */
     public onHookEnd ( payload: HookStats ): void {
-        if ( this.options.disableHooks ) {
-            return;
-        }
         payload.state = payload.error ? payload.state : PASSED;
 
         return this.updateStepStatus( payload );
