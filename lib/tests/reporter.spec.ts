@@ -50,7 +50,8 @@ describe( 'reporter', () => {
 
     describe( 'on create', () => {
         it( 'should set the defaults if only the logfile option is provided', () => {
-            const noOptionsReporter = new WdioCucumberJsJsonReporter( { logFile: path.join( logFolder, logFileName ) } );
+            const noOptionsReporter = new WdioCucumberJsJsonReporter( { logFile: path.join( logFolder, logFileName )
+                .replace( '\\','/' ) } );
 
             expect( noOptionsReporter.options ).toMatchSnapshot();
         } );
@@ -256,8 +257,9 @@ describe( 'reporter', () => {
         } );
 
         it( 'should be able to add json to an existing json output', () => {
+            const date = new Date( Date.now() ).toISOString().replace( /:/g,'-' ).split( '.' )[0];
             const jsonFolder = './.tmp/ut-folder';
-            const jsonFile = `${jsonFolder}/this-feature.json`;
+            const jsonFile = `${jsonFolder}/this-feature_${date}.json`;
 
             copySync( 'lib/tests/__mocks__/mock.json', jsonFile );
 
