@@ -50,7 +50,7 @@
     "webdriverio": "~7.16.13"
   },
   "peerDependencies": {
-    "@wdio/cucumber-framework": "~7.13.2"
+    "@wdio/cucumber-framework": "7.x"
   },
   "devDependencies": {
     "@types/fs-extra": "^9.0.13",
