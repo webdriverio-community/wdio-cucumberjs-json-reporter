@@ -37,7 +37,7 @@ export class Metadata {
             device: this.determineDeviceName( metadata, currentConfigCapabilities ),
             platform: {
                 name: this.determinePlatformName( metadata, currentCapabilities ),
-                version: this.determinePlatformVersion( metadata ),
+                version: this.determinePlatformVersion( metadata, currentCapabilities ),
             },
         };
     }
@@ -68,10 +68,15 @@ export class Metadata {
     /**
      * Determine the platform version
      */
-    public determinePlatformVersion ( metadata: cjson_metadata ): string {
-        return ( metadata && metadata.platform && metadata.platform?.version )
-            ? metadata.platform.version
-            : `Version ${NOT_KNOWN}`;
+    public determinePlatformVersion( metadata: cjson_metadata, currentCapabilities?: WebDriver.DesiredCapabilities ): string {
+        if ( metadata && metadata.platform && metadata.platform?.version ) {
+            return metadata.platform.version;
+        }
+        if ( currentCapabilities?.platformVersion ) {
+            return currentCapabilities.platformVersion;
+        } else {
+            return `Version ${NOT_KNOWN}`;
+        }
     }
 
     /**
