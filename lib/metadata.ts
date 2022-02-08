@@ -74,9 +74,8 @@ export class Metadata {
         }
         if ( currentCapabilities?.platformVersion ) {
             return currentCapabilities.platformVersion;
-        } else {
-            return `Version ${NOT_KNOWN}`;
         }
+            return `Version ${NOT_KNOWN}`;
     }
 
     /**
