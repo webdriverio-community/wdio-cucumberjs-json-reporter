@@ -160,6 +160,14 @@ describe( 'metadata', () => {
                 } as cjson_metadata,
             ) ).toMatchSnapshot();
         } );
+        it( 'should be able to return the platform version based on the metadata.platform from desired capabilities', () => {
+            expect( metadataClassObject.determinePlatformVersion(
+                {
+                    platform: {
+                        version: undefined,
+                    },
+                } as cjson_metadata, { platformVersion: '10.1' } as WebDriver.DesiredCapabilities ) ).toMatchSnapshot();
+        } );
 
         it( 'should be able to return the not known platform version', () => {
             expect( metadataClassObject.determinePlatformVersion( {} as cjson_metadata ) ).toMatchSnapshot();

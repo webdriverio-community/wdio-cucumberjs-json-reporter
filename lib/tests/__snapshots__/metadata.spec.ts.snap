@@ -189,3 +189,5 @@ exports[`metadata determinePlatformName should be able to return the platform na
 exports[`metadata determinePlatformVersion should be able to return the not known platform version 1`] = `"Version not known"`;
 
 exports[`metadata determinePlatformVersion should be able to return the platform version based on the metadata.platform 1`] = `"platform.version"`;
+
+exports[`metadata determinePlatformVersion should be able to return the platform version based on the metadata.platform from desired capabilities 1`] = `"10.1"`;
