@@ -16,8 +16,7 @@ export default class Utils {
         const dialect = dialects[language];
         return ( [] as string[] )
             .concat( dialect.given, dialect.when, dialect.then, dialect.and )
-            .map( keyword => keyword.replace( /\s*$/, '' ) )
-            .filter( keyword => keyword !== '*' );
+            .map( keyword => keyword.replace( /\s*$/, '' ) );
     }
 
     /**
@@ -62,7 +61,8 @@ export default class Utils {
      */
     public keywordStartsWith ( title: string, language: string ): string | undefined {
         const stepKeywords = [].concat( this.getStepKeywords( language ), ['After', 'Before'] );
-        const regex = new RegExp( `^(${stepKeywords.join( '|' )})\\s` );
+        const escapedStepKeywords = stepKeywords.map( ( keyword: string ) => keyword.replace( /[.*+?^${}()|[\]\\]/g, '\\$&' ) );
+        const regex = new RegExp( `^(${escapedStepKeywords.join( '|' )})\\s` );
         return ( regex.exec( title ) || [] ).pop() as string;
     }
 }

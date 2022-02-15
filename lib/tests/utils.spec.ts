@@ -62,4 +62,19 @@ describe( 'utils', () => {
             expect( new Utils().containsSteps( steps, language ) ).toEqual( true );
         } );
     } );
+
+    describe( 'keywordStartsWith', () => {
+        it( 'should return undefined if the first word is not a keyword', () => {
+            const language = 'en';
+
+            expect( new Utils().keywordStartsWith( 'Milk is not a reserved keyword', language ) ).toBeUndefined();
+        } );
+
+        it( 'should return the first word if it is a keyword', () => {
+            const language = 'en';
+
+            // * is a valid keyword in Gherkin
+            expect( new Utils().keywordStartsWith( '* I have milk', language ) ).toEqual( '*' );
+        } );
+    } );
 } );
