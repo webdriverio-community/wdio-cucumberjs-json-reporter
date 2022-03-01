@@ -71,6 +71,7 @@ export interface Scenario {
     foo?: string;
     bar?: string;
     foobar?: string;
+    line?: number | null;
 }
 
 export interface Step {
