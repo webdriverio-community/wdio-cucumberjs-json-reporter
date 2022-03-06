@@ -309,9 +309,6 @@ export class CucumberJsJsonReporter extends WDIOReporter {
      * Add step data to the current running scenario
      */
     public addStepData( test: TestStats | HookStats ): void {
-        log.info( '&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&' );
-        log.info( test );
-        log.info( '&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&' );
         // Always add the finished step to the end of the steps
         // of the last current scenario that is running
         this.getCurrentScenario().steps.push( this.getStepDataObject( test ) );
