@@ -92,7 +92,7 @@ Hook details will not be part of generation if this property sets to `true`.
 - **Mandatory:** No
 - **Default:** `true`
 
-When a spec if retried the report will be appended to the existing report file from the previous tries if this property is set to `false`.
+When a spec is retried the report will be appended to the existing report file from the previous tries if this property is set to `false`.
 
 **Example**:
 `['cucumberjs-json', { jsonFolder: '.tmp/new/', language: 'en', disableHooks:true}]`
