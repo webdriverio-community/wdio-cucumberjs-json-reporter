@@ -3,6 +3,7 @@ import {
     BEFORE,
     DEFAULT_JSON_FOLDER,
     DEFAULT_LANGUAGE,
+    DEFAULT_REPORT_FILE_PER_RETRY,
     FEATURE,
     PASSED,
     //   PENDING,
@@ -38,6 +39,10 @@ export class CucumberJsJsonReporter extends WDIOReporter {
         if ( !this.options.language ) {
             this.options.language = DEFAULT_LANGUAGE;
             log.info( `The 'language' was not set, it has been set to the default '${DEFAULT_LANGUAGE}'` );
+        }
+        if ( this.options.reportFilePerRetry === undefined ) {
+            this.options.reportFilePerRetry = DEFAULT_REPORT_FILE_PER_RETRY;
+            log.info( `The 'reportFilePerRetry' was not set, it has been set to the default '${DEFAULT_REPORT_FILE_PER_RETRY.toString()}'` );
         }
 
         this.instanceMetadata = null;
@@ -207,8 +212,9 @@ export class CucumberJsJsonReporter extends WDIOReporter {
      */
     public onRunnerEnd (): void {
         const uniqueId = String( Date.now() + Math.random() ).replace( '.','' );
+        const filename = this.options.reportFilePerRetry ? `${this.report.feature.id}_${uniqueId}.json` : `${this.report.feature.id}.json`;
         const jsonFolder = resolve( process.cwd(), this.options.jsonFolder );
-        const jsonFile = resolve( jsonFolder, `${this.report.feature.id}_${uniqueId}.json` );
+        const jsonFile = resolve( jsonFolder, filename );
         const json = [this.report.feature];
         // Check if there is an existing file, if so concat the data, else add the new
         // eslint-disable-next-line @typescript-eslint/no-unsafe-argument

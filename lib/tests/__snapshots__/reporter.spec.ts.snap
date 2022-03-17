@@ -200,6 +200,7 @@ Object {
   "jsonFolder": ".tmp/json/",
   "language": "en",
   "logFile": ".tmp/logFile.json",
+  "reportFilePerRetry": true,
 }
 `;
 
@@ -208,6 +209,7 @@ Object {
   "jsonFolder": ".tmp/json-folder/",
   "language": "en",
   "logFile": ".tmp/logFile.json",
+  "reportFilePerRetry": true,
 }
 `;
 

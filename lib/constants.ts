@@ -9,3 +9,4 @@ export const PENDING = 'pending';
 export const TEXT_PLAIN = 'text/plain';
 export const DEFAULT_JSON_FOLDER = '.tmp/json/';
 export const DEFAULT_LANGUAGE = 'en';
+export const DEFAULT_REPORT_FILE_PER_RETRY = true;

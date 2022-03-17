@@ -13,7 +13,7 @@ import {
     TEST_SCENARIO_STATS
 } from './__mocks__/mocks';
 import { HookStatsExtended, RunnerStatsExtended, SuiteStatsExtended, TestStatsExtended } from '../types/wdio';
-import { readJsonSync, readdirSync, removeSync } from 'fs-extra';
+import { copySync, readJsonSync, readdirSync, removeSync } from 'fs-extra';
 import { Metadata } from '../metadata';
 import { Step } from '../models';
 import WdioCucumberJsJsonReporter from '../reporter';
@@ -255,7 +255,7 @@ describe( 'reporter', () => {
             // Clean up
             removeSync( jsonFolder );
         } );
-        it( 'should create unique Json file and should not add in existing Json file onRunnerEnd', () => {
+        it( 'should by default create a unique Json file and should not add in existing Json file onRunnerEnd', () => {
 
             const jsonFolder = './.tmp/ut-folder';
 
@@ -277,6 +277,28 @@ describe( 'reporter', () => {
                     .toEqual( 1 );
 
             }
+            // Clean up
+            removeSync( jsonFolder );
+        } );
+        it( 'should be able to add json to an existing json output when reportFilePerRetry option is set to false', () => {
+            const jsonFolder = './.tmp/ut-folder';
+            const jsonFile = `${jsonFolder}/this-feature.json`;
+
+            copySync( 'lib/tests/__mocks__/mock.json', jsonFile );
+
+            tmpReporter.report.feature = { id: 'this-feature' };
+            tmpReporter.options.jsonFolder = jsonFolder;
+            tmpReporter.options.reportFilePerRetry = false;
+
+            expect( ( readJsonSync( jsonFile ) as any[] ).length ).toEqual( 1 );
+
+            tmpReporter.onRunnerEnd();
+
+            const files = readdirSync( jsonFolder );
+
+            expect( files.length ).toEqual( 1 );
+            expect( ( readJsonSync( jsonFile ) as any[] ).length ).toEqual( 2 );
+
             // Clean up
             removeSync( jsonFolder );
         } );
