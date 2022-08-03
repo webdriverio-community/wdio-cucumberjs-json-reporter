@@ -20,7 +20,7 @@ Object {
   "embeddings": Array [
     Object {
       "data": "data",
-      "mime_type": "mime_type",
+      "mime_type": "text/plain",
     },
   ],
   "foo": "current-step",
@@ -33,11 +33,14 @@ Object {
   "embeddings": Array [
     Object {
       "data": "data-1",
-      "mime_type": "mime_type-1",
+      "mime_type": "text/plain",
     },
   ],
   "foo": "current-step",
-  "status": "pending",
+  "result": Object {
+    "duration": 1,
+    "status": "pending",
+  },
 }
 `;
 
@@ -46,15 +49,18 @@ Object {
   "embeddings": Array [
     Object {
       "data": "data-1",
-      "mime_type": "mime_type-1",
+      "mime_type": "text/plain",
     },
     Object {
       "data": "data-2",
-      "mime_type": "mime_type-2",
+      "mime_type": "text/plain",
     },
   ],
   "foo": "current-step",
-  "status": "pending",
+  "result": Object {
+    "duration": 1,
+    "status": "pending",
+  },
 }
 `;
 

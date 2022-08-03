@@ -202,7 +202,7 @@ cucumberJson.attach('just a second string', 'text/plain');
 cucumberJson.attach({"json-string": true}, 'application/json');
 
 // Attach a screenshot in a before hook
-cucumberJson.attach(browser.takeScreenshot(), 'image/png');
+cucumberJson.attach(await browser.takeScreenshot(), 'image/png');
 ```
 
 ## Use it with multiple-cucumber-html-reporter

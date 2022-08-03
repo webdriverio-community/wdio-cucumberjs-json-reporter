@@ -1,6 +1,5 @@
 import { Argument, Tag } from '@wdio/reporter';
 
-
 export interface BrowserData {
     browser: {
         name: string;
@@ -8,7 +7,7 @@ export interface BrowserData {
     };
 }
 
-export interface AppData{
+export interface AppData {
     app?: {
         name: string;
         version: string;
@@ -33,7 +32,6 @@ export interface MetadataObject {
     type?: string;
     foo?: string;
 }
-
 
 export interface Report {
     feature: Feature;
@@ -95,14 +93,18 @@ export interface Result extends ErrorMessage {
     duration: number;
 }
 
+type AttachmentType = 'application/json' | 'image/png' | 'text/plain';
+
+type JSONValue = string | number | boolean | { [x: string]: JSONValue } | JSONValue[];
+
 export interface CucumberJsAttachment {
-    data: string;
-    type: string;
+    data: string | { [x: string]: JSONValue };
+    type: AttachmentType;
 }
 
 export interface Embedding {
-    data: string;
-    mime_type: string;
+    data: string | { [x: string]: JSONValue };
+    mime_type: AttachmentType;
 }
 
 export interface ErrorMessage {
