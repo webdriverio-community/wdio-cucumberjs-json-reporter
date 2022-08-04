@@ -93,12 +93,12 @@ export interface Result extends ErrorMessage {
     duration: number;
 }
 
-type AttachmentType = 'application/json' | 'image/png' | 'text/plain';
-
-type JSONValue = string | number | boolean | { [x: string]: JSONValue } | JSONValue[];
+export type AttachmentType = 'application/json' | 'image/png' | 'text/plain';
+export type JSONValue = string | number | boolean | { [x: string]: JSONValue } | JSONValue[];
+export type CucumberAttachmentData = string | { [x: string]: JSONValue };
 
 export interface CucumberJsAttachment {
-    data: string | { [x: string]: JSONValue };
+    data: CucumberAttachmentData;
     type: AttachmentType;
 }
 

@@ -458,12 +458,12 @@ describe( 'reporter', () => {
         } );
 
         it( 'should be able to attach with all data', () => {
-            WdioCucumberJsJsonReporter.attach( 'foo', 'type/string' );
+            WdioCucumberJsJsonReporter.attach( 'foo', 'text/plain' );
 
             expect( mockStdout ).toHaveBeenCalledTimes( 1 );
             expect( mockStdout ).toHaveBeenCalledWith( 'wdioCucumberJsReporter:attachment', {
                 data: 'foo',
-                type: 'type/string',
+                type: 'text/plain',
             } );
         } );
     } );
