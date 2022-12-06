@@ -1,4 +1,9 @@
-import { CAPS_METADATA_RUNNER_STATS, FULL_RUNNER_STATS, SMALL_RUNNER_STATS, WDIO6_RUNNER_STATS } from './__mocks__/mocks';
+import {
+    CAPS_METADATA_RUNNER_STATS,
+    FULL_RUNNER_STATS,
+    SMALL_RUNNER_STATS,
+    WDIO6_RUNNER_STATS,
+} from './__mocks__/mocks';
 import { W3CCapabilitiesExtended, WebdriverIOExtended } from '../types/wdio';
 import { Browser } from 'webdriverio';
 import { Metadata } from '../metadata';
@@ -7,166 +12,213 @@ import { Options } from '@wdio/types';
 import WebDriver from 'webdriver';
 import { cjson_metadata } from '../models';
 
+interface Global {
+    browser: Browser<'sync'>;
+}
+declare const global: Global;
+
+
 describe( 'metadata', () => {
     let metadataClassObject: Metadata;
+
     beforeAll( () => {
         metadataClassObject = new Metadata();
     } );
 
     describe( 'determineAppData', () => {
         it( 'should return that no app metadata could be determined', () => {
-            expect( metadataClassObject.determineAppData(
-                {} as WebDriver.DesiredCapabilities,
-                {} as cjson_metadata,
-            ) ).toMatchSnapshot();
+            expect(
+                metadataClassObject.determineAppData( {} as WebDriver.DesiredCapabilities, {} as cjson_metadata ),
+            ).toMatchSnapshot();
         } );
 
         it( 'should return that the app name and version based on the metadata', () => {
-            expect( metadataClassObject.determineAppData(
-                {} as WebDriver.DesiredCapabilities,
-                {
-                    app: {
-                        name: 'metadata app name',
-                        version: 'metadata version 1.2.3',
-                    },
-                } as cjson_metadata,
-            ) ).toMatchSnapshot();
+            expect(
+                metadataClassObject.determineAppData(
+                    {} as WebDriver.DesiredCapabilities,
+                    {
+                        app: {
+                            name: 'metadata app name',
+                            version: 'metadata version 1.2.3',
+                        },
+                    } as cjson_metadata,
+                ),
+            ).toMatchSnapshot();
         } );
 
         it( 'should return that the app name based on the config.app', () => {
-            expect( metadataClassObject.determineAppData(
-                {
-                    app: 'here/there/app.apk',
-                } as WebDriver.DesiredCapabilities,
-                {} as cjson_metadata,
-            ) ).toMatchSnapshot();
+            expect(
+                metadataClassObject.determineAppData(
+                    {
+                        app: 'here/there/app.apk',
+                    } as WebDriver.DesiredCapabilities,
+                    {} as cjson_metadata,
+                ),
+            ).toMatchSnapshot();
         } );
     } );
 
     describe( 'determineBrowserData', () => {
         it( 'should return that no browser metadata could be determined', () => {
-            expect( metadataClassObject.determineBrowserData(
-                {} as WebDriver.DesiredCapabilities,
-                {} as WebDriver.DesiredCapabilities,
-                {} as cjson_metadata,
-            ) ).toMatchSnapshot();
+            expect(
+                metadataClassObject.determineBrowserData(
+                    {} as WebDriver.DesiredCapabilities,
+                    {} as WebDriver.DesiredCapabilities,
+                    {} as cjson_metadata,
+                ),
+            ).toMatchSnapshot();
         } );
 
         it( 'should return that the browser name and version based on the metadata', () => {
-            expect( metadataClassObject.determineBrowserData(
-                {} as WebDriver.DesiredCapabilities,
-                {} as WebDriver.DesiredCapabilities,
-                {
-                    browser: {
-                        name: 'metadata browser name',
-                        version: 'metadata version 1.2.3',
-                    },
-                } as cjson_metadata,
-            ) ).toMatchSnapshot();
+            expect(
+                metadataClassObject.determineBrowserData(
+                    {} as WebDriver.DesiredCapabilities,
+                    {} as WebDriver.DesiredCapabilities,
+                    {
+                        browser: {
+                            name: 'metadata browser name',
+                            version: 'metadata version 1.2.3',
+                        },
+                    } as cjson_metadata,
+                ),
+            ).toMatchSnapshot();
         } );
 
         it( 'should return that the browser name and version based on the capabilities when version is used', () => {
-            expect( metadataClassObject.determineBrowserData(
-                {
-                    browserName: 'capabilities browser name',
-                    version: 'capabilities version',
-                } as WebDriver.DesiredCapabilities,
-                {} as WebDriver.DesiredCapabilities,
-                {} as cjson_metadata,
-            ) ).toMatchSnapshot();
+            expect(
+                metadataClassObject.determineBrowserData(
+                    {
+                        browserName: 'capabilities browser name',
+                        version: 'capabilities version',
+                    } as WebDriver.DesiredCapabilities,
+                    {} as WebDriver.DesiredCapabilities,
+                    {} as cjson_metadata,
+                ),
+            ).toMatchSnapshot();
         } );
 
         it( 'should return that the browser name and version based on the capabilities when browserVersion is used', () => {
-            expect( metadataClassObject.determineBrowserData(
-                {
-                    browserName: 'capabilities browser name',
-                    browserVersion: 'capabilities browserVersion',
-                } as WebDriver.DesiredCapabilities,
-                {} as WebDriver.DesiredCapabilities,
-                {} as cjson_metadata,
-            ) ).toMatchSnapshot();
+            expect(
+                metadataClassObject.determineBrowserData(
+                    {
+                        browserName: 'capabilities browser name',
+                        browserVersion: 'capabilities browserVersion',
+                    } as WebDriver.DesiredCapabilities,
+                    {} as WebDriver.DesiredCapabilities,
+                    {} as cjson_metadata,
+                ),
+            ).toMatchSnapshot();
         } );
 
         it( 'should return that the browser name and version based on the configCapabilities', () => {
-            expect( metadataClassObject.determineBrowserData(
-                {} as WebDriver.DesiredCapabilities,
-                {
-                    browserName: 'configCapabilities browser name',
-                    browserVersion: 'configCapabilities browser version',
-                } as WebDriver.DesiredCapabilities,
-                {} as cjson_metadata,
-            ) ).toMatchSnapshot();
+            expect(
+                metadataClassObject.determineBrowserData(
+                    {} as WebDriver.DesiredCapabilities,
+                    {
+                        browserName: 'configCapabilities browser name',
+                        browserVersion: 'configCapabilities browser version',
+                    } as WebDriver.DesiredCapabilities,
+                    {} as cjson_metadata,
+                ),
+            ).toMatchSnapshot();
         } );
     } );
 
     describe( 'determineDeviceName', () => {
         it( 'should be able to return the device metadata based on the metadata.device', () => {
-            expect( metadataClassObject.determineDeviceName( { device: 'metadata.device' } as cjson_metadata, {} as WebDriver.DesiredCapabilities ) ).toMatchSnapshot();
+            expect(
+                metadataClassObject.determineDeviceName(
+                    { device: 'metadata.device' } as cjson_metadata,
+                    {} as WebDriver.DesiredCapabilities,
+                ),
+            ).toMatchSnapshot();
         } );
 
         it( 'should be able to return the device metadata based on the current.config.capabilities.deviceName', () => {
             expect(
-                metadataClassObject.determineDeviceName( {} as cjson_metadata, { deviceName: 'current.config.capabilities.deviceName' } as WebDriver.DesiredCapabilities ),
+                metadataClassObject.determineDeviceName(
+                    {} as cjson_metadata,
+                    { deviceName: 'current.config.capabilities.deviceName' } as WebDriver.DesiredCapabilities,
+                ),
             ).toMatchSnapshot();
         } );
 
         it( 'should be able to return the not known deviceName', () => {
-            expect( metadataClassObject.determineDeviceName( {} as cjson_metadata, {} as WebDriver.DesiredCapabilities ) ).toMatchSnapshot();
+            expect(
+                metadataClassObject.determineDeviceName( {} as cjson_metadata, {} as WebDriver.DesiredCapabilities ),
+            ).toMatchSnapshot();
         } );
     } );
 
     describe( 'determinePlatformName', () => {
         it( 'should be able to return the platform name based on the metadata.platform', () => {
-            expect( metadataClassObject.determinePlatformName(
-                {
-                    platform: {
-                        name: 'platform.name',
-                    },
-                } as cjson_metadata,
-                {} as WebDriver.DesiredCapabilities,
-            ) ).toMatchSnapshot();
+            expect(
+                metadataClassObject.determinePlatformName(
+                    {
+                        platform: {
+                            name: 'platform.name',
+                        },
+                    } as cjson_metadata,
+                    {} as WebDriver.DesiredCapabilities,
+                ),
+            ).toMatchSnapshot();
         } );
 
         it( 'should be able to return the platform name based on the currentCapabilities.platformName', () => {
             expect(
-                metadataClassObject.determinePlatformName( {} as cjson_metadata, { platformName: 'currentCapabilities.platformName' } as WebDriver.DesiredCapabilities ),
+                metadataClassObject.determinePlatformName(
+                    {} as cjson_metadata,
+                    { platformName: 'currentCapabilities.platformName' } as WebDriver.DesiredCapabilities,
+                ),
             ).toMatchSnapshot();
         } );
 
         it( 'should be able to return the platform name based on the currentCapabilities.platformName for mac properly', () => {
             expect(
-                metadataClassObject.determinePlatformName( {} as cjson_metadata, { platformName: 'mac' } as WebDriver.DesiredCapabilities ),
+                metadataClassObject.determinePlatformName(
+                    {} as cjson_metadata,
+                    { platformName: 'mac' } as WebDriver.DesiredCapabilities,
+                ),
             ).toMatchSnapshot();
         } );
 
         it( 'should be able to return the platform name based on the currentCapabilities.platformName for windows properly', () => {
             expect(
-                metadataClassObject.determinePlatformName( {} as cjson_metadata, { platformName: 'windows nt' } as WebDriver.DesiredCapabilities ),
+                metadataClassObject.determinePlatformName(
+                    {} as cjson_metadata,
+                    { platformName: 'windows nt' } as WebDriver.DesiredCapabilities,
+                ),
             ).toMatchSnapshot();
         } );
 
         it( 'should be able to return the not known platform name', () => {
-            expect( metadataClassObject.determinePlatformName( {} as cjson_metadata, {} as WebDriver.DesiredCapabilities ) ).toMatchSnapshot();
+            expect(
+                metadataClassObject.determinePlatformName( {} as cjson_metadata, {} as WebDriver.DesiredCapabilities ),
+            ).toMatchSnapshot();
         } );
     } );
 
     describe( 'determinePlatformVersion', () => {
         it( 'should be able to return the platform version based on the metadata.platform', () => {
-            expect( metadataClassObject.determinePlatformVersion(
-                {
+            expect(
+                metadataClassObject.determinePlatformVersion( {
                     platform: {
                         version: 'platform.version',
                     },
-                } as cjson_metadata,
-            ) ).toMatchSnapshot();
+                } as cjson_metadata ),
+            ).toMatchSnapshot();
         } );
         it( 'should be able to return the platform version based on the metadata.platform from desired capabilities', () => {
-            expect( metadataClassObject.determinePlatformVersion(
-                {
-                    platform: {
-                        version: undefined,
-                    },
-                } as cjson_metadata, { platformVersion: '10.1' } as WebDriver.DesiredCapabilities ) ).toMatchSnapshot();
+            expect(
+                metadataClassObject.determinePlatformVersion(
+                    {
+                        platform: {
+                            version: undefined,
+                        },
+                    } as cjson_metadata,
+                    { platformVersion: '10.1' } as WebDriver.DesiredCapabilities,
+                ),
+            ).toMatchSnapshot();
         } );
 
         it( 'should be able to return the not known platform version', () => {
@@ -175,7 +227,10 @@ describe( 'metadata', () => {
     } );
 
     describe( 'determineMetadata', () => {
-        let determineAppDataSpy: jest.SpyInstance; let determineBrowserDataSpy: jest.SpyInstance; let determineDeviceNameSpy: jest.SpyInstance; let determinePlatformNameSpy: jest.SpyInstance;
+        let determineAppDataSpy: jest.SpyInstance;
+        let determineBrowserDataSpy: jest.SpyInstance;
+        let determineDeviceNameSpy: jest.SpyInstance;
+        let determinePlatformNameSpy: jest.SpyInstance;
         let determinePlatformVersionSpy;
         const appMockData = {
             app: {
@@ -198,16 +253,22 @@ describe( 'metadata', () => {
                         w3cCaps: {
                             alwaysMatch: {
                                 foo: true,
-                            }
-                        }
+                            },
+                        },
                     },
                 } as WebdriverIOExtended,
             } as Browser<'sync'>;
             determineAppDataSpy = jest.spyOn( metadataClassObject, 'determineAppData' );
-            determineBrowserDataSpy = jest.spyOn( metadataClassObject, 'determineBrowserData' ).mockReturnValue( browserMockData );
+            determineBrowserDataSpy = jest
+                .spyOn( metadataClassObject, 'determineBrowserData' )
+                .mockReturnValue( browserMockData );
             determineDeviceNameSpy = jest.spyOn( metadataClassObject, 'determineDeviceName' ).mockReturnValue( NOT_KNOWN );
-            determinePlatformNameSpy = jest.spyOn( metadataClassObject, 'determinePlatformName' ).mockReturnValue( NOT_KNOWN );
-            determinePlatformVersionSpy = jest.spyOn( metadataClassObject, 'determinePlatformVersion' ).mockReturnValue( NOT_KNOWN );
+            determinePlatformNameSpy = jest
+                .spyOn( metadataClassObject, 'determinePlatformName' )
+                .mockReturnValue( NOT_KNOWN );
+            determinePlatformVersionSpy = jest
+                .spyOn( metadataClassObject, 'determinePlatformVersion' )
+                .mockReturnValue( NOT_KNOWN );
         } );
 
         afterEach( () => {
@@ -231,10 +292,10 @@ describe( 'metadata', () => {
             determineAppDataSpy.mockClear();
         } );
 
-        it( 'should return app metadata based on the current.config.capabilities[\'cjson:metadata\'].app', () => {
+        it( "should return app metadata based on the current.config.capabilities['cjson:metadata'].app", () => {
             ( FULL_RUNNER_STATS.capabilities as W3CCapabilitiesExtended ).cjson_metadata.app = {
-                'name': 'mock-appName',
-                'version': 'mock-appVersion',
+                name: 'mock-appName',
+                version: 'mock-appVersion',
             };
 
             determineAppDataSpy = jest.spyOn( metadataClassObject, 'determineAppData' ).mockReturnValue( appMockData );
@@ -257,7 +318,9 @@ describe( 'metadata', () => {
                 } as Options.WebdriverIO,
             } as Browser<'sync'>;
 
-            determineAppDataSpy = jest.spyOn( metadataClassObject, 'determineBrowserData' ).mockReturnValue( browserMockData );
+            determineAppDataSpy = jest
+                .spyOn( metadataClassObject, 'determineBrowserData' )
+                .mockReturnValue( browserMockData );
 
             expect( metadataClassObject.determineMetadata( CAPS_METADATA_RUNNER_STATS ) ).toMatchSnapshot();
             determineAppDataSpy.mockClear();
@@ -270,14 +333,16 @@ describe( 'metadata', () => {
                     requestedCapabilities: {
                         w3cCaps: {
                             alwaysMatch: {
-                                'cjson_metadata': {},
+                                cjson_metadata: {},
                             },
                         },
                     },
                 } as Options.WebdriverIO,
             } as Browser<'sync'>;
 
-            determineAppDataSpy = jest.spyOn( metadataClassObject, 'determineBrowserData' ).mockReturnValue( browserMockData );
+            determineAppDataSpy = jest
+                .spyOn( metadataClassObject, 'determineBrowserData' )
+                .mockReturnValue( browserMockData );
 
             expect( metadataClassObject.determineMetadata( WDIO6_RUNNER_STATS ) ).toMatchSnapshot();
             determineAppDataSpy.mockClear();
@@ -287,18 +352,18 @@ describe( 'metadata', () => {
             global.browser = {
                 options: {
                     requestedCapabilities: {
-                        w3cCaps: {
-
-                        }
+                        w3cCaps: {},
                     },
                     capabilities: {
                         browserName: 'chrome',
-                        'cjson_metadata': {},
-                    }
+                        cjson_metadata: {},
+                    },
                 } as WebdriverIOExtended,
             } as Browser<'sync'>;
 
-            determineAppDataSpy = jest.spyOn( metadataClassObject, 'determineBrowserData' ).mockReturnValue( browserMockData );
+            determineAppDataSpy = jest
+                .spyOn( metadataClassObject, 'determineBrowserData' )
+                .mockReturnValue( browserMockData );
 
             expect( metadataClassObject.determineMetadata( WDIO6_RUNNER_STATS ) ).toMatchSnapshot();
             determineAppDataSpy.mockClear();
@@ -309,13 +374,14 @@ describe( 'metadata', () => {
                 options: {
                     capabilities: {
                         browserName: 'chrome',
-                        'cjson_metadata': {},
+                        cjson_metadata: {},
                     },
                 } as WebdriverIOExtended,
-
             } as Browser<'sync'>;
 
-            determineAppDataSpy = jest.spyOn( metadataClassObject, 'determineBrowserData' ).mockReturnValue( browserMockData );
+            determineAppDataSpy = jest
+                .spyOn( metadataClassObject, 'determineBrowserData' )
+                .mockReturnValue( browserMockData );
 
             expect( metadataClassObject.determineMetadata( WDIO6_RUNNER_STATS ) ).toMatchSnapshot();
             determineAppDataSpy.mockClear();
