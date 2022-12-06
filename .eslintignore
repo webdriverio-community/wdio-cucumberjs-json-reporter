@@ -1,3 +1,7 @@
 /build
 /node_modules
 /coverage
+/dist
+.eslintrc.js
+jest.config.js
+babel.config.js
