@@ -37,7 +37,7 @@ npm install wdio-cucumberjs-json-reporter --save-dev
 
 so it will automatically be added to your `package.json`
 
-Instructions on how to install `WebdriverIO` can be found [here](http://webdriver.io/guide/getstarted/install.html).
+Instructions on how to install `WebdriverIO` can be found [here](https://webdriver.io/docs/gettingstarted).
 
 ## Configuration
 Configure the output directory and the language in your wdio.conf.js file:
