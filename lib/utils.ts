@@ -12,11 +12,11 @@ export default class Utils {
      *
      * @return {string[]}
      */
-    public getStepKeywords( language: string ): string[] {
+    public getStepKeywords(language: string): string[] {
         const dialect = dialects[language];
-        return ( [] as string[] )
-            .concat( dialect.given, dialect.when, dialect.then, dialect.and )
-            .map( ( keyword ) => keyword.replace( /\s*$/, '' ) );
+        return ([] as string[])
+            .concat(dialect.given, dialect.when, dialect.then, dialect.and)
+            .map((keyword) => keyword.replace(/\s*$/, ''));
     }
 
     /**
@@ -26,10 +26,10 @@ export default class Utils {
      *
      * @return {object}
      */
-    public getFailedMessage( testObject: TestStats | HookStats ): ErrorMessage {
-        if ( testObject.state === FAILED ) {
+    public getFailedMessage(testObject: TestStats | HookStats): ErrorMessage {
+        if (testObject.state === FAILED && testObject.error && testObject.error.stack) {
             return {
-                error_message: stripAnsi( testObject.error.stack ),
+                error_message: stripAnsi(testObject.error.stack),
             };
         }
 
@@ -45,9 +45,9 @@ export default class Utils {
      *
      * @return {boolean}
      */
-    public containsSteps( steps: Step[], language: string ): boolean {
-        const stepKeywords = this.getStepKeywords( language );
-        return steps.some( ( step ) => stepKeywords.includes( step.keyword ) );
+    public containsSteps(steps: Step[], language: string): boolean {
+        const stepKeywords = this.getStepKeywords(language);
+        return steps.some((step) => step.keyword && stepKeywords.includes(step.keyword));
     }
 
     /**
@@ -59,12 +59,12 @@ export default class Utils {
      *
      * @return {string|undefined}
      */
-    public keywordStartsWith( title: string, language: string ): string | undefined {
-        const stepKeywords = [].concat( this.getStepKeywords( language ), ['After', 'Before'] );
-        const escapedStepKeywords = stepKeywords.map( ( keyword: string ) =>
-            keyword.replace( /[.*+?^${}()|[\]\\]/g, '\\$&' ),
+    public keywordStartsWith(title: string, language: string): string | undefined {
+        const stepKeywords = ([] as string[]).concat(this.getStepKeywords(language), ['After', 'Before']);
+        const escapedStepKeywords = stepKeywords.map((keyword: string) =>
+            keyword.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'),
         );
-        const regex = new RegExp( `^(${escapedStepKeywords.join( '|' )})\\s` );
-        return ( regex.exec( title ) || [] ).pop();
+        const regex = new RegExp(`^(${escapedStepKeywords.join('|')})\\s`);
+        return (regex.exec(title) || []).pop();
     }
 }

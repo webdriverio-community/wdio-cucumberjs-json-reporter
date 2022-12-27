@@ -1,29 +1,23 @@
 {
-  "extends": "@tsconfig/node12/tsconfig.json",
-  "compileOnSave": true,
+  "extends": "@tsconfig/node18/tsconfig.json",
+
   "compilerOptions": {
-    "noFallthroughCasesInSwitch": true,
-    "allowUnreachableCode": false,
-    "allowUnusedLabels": false,
-    "strictNullChecks": false,
-    "noImplicitAny" : false,
-    "preserveSymlinks": true,
     "allowJs": true,
-    "resolveJsonModule": true,
-    "sourceMap": true,
     "declaration": true,
-    "inlineSources": true,
-    "typeRoots": ["./node_modules/@types","./lib/types" ],
-    "rootDir": "./lib",
-    "removeComments": true,
-    "moduleResolution": "node",
-    "baseUrl": ".",
-    "types": [ "jest", "node", "@wdio/globals/types", "@types/fs-extra", "long"],
-    "allowSyntheticDefaultImports": true,
+    "declarationMap": true,
+    "resolveJsonModule": true,
+    "removeComments": false,
+    "strictFunctionTypes": false,
     "experimentalDecorators": true,
-    "emitDecoratorMetadata": true,
-    "outDir": "./dist"
+    "esModuleInterop": true,
+    "moduleResolution": "Node",
+    "module": "ESNext",
+    "lib": ["dom", "es2021"],
+    "types": ["jest", "node", "@wdio/globals/types", "@types/fs-extra", "long"],
+    "outDir": "./dist",
+    "inlineSourceMap": true
   },
+  "compileOnSave": true,
   "include": [
     "**/*.ts"
   ]
