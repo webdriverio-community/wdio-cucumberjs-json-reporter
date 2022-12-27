@@ -1,3 +1,6 @@
+import logger from '@wdio/logger';
+import { resolve } from 'path';
+import { existsSync, outputJsonSync, readJsonSync } from 'fs-extra';
 import {
     AFTER,
     BEFORE,
@@ -19,37 +22,34 @@ import {
     Report,
     Scenario,
     Step,
-} from './models';
-import { HookStatsExtended, SuiteStatsExtended, TestStatsExtended } from './types/wdio';
+} from './models.js';
+import { HookStatsExtended, SuiteStatsExtended, TestStatsExtended } from './types/wdio.js';
 import WDIOReporter, { HookStats, RunnerStats, SuiteStats, TestStats } from '@wdio/reporter';
-import { existsSync, outputJsonSync, readJsonSync } from 'fs-extra';
-import { CucumberJsJsonReporterInterface } from './types';
-import { Metadata } from './metadata';
-import Utils from './utils';
-import logger from '@wdio/logger';
-import { resolve } from 'path';
+import { CucumberJsJsonReporterInterface } from './types.js';
+import { Metadata } from './metadata.js';
+import Utils from './utils.js';
 
-const log = logger( 'wdio-cucumberjs-json-reporter' );
+const log = logger('wdio-cucumberjs-json-reporter');
 
-export class CucumberJsJsonReporter extends WDIOReporter {
-    public instanceMetadata: MetadataObject;
+class CucumberJsJsonReporter extends WDIOReporter {
+    public instanceMetadata: MetadataObject | null;
     public report: Report;
     public metadataClassObject: Metadata;
     public utilsObject: Utils;
 
-    public constructor( public options: CucumberJsJsonReporterInterface ) {
-        super( options );
+    public constructor(public options: CucumberJsJsonReporterInterface) {
+        super(options);
         this.options = options;
 
-        if ( !this.options.jsonFolder ) {
+        if (!this.options.jsonFolder) {
             this.options.jsonFolder = DEFAULT_JSON_FOLDER;
-            log.info( `The 'jsonFolder' was not set, it has been set to the default '${DEFAULT_JSON_FOLDER}'` );
+            log.info(`The 'jsonFolder' was not set, it has been set to the default '${DEFAULT_JSON_FOLDER}'`);
         }
-        if ( !this.options.language ) {
+        if (!this.options.language) {
             this.options.language = DEFAULT_LANGUAGE;
-            log.info( `The 'language' was not set, it has been set to the default '${DEFAULT_LANGUAGE}'` );
+            log.info(`The 'language' was not set, it has been set to the default '${DEFAULT_LANGUAGE}'`);
         }
-        if ( this.options.reportFilePerRetry === undefined ) {
+        if (this.options.reportFilePerRetry === undefined) {
             this.options.reportFilePerRetry = DEFAULT_REPORT_FILE_PER_RETRY;
             log.info(
                 `The 'reportFilePerRetry' was not set, it has been set to the default '${DEFAULT_REPORT_FILE_PER_RETRY.toString()}'`,
@@ -67,16 +67,16 @@ export class CucumberJsJsonReporter extends WDIOReporter {
     /**
      * Attach data to the report
      */
-    public static attach( data: CucumberAttachmentData, type: AttachmentType = TEXT_PLAIN ): void {
+    public static attach(data: CucumberAttachmentData, type: AttachmentType = TEXT_PLAIN): void {
         // eslint-disable-next-line @typescript-eslint/ban-types, @typescript-eslint/no-unsafe-assignment
-        ( process.emit as Function )( 'wdioCucumberJsReporter:attachment', { data, type } );
+        (process.emit as Function)('wdioCucumberJsReporter:attachment', { data, type });
     }
 
     /**
      * Add a customer listener for the attachments
      */
     public registerListeners(): void {
-        process.on( 'wdioCucumberJsReporter:attachment', this.cucumberJsAttachment.bind( this ) );
+        process.on('wdioCucumberJsReporter:attachment', this.cucumberJsAttachment.bind(this));
     }
 
     /**
@@ -100,9 +100,9 @@ export class CucumberJsJsonReporter extends WDIOReporter {
     /**
      * This hook is used to retrieve the browser data, but this is done only once
      */
-    public onRunnerStart( runnerData: RunnerStats ): void {
-        if ( !this.instanceMetadata ) {
-            this.instanceMetadata = this.metadataClassObject.determineMetadata( runnerData );
+    public onRunnerStart(runnerData: RunnerStats): void {
+        if (!this.instanceMetadata) {
+            this.instanceMetadata = this.metadataClassObject.determineMetadata(runnerData);
         }
     }
 
@@ -111,18 +111,18 @@ export class CucumberJsJsonReporter extends WDIOReporter {
      * 1. create the feature
      * 2. add the scenario to the feature
      */
-    public onSuiteStart( payload: SuiteStats ): void {
-        if ( !this.report.feature ) {
-            this.report.feature = this.getFeatureDataObject( payload );
+    public onSuiteStart(payload: SuiteStats): void {
+        if (!this.report.feature) {
+            this.report.feature = this.getFeatureDataObject(payload);
         }
 
         /* istanbul ignore else */
-        if ( !this.report.feature.metadata ) {
+        if (!this.report.feature.metadata) {
             this.report.feature = { ...this.report.feature, metadata: { ...this.instanceMetadata } };
         }
 
-        if ( typeof this.report.feature.elements !== 'undefined' && payload.parent ) {
-            this.report.feature.elements.push( this.getScenarioDataObject( payload, this.report.feature.id ) );
+        if (typeof this.report.feature.elements !== 'undefined' && payload.parent && this.report.feature.id) {
+            this.report.feature.elements.push(this.getScenarioDataObject(payload, this.report.feature.id));
         }
     }
 
@@ -130,36 +130,39 @@ export class CucumberJsJsonReporter extends WDIOReporter {
      * This one is for the start of the hook and determines if this is a pending `before` or `after` hook.
      * The data will be equal to a step, so a hook is added as a step.
      */
-    public onHookStart( payload: HookStatsExtended ): void {
+    public onHookStart(payload: HookStatsExtended): void {
         // There is always a scenario, take the last one
-        if ( this.options.disableHooks ) {
+        if (this.options.disableHooks) {
             return;
         }
         const currentSteps = this.getCurrentScenario().steps;
         payload.state = PASSED;
-        payload.keyword = this.utilsObject.containsSteps( currentSteps, this.options.language ) ? AFTER : BEFORE;
+        payload.keyword =
+            currentSteps && this.options.language && this.utilsObject.containsSteps(currentSteps, this.options.language)
+                ? AFTER
+                : BEFORE;
 
-        this.addStepData( payload );
+        this.addStepData(payload);
     }
 
     /**
      * This one is for the end of the hook, it directly comes after the onHookStart
      * A hook is the same  as a 'normal' step, so use the update step
      */
-    public onHookEnd( payload: HookStats ): void {
-        if ( this.options.disableHooks ) {
+    public onHookEnd(payload: HookStats): void {
+        if (this.options.disableHooks) {
             return;
         }
         payload.state = payload.error ? payload.state : PASSED;
 
-        return this.updateStepStatus( payload );
+        return this.updateStepStatus(payload);
     }
 
     /**
      * This one starts the step, which will be set to pending
      */
-    public onTestStart( payload: TestStats ): void {
-        this.addStepData( payload );
+    public onTestStart(payload: TestStats): void {
+        this.addStepData(payload);
     }
 
     // /**
@@ -187,22 +190,22 @@ export class CucumberJsJsonReporter extends WDIOReporter {
     /**
      * The passed step
      */
-    public onTestPass( payload: TestStats ): void {
-        this.updateStepStatus( payload );
+    public onTestPass(payload: TestStats): void {
+        this.updateStepStatus(payload);
     }
 
     /**
      * The failed step including the logs
      */
-    public onTestFail( payload: TestStats ): void {
-        this.updateStepStatus( payload );
+    public onTestFail(payload: TestStats): void {
+        this.updateStepStatus(payload);
     }
 
     /**
      * The skippe step
      */
-    public onTestSkip( payload: TestStats ): void {
-        this.updateStepStatus( payload );
+    public onTestSkip(payload: TestStats): void {
+        this.updateStepStatus(payload);
     }
 
     // onTestEnd(payload) {
@@ -222,18 +225,20 @@ export class CucumberJsJsonReporter extends WDIOReporter {
      * Runner is done, write the file
      */
     public onRunnerEnd(): void {
-        const uniqueId = String( Date.now() + Math.random() ).replace( '.', '' );
-        const filename = this.options.reportFilePerRetry
-            ? `${this.report.feature.id}_${uniqueId}.json`
-            : `${this.report.feature.id}.json`;
-        const jsonFolder = resolve( process.cwd(), this.options.jsonFolder );
-        const jsonFile = resolve( jsonFolder, filename );
-        const json = [this.report.feature];
-        // Check if there is an existing file, if so concat the data, else add the new
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-        const output = existsSync( jsonFile ) ? json.concat( readJsonSync( jsonFile ) ) : json;
+        if (this.options.jsonFolder) {
+            const uniqueId = String(Date.now() + Math.random()).replace('.', '');
+            const filename = this.options.reportFilePerRetry
+                ? `${this.report.feature.id}_${uniqueId}.json`
+                : `${this.report.feature.id}.json`;
+            const jsonFolder = resolve(process.cwd(), this.options.jsonFolder);
+            const jsonFile = resolve(jsonFolder, filename);
+            const json = [this.report.feature];
+            // Check if there is an existing file, if so concat the data, else add the new
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+            const output = existsSync(jsonFile) ? json.concat(readJsonSync(jsonFile)) : json;
 
-        outputJsonSync( jsonFile, output );
+            outputJsonSync(jsonFile, output);
+        }
     }
 
     /**
@@ -243,7 +248,7 @@ export class CucumberJsJsonReporter extends WDIOReporter {
     /**
      * Get the feature data object
      */
-    public getFeatureDataObject( featureData: SuiteStats ): Feature {
+    public getFeatureDataObject(featureData: SuiteStats): Feature {
         const featureName = featureData.title;
 
         return {
@@ -254,12 +259,12 @@ export class CucumberJsJsonReporter extends WDIOReporter {
             // - [0]: file name
             // - [1]: line in file
             // - [2]: column
-            line: featureData.uid && featureData.uid.includes( ':' ) ? parseInt( featureData.uid.split( ':' )[1], 10 ) : null,
+            line: featureData.uid && featureData.uid.includes(':') ? parseInt(featureData.uid.split(':')[1], 10) : null,
             name: featureName,
             uri: featureData.file || 'Can not be determined',
             tags: featureData.tags || [],
             elements: [],
-            id: featureName.replace( /[\\/?%*:|"<> ]/g, '-' ).toLowerCase(),
+            id: featureName.replace(/[\\/?%*:|"<> ]/g, '-').toLowerCase(),
         };
     }
 
@@ -278,7 +283,7 @@ export class CucumberJsJsonReporter extends WDIOReporter {
             description: scenarioData.description || '',
             name: scenarioName,
             tags: scenarioData.tags || [],
-            id: `${id};${scenarioData.title.replace( / /g, '-' ).toLowerCase()}`,
+            id: `${id};${scenarioData.title.replace(/ /g, '-').toLowerCase()}`,
             steps: [],
         };
     }
@@ -286,18 +291,20 @@ export class CucumberJsJsonReporter extends WDIOReporter {
     /**
      * Get the step data object
      */
-    public getStepDataObject( stepData: TestStatsExtended | HookStatsExtended ): Step {
+    public getStepDataObject(stepData: TestStatsExtended | HookStatsExtended): Step {
         const keyword =
-            stepData?.keyword || this.utilsObject.keywordStartsWith( stepData.title, this.options.language ) || '';
-        const title = ( stepData.title.split( keyword ).pop() || stepData.title || '' ).trim();
+            stepData?.keyword ||
+            (this.options.language && this.utilsObject.keywordStartsWith(stepData.title, this.options.language)) ||
+            '';
+        const title = (stepData.title.split(keyword).pop() || stepData.title || '').trim();
         return {
             arguments: stepData.argument ? [stepData.argument] : [],
             keyword,
             name: title,
             result: {
                 status: stepData.state || '',
-                duration: ( stepData._duration || 0 ) * 1000000,
-                ...this.utilsObject.getFailedMessage( stepData ),
+                duration: (stepData._duration || 0) * 1000000,
+                ...this.utilsObject.getFailedMessage(stepData),
             },
             line: null,
             match: {
@@ -325,28 +332,30 @@ export class CucumberJsJsonReporter extends WDIOReporter {
     /**
      * Add step data to the current running scenario
      */
-    public addStepData( test: TestStats | HookStats ): void {
+    public addStepData(test: TestStats | HookStats): void {
         // Always add the finished step to the end of the steps
         // of the last current scenario that is running
-        this.getCurrentScenario().steps.push( this.getStepDataObject( test ) );
+        this.getCurrentScenario().steps?.push(this.getStepDataObject(test));
     }
 
     /**
      * Add step data to the current running scenario
      */
-    public updateStepStatus( test: TestStats | HookStats ): void {
+    public updateStepStatus(test: TestStats | HookStats): void {
         // There is always a scenario, take the last one
         const currentSteps = this.getCurrentScenario().steps;
-        const currentStepsLength = currentSteps.length;
-        const stepData = this.getStepDataObject( test );
+        if (currentSteps) {
+            const currentStepsLength = currentSteps.length;
+            const stepData = this.getStepDataObject(test);
 
-        currentSteps[currentStepsLength - 1] = { ...this.getCurrentStep(), ...stepData };
+            currentSteps[currentStepsLength - 1] = { ...this.getCurrentStep(), ...stepData };
+        }
     }
 
     /**
      * Add the attachment to the result
      */
-    public cucumberJsAttachment( attachment: CucumberJsAttachment ): void {
+    public cucumberJsAttachment(attachment: CucumberJsAttachment): void {
         // The attachment can be added to the current running scenario step
         const currentStep = this.getCurrentStep();
         const embeddings = {
@@ -355,13 +364,12 @@ export class CucumberJsJsonReporter extends WDIOReporter {
         };
 
         // Check if there is an embedding, if not, add it, else push it
-        if ( !currentStep.embeddings ) {
+        if (!currentStep.embeddings) {
             currentStep.embeddings = [embeddings];
         } else {
-            currentStep.embeddings.push( embeddings );
+            currentStep.embeddings.push(embeddings);
         }
     }
 }
 
-// CucumberJsJsonReporter.name = 'cucumberjs-json';
 export default CucumberJsJsonReporter;
