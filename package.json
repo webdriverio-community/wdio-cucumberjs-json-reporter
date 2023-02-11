@@ -44,10 +44,10 @@
     "dependencies": {
         "@cucumber/gherkin": "~25.0.2",
         "@wdio/logger": "~7.26.0",
-        "@wdio/reporter": "~7.26.0",
+        "@wdio/reporter": "~8.3.0",
         "fs-extra": "~11.1.0",
         "strip-ansi": "^6.0.1",
-        "webdriverio": "~7.27.0"
+        "webdriverio": "~8.3.5"
     },
     "peerDependencies": {
         "@wdio/cucumber-framework": "7.x"
@@ -61,7 +61,7 @@
         "@typescript-eslint/eslint-plugin": "^5.45.1",
         "@typescript-eslint/eslint-plugin-tslint": "^5.45.1",
         "@typescript-eslint/parser": "^5.45.1",
-        "@wdio/types": "^7.26.0",
+        "@wdio/types": "^8.3.0",
         "coveralls": "^3.1.1",
         "cucumber-messages": "^8.0.0",
         "eslint": "^8.29.0",
