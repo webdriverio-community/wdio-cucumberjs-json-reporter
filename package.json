@@ -10,7 +10,7 @@
         "clean": "rimraf coverage dist .tmp",
         "compile": "npm run-script clean && tsc",
         "test.lint": "eslint lib",
-        "test": "jest --coverage",
+        "test": "NODE_OPTIONS=--experimental-vm-modules jest --coverage",
         "precompile": "npm run clean",
         "prerelease": "npm run compile",
         "prepublish": "npm run compile",
@@ -43,13 +43,13 @@
     },
     "homepage": "https://github.com/webdriverio-community/wdio-cucumberjs-json-reporter#readme",
     "dependencies": {
-        "@cucumber/gherkin": "~26.0.1",
-        "@wdio/globals": "^8.0.13",
-        "@wdio/logger": "~8.0.0",
-        "@wdio/reporter": "~8.0.13",
-        "fs-extra": "~11.1.0",
+        "@cucumber/gherkin": "~26.1.0",
+        "@wdio/globals": "^8.6.9",
+        "@wdio/logger": "~8.6.6",
+        "@wdio/reporter": "~8.6.8",
+        "fs-extra": "~11.1.1",
         "strip-ansi": "^7.0.1",
-        "webdriverio": "~8.0.13"
+        "webdriverio": "~8.6.9"
     },
     "peerDependencies": {
         "@wdio/cucumber-framework": "8.x"
@@ -57,12 +57,12 @@
     "devDependencies": {
         "@tsconfig/node18": "^1.0.1",
         "@types/fs-extra": "^9.0.13",
-        "@types/jest": "^29.2.4",
+        "@types/jest": "^29.5.0",
         "@types/long": "^4.0.2",
         "@types/node": "^18.11.17",
-        "@typescript-eslint/eslint-plugin": "^5.47.0",
-        "@typescript-eslint/parser": "^5.47.0",
-        "@wdio/types": "^8.0.11",
+        "@typescript-eslint/eslint-plugin": "^5.57.1",
+        "@typescript-eslint/parser": "^5.57.1",
+        "@wdio/types": "^8.6.8",
         "coveralls": "^3.1.1",
         "cucumber-messages": "^8.0.0",
         "eslint": "^8.30.0",

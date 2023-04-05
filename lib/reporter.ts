@@ -1,6 +1,12 @@
+// import * as fso from 'fs';
+
+import { readFileSync , existsSync} from 'fs'
+//import { outputFile, outputFileSync } from 'fs-extra/esm'
+
 import logger from '@wdio/logger';
 import { resolve } from 'path';
-import { existsSync, outputJsonSync, readJsonSync } from 'fs-extra';
+// @ts-ignore
+import { outputJsonSync, readJsonSync } from 'fs-extra/esm';
 import {
     AFTER,
     BEFORE,
@@ -26,8 +32,8 @@ import {
 import { HookStatsExtended, SuiteStatsExtended, TestStatsExtended } from './types/wdio.js';
 import WDIOReporter, { HookStats, RunnerStats, SuiteStats, TestStats } from '@wdio/reporter';
 import { CucumberJsJsonReporterInterface } from './types.js';
-import { Metadata } from './metadata.js';
-import Utils from './utils.js';
+import { Metadata } from './metadata';
+import Utils from './utils';
 
 const log = logger('wdio-cucumberjs-json-reporter');
 
@@ -317,7 +323,7 @@ class CucumberJsJsonReporter extends WDIOReporter {
      * Get the current scenario
      */
     public getCurrentScenario(): Scenario {
-        return this.report.feature.elements[this.report.feature.elements.length - 1];
+        return this.report.feature.elements![this.report.feature.elements!.length - 1];
     }
 
     /**
@@ -326,7 +332,7 @@ class CucumberJsJsonReporter extends WDIOReporter {
     public getCurrentStep(): Step {
         const currentScenario = this.getCurrentScenario();
 
-        return currentScenario.steps[currentScenario.steps.length - 1];
+        return currentScenario.steps![currentScenario.steps!.length - 1];
     }
 
     /**
