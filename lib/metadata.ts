@@ -17,8 +17,17 @@ export class Metadata {
         const currentCapabilities = data.capabilities as W3CCapabilitiesExtended;
         const optsCaps = browser.options.capabilities as W3CCapabilitiesExtended;
         const currentConfigCapabilities = data.capabilities as DesiredCapabilitiesExtended;
-        // @ts-ignore
-        const w3cCaps: cjson_metadata | undefined = !Object.prototype.hasOwnProperty.call( data.config.capabilities, 'cjson:metadata' ) ? ( browser.options as WebdriverIOExtended )?.requestedCapabilities?.cjson_metadata : ( data.config.capabilities['cjson:metadata'] as cjson_metadata );
+
+        const w3cCaps: cjson_metadata | undefined
+            = Object.prototype.hasOwnProperty.call(data.config.capabilities, 'cjson:metadata') ? // Fixes: https://github.com/webdriverio-community/wdio-cucumberjs-json-reporter/issues/73 Fallback
+            (data.config.capabilities as cjson_metadata)
+            : (browser.options as WebdriverIOExtended)?.requestedCapabilities?.cjson_metadata;
+
+      /*   const w3cCaps: cjson_metadata | undefined =
+            !Object.prototype.hasOwnProperty.call( data.config.capabilities, 'cjson:metadata' ) ?
+                ( browser.options as WebdriverIOExtended )?.requestedCapabilities?.cjson_metadata :
+                data.config.capabilities['cjson:metadata'] as cjson_metadata; */
+
         const metadata: cjson_metadata =
             (currentConfigCapabilities as W3CCapabilitiesExtended)?.cjson_metadata ||
             w3cCaps || // When an app is used to test

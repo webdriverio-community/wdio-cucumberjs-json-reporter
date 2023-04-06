@@ -1,4 +1,5 @@
 import { AFTER, BEFORE, FAILED, PASSED, PENDING, TEXT_PLAIN } from '../constants';
+import { vi, describe, beforeEach, afterEach, it, expect, SpyInstance, beforeAll} from 'vitest'
 import {
     EMPTY_FEATURE,
     EMPTY_SCENARIO,
@@ -19,14 +20,14 @@ import { ErrorMessage, Step } from '../models';
 import WdioCucumberJsJsonReporter from '../reporter';
 import { fileExists } from './fileExists';
 import { HookStats, TestStats } from '@wdio/reporter';
-import { readdirSync, closeSync, openSync, mkdirSync} from "fs";
-// @ts-ignore
-import { copySync, readJsonSync, removeSync, pathExistsSync } from 'fs-extra/esm'
+import { readdirSync, closeSync, openSync, mkdirSync } from "fs";
+import { copySync, readJsonSync, removeSync, pathExistsSync } from 'fs-extra'
 import path from 'path';
 import { fileURLToPath } from 'url';
-const __filename = fileURLToPath(import.meta.url);
-console.log(__filename)
-const __dirname = path.dirname(__filename);
+
+const __filename = fileURLToPath( import.meta.url );
+console.log( __filename )
+const __dirname = path.dirname( __filename );
 
 
 describe( 'reporter', () => {
@@ -51,7 +52,7 @@ describe( 'reporter', () => {
     } );
 
     afterEach( () => {
-        jest.clearAllMocks();
+        vi.clearAllMocks()
         EMPTY_FEATURE.elements = [];
         EMPTY_SCENARIO.steps = [];
         delete STEP_HOOK_ONSTART_STATS.keyword;
@@ -77,7 +78,7 @@ describe( 'reporter', () => {
         it( 'should set instance data if it is not available yet', () => {
             const metadata = { foo: 'bar' };
             const metadataClassObject: Metadata = tmpReporter.metadataClassObject;
-            const determineMetadataSpy: jest.SpyInstance = jest
+            const determineMetadataSpy  = vi
                 .spyOn( metadataClassObject, 'determineMetadata' )
                 .mockReturnValue( metadata );
 
@@ -91,7 +92,7 @@ describe( 'reporter', () => {
 
         it( 'should set not set instance data if it is already available', () => {
             const metadata = { foo: 'bar' };
-            const determineMetadataSpy: jest.SpyInstance = jest
+            const determineMetadataSpy = vi
                 .spyOn( new Metadata(), 'determineMetadata' )
                 .mockReturnValue( metadata );
 
@@ -107,7 +108,7 @@ describe( 'reporter', () => {
     describe( 'onSuiteStart', () => {
         it( 'should add the CucumberJS feature object if it is not available', () => {
             const featureData = { keyword: 'feature' };
-            const getFeatureDataObjectSpy = jest
+            const getFeatureDataObjectSpy = vi
                 .spyOn( tmpReporter, 'getFeatureDataObject' )
                 .mockReturnValue( featureData );
 
@@ -122,10 +123,10 @@ describe( 'reporter', () => {
         it( 'should add instance data to the feature if the feature is already there', () => {
             const metadata = { foo: 'bar' };
             const featureData = { keyword: 'feature' };
-            const getFeatureDataObjectSpy = jest
+            const getFeatureDataObjectSpy = vi
                 .spyOn( tmpReporter, 'getFeatureDataObject' )
                 .mockReturnValue( featureData );
-            jest.spyOn( tmpReporter, 'getScenarioDataObject' ).mockReturnValue( EMPTY_SCENARIO );
+            vi.spyOn( tmpReporter, 'getScenarioDataObject' ).mockReturnValue( EMPTY_SCENARIO );
 
             expect( tmpReporter.report ).toMatchSnapshot();
 
@@ -138,8 +139,8 @@ describe( 'reporter', () => {
         } );
 
         it( 'should add a scenario to the feature if the feature is already there', () => {
-            const getFeatureDataObjectSpy = jest.spyOn( tmpReporter, 'getFeatureDataObject' );
-            const getScenarioDataObjectSpy = jest
+            const getFeatureDataObjectSpy = vi.spyOn( tmpReporter, 'getFeatureDataObject' );
+            const getScenarioDataObjectSpy = vi
                 .spyOn( tmpReporter, 'getScenarioDataObject' )
                 .mockReturnValue( EMPTY_SCENARIO );
 
@@ -157,9 +158,9 @@ describe( 'reporter', () => {
 
     describe( 'onHookStart', () => {
         it( 'should call `addStepData` to add a pending before step', () => {
-            const getCurrentScenarioSpy = jest.spyOn( tmpReporter, 'getCurrentScenario' ).mockReturnValue( EMPTY_SCENARIO );
-            const containsStepsSpy = jest.spyOn( tmpReporter.utilsObject, 'containsSteps' ).mockReturnValue( false );
-            const addStepDataSpy = jest.spyOn( tmpReporter, 'addStepData' ).mockReturnValue();
+            const getCurrentScenarioSpy = vi.spyOn( tmpReporter, 'getCurrentScenario' ).mockReturnValue( EMPTY_SCENARIO );
+            const containsStepsSpy = vi.spyOn( tmpReporter.utilsObject, 'containsSteps' ).mockReturnValue( false );
+            const addStepDataSpy = vi.spyOn( tmpReporter, 'addStepData' ).mockReturnValue();
 
             tmpReporter.onHookStart( {} as HookStatsExtended );
 
@@ -169,9 +170,9 @@ describe( 'reporter', () => {
         } );
 
         it( 'should call `addStepData` to add a pending after step', () => {
-            const getCurrentScenarioSpy = jest.spyOn( tmpReporter, 'getCurrentScenario' ).mockReturnValue( EMPTY_SCENARIO );
-            const containsStepsSpy = jest.spyOn( tmpReporter.utilsObject, 'containsSteps' ).mockReturnValue( true );
-            const addStepDataSpy = jest.spyOn( tmpReporter, 'addStepData' ).mockReturnValue();
+            const getCurrentScenarioSpy = vi.spyOn( tmpReporter, 'getCurrentScenario' ).mockReturnValue( EMPTY_SCENARIO );
+            const containsStepsSpy = vi.spyOn( tmpReporter.utilsObject, 'containsSteps' ).mockReturnValue( true );
+            const addStepDataSpy = vi.spyOn( tmpReporter, 'addStepData' ).mockReturnValue();
 
             tmpReporter.onHookStart( {} as HookStatsExtended );
 
@@ -181,7 +182,7 @@ describe( 'reporter', () => {
         } );
         it( 'should not call `addStepData` to add a pending after step', () => {
             tmpReporter.options.disableHooks = true;
-            const withDisabledHooks = jest.spyOn( tmpReporter, 'addStepData' ).mockReturnValue();
+            const withDisabledHooks = vi.spyOn( tmpReporter, 'addStepData' ).mockReturnValue();
             tmpReporter.onHookStart( {} as HookStatsExtended );
 
             expect( withDisabledHooks ).toHaveBeenCalledTimes( 0 );
@@ -190,7 +191,7 @@ describe( 'reporter', () => {
 
     describe( 'onHookEnd', () => {
         it( 'should call update a hook step to passed', () => {
-            const updateStepStatusSpy = jest.spyOn( tmpReporter, 'updateStepStatus' ).mockReturnValue();
+            const updateStepStatusSpy = vi.spyOn( tmpReporter, 'updateStepStatus' ).mockReturnValue();
 
             tmpReporter.onHookEnd( {} as HookStatsExtended );
 
@@ -198,7 +199,7 @@ describe( 'reporter', () => {
         } );
 
         it( 'should call update a hook step to the current state when there is an error', () => {
-            const updateStepStatusSpy = jest.spyOn( tmpReporter, 'updateStepStatus' ).mockReturnValue();
+            const updateStepStatusSpy = vi.spyOn( tmpReporter, 'updateStepStatus' ).mockReturnValue();
 
             tmpReporter.onHookEnd( { state: FAILED, error: {} as Error } as HookStatsExtended );
 
@@ -207,7 +208,7 @@ describe( 'reporter', () => {
 
         it( 'should not call `addUpdateStepStatus` to add a pending after step', () => {
             tmpReporter.options.disableHooks = true;
-            const withDisabledHooks = jest.spyOn( tmpReporter, 'updateStepStatus' ).mockReturnValue();
+            const withDisabledHooks = vi.spyOn( tmpReporter, 'updateStepStatus' ).mockReturnValue();
 
             tmpReporter.onHookEnd( {} as HookStatsExtended );
 
@@ -217,7 +218,7 @@ describe( 'reporter', () => {
 
     describe( 'onTestStart', () => {
         it( 'should call `addStepDataSpy` to add a step when a test is started', () => {
-            const addStepDataSpy = jest.spyOn( tmpReporter, 'addStepData' ).mockReturnValue();
+            const addStepDataSpy = vi.spyOn( tmpReporter, 'addStepData' ).mockReturnValue();
 
             tmpReporter.onTestStart( { foo: 'bar' } as TestStatsExtended );
 
@@ -227,7 +228,7 @@ describe( 'reporter', () => {
 
     describe( 'onTestPass', () => {
         it( 'should call update a step', () => {
-            const updateStepStatusSpy = jest.spyOn( tmpReporter, 'updateStepStatus' ).mockReturnValue();
+            const updateStepStatusSpy = vi.spyOn( tmpReporter, 'updateStepStatus' ).mockReturnValue();
 
             tmpReporter.onTestPass( { foo: true } as TestStatsExtended );
 
@@ -237,7 +238,7 @@ describe( 'reporter', () => {
 
     describe( 'onTestFail', () => {
         it( 'should call update a step', () => {
-            const updateStepStatusSpy = jest.spyOn( tmpReporter, 'updateStepStatus' ).mockReturnValue();
+            const updateStepStatusSpy = vi.spyOn( tmpReporter, 'updateStepStatus' ).mockReturnValue();
 
             tmpReporter.onTestFail( { bar: true } as TestStatsExtended );
 
@@ -247,7 +248,7 @@ describe( 'reporter', () => {
 
     describe( 'onTestSkip', () => {
         it( 'should call update a step', () => {
-            const updateStepStatusSpy = jest.spyOn( tmpReporter, 'updateStepStatus' ).mockReturnValue();
+            const updateStepStatusSpy = vi.spyOn( tmpReporter, 'updateStepStatus' ).mockReturnValue();
 
             tmpReporter.onTestSkip( { bar: false } as TestStatsExtended );
 
@@ -338,10 +339,10 @@ describe( 'reporter', () => {
     } );
 
     describe( 'getStepDataObject', () => {
-        let getFailedMessageSpy: jest.SpyInstance<ErrorMessage, [testObject: HookStats | TestStats]>;
+        let getFailedMessageSpy: SpyInstance<[testObject: HookStats | TestStats], ErrorMessage> // : jest.SpyInstance<ErrorMessage, [testObject: HookStats | TestStats]>;
 
         beforeEach(() => {
-            getFailedMessageSpy = jest.spyOn(tmpReporter.utilsObject, 'getFailedMessage').mockReturnValue({});
+            getFailedMessageSpy = vi.spyOn(tmpReporter.utilsObject, 'getFailedMessage').mockReturnValue({});
         });
 
         it('should be able to to create a step JSON data object', () => {
@@ -386,7 +387,7 @@ describe( 'reporter', () => {
             const currentScenarioMock = {
                 steps: [{ foo: 'first-step' }, { foo: 'second-step' }, { foo: 'current-step' }] as Step[],
             };
-            const getCurrentScenarioSpy = jest
+            const getCurrentScenarioSpy = vi
                 .spyOn(tmpReporter, 'getCurrentScenario')
                 .mockReturnValue(currentScenarioMock);
 
@@ -397,8 +398,8 @@ describe( 'reporter', () => {
 
     describe('addStepData', () => {
         it('should add step data to a current scenario', () => {
-            const getCurrentScenarioSpy = jest.spyOn(tmpReporter, 'getCurrentScenario');
-            const getStepDataObjectSpy = jest
+            const getCurrentScenarioSpy = vi.spyOn(tmpReporter, 'getCurrentScenario');
+            const getStepDataObjectSpy = vi
                 .spyOn(tmpReporter, 'getStepDataObject')
                 .mockReturnValue({ foo: 'current-step' });
 
@@ -420,9 +421,9 @@ describe( 'reporter', () => {
         it('should update step data of the current scenario step', () => {
             const pendingStep = { foo: 'current-step', status: PENDING };
             const updatedStep = { foo: 'current-step', status: PASSED, bar: false };
-            const getCurrentScenarioSpy = jest.spyOn(tmpReporter, 'getCurrentScenario');
-            const getStepDataObjectSpy = jest.spyOn(tmpReporter, 'getStepDataObject').mockReturnValue(updatedStep);
-            const getCurrentStepSpy = jest
+            const getCurrentScenarioSpy = vi.spyOn(tmpReporter, 'getCurrentScenario');
+            const getStepDataObjectSpy = vi.spyOn(tmpReporter, 'getStepDataObject').mockReturnValue(updatedStep);
+            const getCurrentStepSpy = vi
                 .spyOn(tmpReporter, 'getCurrentStep')
                 .mockReturnValue({ foo: 'current-step' });
 
@@ -444,10 +445,10 @@ describe( 'reporter', () => {
     });
 
     describe('attach', () => {
-        let mockStdout: jest.SpyInstance;
+        let mockStdout: SpyInstance<[event: "worker", listener: NodeJS.WorkerListener], NodeJS.Process>
         beforeAll(() => {
-            //   process.emit = jest.fn();
-            mockStdout = jest.spyOn(process, 'emit').mockImplementation();
+            //   process.emit = vi.fn();
+            mockStdout = vi.spyOn(process, 'emit').mockReturnThis(); //.mockImplementation() //.mockImplementation();
         });
 
         afterEach(() => {
@@ -479,7 +480,7 @@ describe( 'reporter', () => {
     describe('cucumberJsAttachment', () => {
         it('should be able to add embeddings to a current step when they have not been added', () => {
             const pendingStep = { foo: 'current-step', status: PENDING };
-            const getCurrentStepSpy = jest.spyOn(tmpReporter, 'getCurrentStep').mockReturnValue(pendingStep);
+            const getCurrentStepSpy = vi.spyOn(tmpReporter, 'getCurrentStep').mockReturnValue(pendingStep);
 
             tmpReporter.report.feature = EMPTY_FEATURE;
                 tmpReporter.report.feature.elements?.push( EMPTY_SCENARIO );
@@ -499,7 +500,7 @@ describe( 'reporter', () => {
                 result: { duration: 1, status: PENDING },
                 embeddings: [{ data: 'data-1', mime_type: 'text/plain' }],
             };
-            const getCurrentStepSpy = jest.spyOn(tmpReporter, 'getCurrentStep').mockReturnValue(pendingStep);
+            const getCurrentStepSpy = vi.spyOn(tmpReporter, 'getCurrentStep').mockReturnValue(pendingStep);
 
             tmpReporter.report.feature = EMPTY_FEATURE;
             tmpReporter.report.feature.elements?.push(EMPTY_SCENARIO);

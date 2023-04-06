@@ -5,8 +5,7 @@ import { readFileSync , existsSync} from 'fs'
 
 import logger from '@wdio/logger';
 import { resolve } from 'path';
-// @ts-ignore
-import { outputJsonSync, readJsonSync } from 'fs-extra/esm';
+import { outputJsonSync, readJsonSync } from 'fs-extra';
 import {
     AFTER,
     BEFORE,
@@ -323,7 +322,8 @@ class CucumberJsJsonReporter extends WDIOReporter {
      * Get the current scenario
      */
     public getCurrentScenario(): Scenario {
-        return this.report.feature.elements![this.report.feature.elements!.length - 1];
+        console.log('=>',JSON.stringify(this.report))
+        return <Scenario>this.report.feature.elements?.[this.report.feature.elements.length - 1]
     }
 
     /**
