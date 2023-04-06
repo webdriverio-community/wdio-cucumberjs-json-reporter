@@ -27,8 +27,8 @@ import {
 import { HookStatsExtended, SuiteStatsExtended, TestStatsExtended } from './types/wdio.js';
 import WDIOReporter, { HookStats, RunnerStats, SuiteStats, TestStats } from '@wdio/reporter';
 import { CucumberJsJsonReporterInterface } from './types.js';
-import { Metadata } from './metadata';
-import Utils from './utils';
+import { Metadata } from './metadata.js';
+import Utils from './utils.js';
 
 const log = logger('wdio-cucumberjs-json-reporter');
 
