@@ -1,5 +1,3 @@
-// import * as fso from 'fs';
-
 import { existsSync} from 'fs'
 import logger from '@wdio/logger';
 import { resolve } from 'path';
