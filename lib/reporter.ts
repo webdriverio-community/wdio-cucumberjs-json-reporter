@@ -318,7 +318,6 @@ class CucumberJsJsonReporter extends WDIOReporter {
      * Get the current scenario
      */
     public getCurrentScenario(): Scenario {
-        console.log('=>',JSON.stringify(this.report))
         return <Scenario>this.report.feature.elements?.[this.report.feature.elements.length - 1]
     }
 
