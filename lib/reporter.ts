@@ -1,8 +1,6 @@
 // import * as fso from 'fs';
 
-import { readFileSync , existsSync} from 'fs'
-//import { outputFile, outputFileSync } from 'fs-extra/esm'
-
+import { existsSync} from 'fs'
 import logger from '@wdio/logger';
 import { resolve } from 'path';
 import { outputJsonSync, readJsonSync } from 'fs-extra';
