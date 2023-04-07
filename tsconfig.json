@@ -13,7 +13,7 @@
     "moduleResolution": "Node",
     "module": "ESNext",
     "lib": ["dom", "es2021"],
-    "types": ["jest", "node", "@wdio/globals/types", "@types/fs-extra", "long"],
+    "types": ["node", "@wdio/globals/types", "@types/fs-extra", "long"],
     "outDir": "./dist",
     "inlineSourceMap": true
   },

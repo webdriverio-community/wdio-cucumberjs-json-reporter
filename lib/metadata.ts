@@ -7,7 +7,6 @@ import {
 } from './types/wdio';
 import { NOT_KNOWN } from './constants';
 import WebDriver from 'webdriver';
-import { browser } from '@wdio/globals';
 
 export class Metadata {
     /**
@@ -17,11 +16,11 @@ export class Metadata {
         let instanceData: AppData | BrowserData;
         const currentCapabilities = data.capabilities as W3CCapabilitiesExtended;
         const optsCaps = browser.options.capabilities as W3CCapabilitiesExtended;
-        const currentConfigCapabilities = data?.capabilities as DesiredCapabilitiesExtended;
-        const w3cCaps: cjson_metadata = Object.prototype.hasOwnProperty.call(data.config.capabilities, 'cjson:metadata')
-            ? // Fixes: https://github.com/webdriverio-community/wdio-cucumberjs-json-reporter/issues/73
-              // Fallback
-              (data.config.capabilities['cjson:metadata'] as cjson_metadata)
+        const currentConfigCapabilities = data.capabilities as DesiredCapabilitiesExtended;
+
+        const w3cCaps: cjson_metadata | undefined
+            = Object.prototype.hasOwnProperty.call(data.config.capabilities, 'cjson:metadata') ? // Fixes: https://github.com/webdriverio-community/wdio-cucumberjs-json-reporter/issues/73 Fallback
+            (data.config.capabilities as cjson_metadata)
             : (browser.options as WebdriverIOExtended)?.requestedCapabilities?.cjson_metadata;
         const metadata: cjson_metadata =
             (currentConfigCapabilities as W3CCapabilitiesExtended)?.cjson_metadata ||
@@ -52,7 +51,7 @@ export class Metadata {
      */
     public determineDeviceName(
         metadata: cjson_metadata,
-        currentConfigCapabilities: WebDriver.DesiredCapabilities,
+        currentConfigCapabilities: DesiredCapabilitiesExtended,
     ): string {
         return metadata?.device || currentConfigCapabilities?.deviceName || `Device name ${NOT_KNOWN}`;
     }
@@ -111,7 +110,7 @@ export class Metadata {
      */
     public determineBrowserData(
         currentCapabilities: WebDriver.DesiredCapabilities,
-        currentConfigCapabilities: WebDriver.DesiredCapabilities,
+        currentConfigCapabilities: DesiredCapabilitiesExtended,
         metadata: cjson_metadata,
     ): BrowserData {
         const browserName =

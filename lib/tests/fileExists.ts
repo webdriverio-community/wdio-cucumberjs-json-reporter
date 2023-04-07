@@ -1,4 +1,4 @@
-import { accessSync } from 'fs-extra';
+import { accessSync } from 'fs';
 
 /**
  * Check if a file exists

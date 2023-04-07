@@ -1,6 +1,7 @@
+import { existsSync} from 'fs'
 import logger from '@wdio/logger';
 import { resolve } from 'path';
-import { existsSync, outputJsonSync, readJsonSync } from 'fs-extra';
+import { outputJsonSync, readJsonSync } from 'fs-extra';
 import {
     AFTER,
     BEFORE,
@@ -317,7 +318,7 @@ class CucumberJsJsonReporter extends WDIOReporter {
      * Get the current scenario
      */
     public getCurrentScenario(): Scenario {
-        return this.report.feature.elements[this.report.feature.elements.length - 1];
+        return <Scenario>this.report.feature.elements?.[this.report.feature.elements.length - 1]
     }
 
     /**
@@ -325,8 +326,7 @@ class CucumberJsJsonReporter extends WDIOReporter {
      */
     public getCurrentStep(): Step {
         const currentScenario = this.getCurrentScenario();
-
-        return currentScenario.steps[currentScenario.steps.length - 1];
+        return (typeof currentScenario.steps?.[currentScenario.steps.length - 1] !== "undefined" )? currentScenario.steps[currentScenario.steps.length - 1] : {}
     }
 
     /**
