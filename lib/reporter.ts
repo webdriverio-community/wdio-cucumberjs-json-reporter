@@ -326,8 +326,7 @@ class CucumberJsJsonReporter extends WDIOReporter {
      */
     public getCurrentStep(): Step {
         const currentScenario = this.getCurrentScenario();
-
-        return currentScenario.steps![currentScenario.steps!.length - 1];
+        return (typeof currentScenario.steps?.[currentScenario.steps.length - 1] !== "undefined" )? currentScenario.steps[currentScenario.steps.length - 1] : {}
     }
 
     /**
