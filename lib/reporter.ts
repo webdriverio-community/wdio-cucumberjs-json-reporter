@@ -371,5 +371,4 @@ class CucumberJsJsonReporter extends WDIOReporter {
         }
     }
 }
-
 export default CucumberJsJsonReporter;
