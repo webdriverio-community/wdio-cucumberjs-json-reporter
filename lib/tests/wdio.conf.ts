@@ -8,7 +8,7 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
 export const config: Options.Testrunner = {
-    specs: [__dirname +'/e2e/*.feature'],
+    specs: [path.join(__dirname, 'e2e', '*.feature')],
     capabilities: [{
         maxInstances: 2,
         acceptInsecureCerts: true,
