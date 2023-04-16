@@ -5,7 +5,7 @@ import {
     W3CCapabilitiesExtended,
     WebdriverIOExtended,
 } from './types/wdio';
-import { NOT_KNOWN } from './constants';
+import { NOT_KNOWN } from './constants.js';
 import WebDriver from 'webdriver';
 
 export class Metadata {

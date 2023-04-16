@@ -1,7 +1,8 @@
 import { existsSync} from 'fs'
 import logger from '@wdio/logger';
 import { resolve } from 'path';
-import { outputJsonSync, readJsonSync } from 'fs-extra';
+import pkg from 'fs-extra';
+const { outputJsonSync, readJsonSync } = pkg;
 import {
     AFTER,
     BEFORE,
@@ -13,7 +14,7 @@ import {
     //   PENDING,
     SCENARIO,
     TEXT_PLAIN,
-} from './constants';
+} from './constants.js';
 import {
     AttachmentType,
     CucumberAttachmentData,

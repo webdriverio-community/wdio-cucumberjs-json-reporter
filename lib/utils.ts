@@ -1,6 +1,6 @@
 import { ErrorMessage, Step } from './models';
 import { HookStats, TestStats } from '@wdio/reporter';
-import { FAILED } from './constants';
+import { FAILED } from './constants.js';
 import { dialects } from '@cucumber/gherkin';
 import stripAnsi from 'strip-ansi';
 
