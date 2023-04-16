@@ -1,10 +1,13 @@
-import WdioCucumberJsJsonReporter from '../../dist/lib/reporter.js';
-import path from 'path';
-import { fileURLToPath } from 'url';
-const __filename = fileURLToPath( import.meta.url );
-const __dirname = path.dirname( __filename );
-console.log(WdioCucumberJsJsonReporter)
-export const config = {
+import path from 'node:path'
+import { fileURLToPath } from 'node:url'
+import type { Options } from '@wdio/types'
+
+import WdioCucumberJsJsonReporter from '../../lib/reporter.js'
+
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
+
+export const config: Options.Testrunner = {
     specs: [__dirname +'/e2e/*.feature'],
     capabilities: [{
         maxInstances: 2,
