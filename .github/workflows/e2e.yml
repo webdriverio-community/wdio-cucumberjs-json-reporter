@@ -32,7 +32,7 @@ jobs:
         run: npm run test.e2e
       - name: Check if cucumber report was generated
         run: |
-          if [ -d ".tmp/new" ] then
+          if [ -d ".tmp/new" ]; then
             ls .tmp/new
           else
             exit 1
