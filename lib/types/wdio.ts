@@ -61,6 +61,10 @@ export interface RunnerStatsExtended extends RunnerStats {
     metadata?: {
         foo?: string;
     };
+    config:{
+        capabilities:{}
+    };
+    capabilities:{}
 }
 
 export interface SuiteStatsExtended extends SuiteStats {

@@ -1,0 +1,39 @@
+name: wdio-cucumberjs-json-reporter-e2e
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+  pull_request:
+
+defaults:
+  run:
+    working-directory: ./
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [18.x]
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+      - name: Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+            node-version: ${{ matrix.node-version }}
+      - name: Install dependencies
+        working-directory: ./
+        run: npm install
+      - name: Run E2E Tests and generate cucumberjs report
+        working-directory: ./
+        run: npm run test.e2e
+      - name: Check if cucumber report was generated
+        run: |
+          if [ -d ".tmp/new" ]; then
+            ls .tmp/new
+          else
+            exit 1
+          fi
