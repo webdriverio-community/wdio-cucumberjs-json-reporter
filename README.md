@@ -1,17 +1,9 @@
-# wdio-cucumberjs-json-reporter
-A WDIO reporter that creates CucumberJS JSON files for WebdriverIO V6+
-
-[![dependencies Status](https://david-dm.org/webdriverio-community/wdio-cucumberjs-json-reporter/status.svg)](https://david-dm.org/webdriverio-community/wdio-cucumberjs-json-reporter)
-![example workflow](https://github.com/webdriverio-community/wdio-cucumberjs-json-reporter/actions/workflows/test.yml/badge.svg)
+# WDIO CucumberJS JSON Reporter ![Test](https://github.com/webdriverio-community/wdio-cucumberjs-json-reporter/actions/workflows/test.yml/badge.svg)
 [![MIT license](http://img.shields.io/badge/license-MIT-brightgreen.svg)](http://opensource.org/licenses/MIT)
 
+A WDIO reporter that creates CucumberJS JSON files for WebdriverIO v8 and up.
+
 [![NPM](https://nodei.co/npm/wdio-cucumberjs-json-reporter.png)](https://nodei.co/npm/wdio-cucumberjs-json-reporter/)
-
-> **THIS MODULE CAN ONLY WORK WITH WebdriverIO V7+!**\
-> **For V6 please check the docs [here](https://github.com/webdriverio-community/wdio-cucumberjs-json-reporter/tree/v6) and use version 2.0.4**\
-> **For V5 please check the docs [here](https://github.com/webdriverio-community/wdio-cucumberjs-json-reporter/tree/v5) and use version 1.3.0**
-
-> **THIS MODULE IS NOT A REPLACEMENT OF [wdio-multiple-cucumber-html-reporter](https://github.com/wswebcreation/wdio-multiple-cucumber-html-reporter). THAT MODULE ONLY SUPPORTS WEBDRIVERIO V4 AND ALSO CREATES A REPORT. THIS MODULE ONLY CREATES A JSON, NO REPORT!!**
 
 ## What does it do
 This reporter will generate a **Cucumber JSON file** for each feature that is being tested. The JSON file can be used with whatever report you want to use like for example [multiple-cucumber-html-reporter](https://github.com/wswebcreation/multiple-cucumber-html-reporter).
@@ -261,3 +253,10 @@ If you still want to use the [multiple-cucumber-html-reporter](https://github.co
       }
     }
     ```
+## Older WebdriverIO Versions
+
+> **THIS MODULE CAN ONLY WORK WITH WebdriverIO V8+!**\
+> **For V6 please check the docs [here](https://github.com/webdriverio-community/wdio-cucumberjs-json-reporter/tree/v6) and use version 2.0.4**\
+> **For V5 please check the docs [here](https://github.com/webdriverio-community/wdio-cucumberjs-json-reporter/tree/v5) and use version 1.3.0**
+
+> **THIS MODULE IS NOT A REPLACEMENT OF [wdio-multiple-cucumber-html-reporter](https://github.com/wswebcreation/wdio-multiple-cucumber-html-reporter). THAT MODULE ONLY SUPPORTS WEBDRIVERIO V4 AND ALSO CREATES A REPORT. THIS MODULE ONLY CREATES A JSON, NO REPORT!!**
