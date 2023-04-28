@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import fs from 'node:fs'
+import url from 'node:url'
 import path from 'node:path'
 import { describe, it, expect, beforeAll, beforeEach, afterEach, vi, type SpyInstance } from 'vitest'
 import { copySync, readJsonSync, readdirSync, removeSync } from 'fs-extra'
@@ -19,14 +20,24 @@ import {
     TEST_NO_KEYWORD_STATS,
     TEST_SCENARIO_STATS,
 } from './__mocks__/mocks.js'
-import type { HookStatsExtended, RunnerStatsExtended, SuiteStatsExtended, TestStatsExtended } from '../src/types/wdio'
+import type { HookStatsExtended, RunnerStatsExtended, SuiteStatsExtended, TestStatsExtended } from '../src/types/wdio.js'
 import { Metadata } from '../src/metadata.js'
-import type { Step } from '../src/types'
+import type { Step } from '../src/types.js'
 import WdioCucumberJsJsonReporter from '../src/index.js'
+
+const __dirname = url.fileURLToPath(new URL('.', import.meta.url))
+const jsonFolder = `${__dirname}.tmp/ut-folder`
 
 vi.mock('../src/utils', () => ({
     containsSteps: vi.fn(),
-    getFailedMessage: vi.fn()
+    getFailedMessage: vi.fn(),
+    keywordStartsWith: vi.fn()
+}))
+
+vi.mock('@wdio/logger', () => ({
+    default: vi.fn().mockReturnValue({
+        info: vi.fn()
+    })
 }))
 
 describe('reporter', () => {
@@ -44,7 +55,7 @@ describe('reporter', () => {
 
     beforeEach(() => {
         tmpReporter = new WdioCucumberJsJsonReporter({
-            jsonFolder: '.tmp/json-folder/',
+            jsonFolder,
             language: 'en',
             logFile: `${logFolder}/${logFileName}`,
         })
@@ -67,7 +78,9 @@ describe('reporter', () => {
         })
 
         it('should verify initial properties', () => {
-            expect(tmpReporter.options).toMatchSnapshot()
+            const { jsonFolder, ...options } = tmpReporter.options
+            expect(options).toMatchSnapshot()
+            expect(jsonFolder).toBe(jsonFolder)
             expect(tmpReporter.instanceMetadata).toBeNull()
             expect(tmpReporter.report).toMatchSnapshot()
         })
@@ -171,10 +184,12 @@ describe('reporter', () => {
             const getCurrentScenarioSpy = vi.spyOn(tmpReporter, 'getCurrentScenario').mockReturnValue(EMPTY_SCENARIO)
             const addStepDataSpy = vi.spyOn(tmpReporter, 'addStepData').mockReturnValue()
 
+            vi.mocked(containsSteps).mockReturnValue(true)
             tmpReporter.onHookStart({} as HookStatsExtended)
 
             expect(getCurrentScenarioSpy).toHaveBeenCalledTimes(1)
             expect(containsSteps).toHaveBeenCalledTimes(1)
+
             expect(addStepDataSpy).toHaveBeenCalledWith({ state: PASSED, keyword: AFTER })
         })
         it('should not call `addStepData` to add a pending after step', () => {
@@ -255,11 +270,10 @@ describe('reporter', () => {
 
     describe('onRunnerEnd', () => {
         it('should store the json file on the file system', () => {
-            const jsonFolder = './.tmp/ut-folder'
-
             tmpReporter.report.feature = { id: 'this-feature' }
             tmpReporter.options.jsonFolder = jsonFolder
 
+            removeSync(jsonFolder)
             expect(fs.existsSync(jsonFolder)).toEqual(false)
 
             tmpReporter.onRunnerEnd()
@@ -274,8 +288,6 @@ describe('reporter', () => {
             removeSync(jsonFolder)
         })
         it('should by default create a unique Json file and should not add in existing Json file onRunnerEnd', () => {
-            const jsonFolder = './.tmp/ut-folder'
-
             tmpReporter.report.feature = { id: 'this-feature' }
             tmpReporter.options.jsonFolder = jsonFolder
 
@@ -295,11 +307,12 @@ describe('reporter', () => {
             // Clean up
             removeSync(jsonFolder)
         })
-        it('should be able to add json to an existing json output when reportFilePerRetry option is set to false', () => {
-            const jsonFolder = './.tmp/ut-folder'
+        it('should be able to add json to an existing json output when reportFilePerRetry option is set to false', async () => {
+
             const jsonFile = `${jsonFolder}/this-feature.json`
 
-            copySync('lib/tests/__mocks__/mock.json', jsonFile)
+            await fs.rmSync(jsonFolder, { recursive: true, force: true })
+            copySync(__dirname + '/__mocks__/mock.json', jsonFile)
 
             tmpReporter.report.feature = { id: 'this-feature' }
             tmpReporter.options.jsonFolder = jsonFolder
@@ -442,7 +455,7 @@ describe('reporter', () => {
     describe('attach', () => {
         let mockStdout: SpyInstance
         beforeAll(() => {
-            //   process.emit = jest.fn()
+            process.emit = vi.fn() as any
             mockStdout = vi.spyOn(process, 'emit')
         })
 

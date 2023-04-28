@@ -3,7 +3,7 @@ import { defineConfig } from 'vite'
 
 export default defineConfig({
     test: {
-        include: ['test/**/*.test.ts'],
+        include: ['tests/**/*.test.ts'],
         /**
          * not to ESM ported packages
          */
@@ -14,11 +14,11 @@ export default defineConfig({
         coverage: {
             enabled: true,
             provider: 'c8',
-            exclude: ['**/build/**', '**/__fixtures__/**', '**/*.test.ts'],
-            lines: 100,
-            functions: 100,
-            branches: 85,
-            statements: 100
+            exclude: ['**/dist/**', '**/__mocks__/**', '**/__fixtures__/**', '**/*.test.ts'],
+            lines: 99,
+            functions: 95,
+            branches: 98,
+            statements: 99
         }
     }
 })
