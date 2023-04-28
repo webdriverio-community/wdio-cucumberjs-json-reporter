@@ -1,5 +1,4 @@
-# WDIO CucumberJS JSON Reporter ![Test](https://github.com/webdriverio-community/wdio-cucumberjs-json-reporter/actions/workflows/test.yml/badge.svg)
-[![MIT license](http://img.shields.io/badge/license-MIT-brightgreen.svg)](http://opensource.org/licenses/MIT)
+# WDIO CucumberJS JSON Reporter ![Test](https://github.com/webdriverio-community/wdio-cucumberjs-json-reporter/actions/workflows/test.yml/badge.svg) [![MIT license](http://img.shields.io/badge/license-MIT-brightgreen.svg)](http://opensource.org/licenses/MIT)
 
 A WDIO reporter that creates CucumberJS JSON files for WebdriverIO v8 and up.
 
