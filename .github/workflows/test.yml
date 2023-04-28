@@ -1,4 +1,4 @@
-name: wdio-cucumberjs-json-reporter
+name: Tests
 
 on:
   push:
@@ -15,16 +15,13 @@ defaults:
 jobs:
   test:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [16.x]
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
-      - name: Setup Node.js ${{ matrix.node-version }}
+      - name: Setup Node.js
         uses: actions/setup-node@v1
         with:
-            node-version: ${{ matrix.node-version }}
+            node-version: 18.x
       - name: Install dependencies
         working-directory: ./
         run: npm install
