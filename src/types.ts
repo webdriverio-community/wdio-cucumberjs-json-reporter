@@ -1,4 +1,11 @@
-import { Argument, Tag } from '@wdio/reporter';
+import type { Reporters } from '@wdio/types'
+import type { Argument, Tag } from '@wdio/reporter'
+
+export interface CucumberJsJsonReporterInterface extends Reporters.Options {
+    jsonFolder?: string;
+    language?: string;
+    disableHooks?: boolean;
+}
 
 export interface BrowserData {
     browser: {

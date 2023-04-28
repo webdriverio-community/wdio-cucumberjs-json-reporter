@@ -1,7 +1,9 @@
 {
-  "extends": "@tsconfig/node12/tsconfig.json",
+  "extends": "@tsconfig/node18/tsconfig.json",
   "compileOnSave": true,
   "compilerOptions": {
+    "module": "ESNext",
+    "target": "ES2020",
     "noFallthroughCasesInSwitch": true,
     "allowUnreachableCode": false,
     "allowUnusedLabels": false,
@@ -11,20 +13,17 @@
     "allowJs": true,
     "resolveJsonModule": true,
     "sourceMap": true,
+    "declarationMap": true,
     "declaration": true,
     "inlineSources": true,
-    "typeRoots": ["./node_modules/@types","./lib/types" ],
-    "rootDir": "./lib",
     "removeComments": true,
     "moduleResolution": "node",
-    "baseUrl": ".",
-    "types": [ "jest", "node", "webdriverio/async", "@types/fs-extra", "long"],
     "allowSyntheticDefaultImports": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "outDir": "./dist"
   },
   "include": [
-    "**/*.ts"
+    "src/**/*.ts"
   ]
 }

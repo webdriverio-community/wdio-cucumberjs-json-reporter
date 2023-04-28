@@ -23,4 +23,14 @@ yarn.lock
 # Some folders
 .tmp/
 .github/
-lib/tests/
+tests/
+.husky
+.eslintrc.js
+.eslintignore
+.editorconfig
+.nvmrc
+.prettierrc
+src
+vitest.conf.ts
+*.tgz
+*.json
