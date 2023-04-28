@@ -26,7 +26,9 @@ import type { Step } from '../src/types.js'
 import WdioCucumberJsJsonReporter from '../src/index.js'
 
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url))
-const jsonFolder = `${__dirname}.tmp/ut-folder`
+const logFolderPath = path.join(__dirname, '.tmp')
+const logFile = path.join(logFolderPath, 'logFile.json')
+const jsonFolder = path.join(logFolderPath, 'ut-folder')
 
 vi.mock('../src/utils', () => ({
     containsSteps: vi.fn(),
@@ -42,14 +44,10 @@ vi.mock('@wdio/logger', () => ({
 
 describe('reporter', () => {
     let tmpReporter: WdioCucumberJsJsonReporter
-    const logFolder = '.tmp'
-    const logFileName = 'logFile.json'
-    const logFolderPath = path.join(__dirname, '../../', logFolder)
-    const logFilePath = path.join(logFolderPath, logFileName)
     beforeAll(() => {
         if (!fs.existsSync(logFolderPath)) {
             fs.mkdirSync(logFolderPath)
-            fs.closeSync(fs.openSync(logFilePath, 'w'))
+            fs.closeSync(fs.openSync(logFile, 'w'))
         }
     })
 
@@ -57,7 +55,7 @@ describe('reporter', () => {
         tmpReporter = new WdioCucumberJsJsonReporter({
             jsonFolder,
             language: 'en',
-            logFile: `${logFolder}/${logFileName}`,
+            logFile,
         })
     })
 
@@ -71,16 +69,19 @@ describe('reporter', () => {
     describe('on create', () => {
         it('should set the defaults if only the logfile option is provided', () => {
             const noOptionsReporter = new WdioCucumberJsJsonReporter({
-                logFile: path.join(logFolder, logFileName).replace('\\', '/'),
+                logFile: logFile.replace('\\', '/'),
             })
 
-            expect(noOptionsReporter.options).toMatchSnapshot()
+            const { logFile: logFileOption, ...options } = noOptionsReporter.options
+            expect(logFileOption).toBe(logFile)
+            expect(options).toMatchSnapshot()
         })
 
         it('should verify initial properties', () => {
-            const { jsonFolder, ...options } = tmpReporter.options
+            const { jsonFolder: jsonFolderOption, logFile: logFileOption, ...options } = tmpReporter.options
             expect(options).toMatchSnapshot()
-            expect(jsonFolder).toBe(jsonFolder)
+            expect(jsonFolderOption).toBe(jsonFolder)
+            expect(logFileOption).toBe(logFile)
             expect(tmpReporter.instanceMetadata).toBeNull()
             expect(tmpReporter.report).toMatchSnapshot()
         })

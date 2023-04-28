@@ -205,7 +205,6 @@ exports[`reporter > on create > should set the defaults if only the logfile opti
 {
   "jsonFolder": ".tmp/json/",
   "language": "en",
-  "logFile": ".tmp/logFile.json",
   "reportFilePerRetry": true,
 }
 `;
@@ -213,7 +212,6 @@ exports[`reporter > on create > should set the defaults if only the logfile opti
 exports[`reporter > on create > should verify initial properties 1`] = `
 {
   "language": "en",
-  "logFile": ".tmp/logFile.json",
   "reportFilePerRetry": true,
 }
 `;
