@@ -20,8 +20,8 @@
     "wdio-reporter"
   ],
   "homepage": "https://github.com/webdriverio-community/wdio-cucumberjs-json-reporter#readme",
-  "main": "./dist/reporter.js",
-  "types": "./dist/reporter.d.ts",
+  "exports": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "scripts": {
     "build": "run-s clean compile",
     "clean": "rimraf coverage dist .tmp",
