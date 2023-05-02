@@ -42,7 +42,7 @@
     "eslint-fix-all": "npx eslint src/**/**/*.ts src/**/*.ts src/*.ts --fix"
   },
   "dependencies": {
-    "@cucumber/gherkin": "^25.0.2",
+    "@cucumber/gherkin": "^26.2.0",
     "@wdio/logger": "^8.6.6",
     "@wdio/reporter": "^8.8.7",
     "fs-extra": "^11.1.1",
