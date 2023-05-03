@@ -34,7 +34,7 @@ Instructions on how to install `WebdriverIO` can be found [here](https://webdriv
 Configure the output directory and the language in your wdio.conf.js file:
 
 ```js
-exports.config = {
+export const config = {
     // ...
     reporters: [
         // Like this with the default options, see the options below
@@ -99,7 +99,7 @@ To customize this you can add it by adding the following object to your `capabil
 
 ```js
 // Example wdio.conf.js
-exports.config = {
+export const config = {
     //..
     capabilities: [
         {
@@ -246,6 +246,7 @@ If you still want to use the [multiple-cucumber-html-reporter](https://github.co
       }
     }
     ```
+
 ## Older WebdriverIO Versions
 
 > **THIS MODULE CAN ONLY WORK WITH WebdriverIO V8+!**\
