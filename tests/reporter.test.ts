@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import fs from 'node:fs'
+import fsp from 'node:fs/promises'
 import url from 'node:url'
 import path from 'node:path'
 import { describe, it, expect, beforeAll, beforeEach, afterEach, vi, type SpyInstance } from 'vitest'
-import { copySync, readJsonSync, readdirSync, removeSync } from 'fs-extra'
 
 import { containsSteps, getFailedMessage } from '../src/utils.js'
 import { AFTER, BEFORE, FAILED, PASSED, PENDING, TEXT_PLAIN } from '../src/constants.js'
@@ -270,66 +270,69 @@ describe('reporter', () => {
     })
 
     describe('onRunnerEnd', () => {
-        it('should store the json file on the file system', () => {
+        it('should store the json file on the file system', async () => {
             tmpReporter.report.feature = { id: 'this-feature' }
             tmpReporter.options.jsonFolder = jsonFolder
-
-            removeSync(jsonFolder)
+            await fsp.rm(jsonFolder, {
+                recursive: true,
+                force: true
+            })
             expect(fs.existsSync(jsonFolder)).toEqual(false)
 
-            tmpReporter.onRunnerEnd()
-
-            const files = readdirSync(jsonFolder)
+            await tmpReporter.onRunnerEnd()
+            const files = (await fsp.readdir(jsonFolder)).filter((dir) => dir !== '.' && dir !== '..')
 
             expect(files.length).toEqual(1)
             expect(files[0].includes(tmpReporter.report.feature.id!)).toEqual(true)
             expect(fs.existsSync(jsonFolder)).toEqual(true)
-
-            // Clean up
-            removeSync(jsonFolder)
         })
-        it('should by default create a unique Json file and should not add in existing Json file onRunnerEnd', () => {
+        it('should by default create a unique Json file and should not add in existing Json file onRunnerEnd', async () => {
             tmpReporter.report.feature = { id: 'this-feature' }
             tmpReporter.options.jsonFolder = jsonFolder
 
-            tmpReporter.onRunnerEnd()
-            tmpReporter.onRunnerEnd()
-            tmpReporter.onRunnerEnd()
-            tmpReporter.onRunnerEnd()
-            tmpReporter.onRunnerEnd()
+            await tmpReporter.onRunnerEnd()
+            await tmpReporter.onRunnerEnd()
+            await tmpReporter.onRunnerEnd()
+            await tmpReporter.onRunnerEnd()
+            await tmpReporter.onRunnerEnd()
 
-            const files = readdirSync(jsonFolder)
+            const files = (await fsp.readdir(jsonFolder)).filter((dir) => dir !== '.' && dir !== '..')
 
             expect(files.length).toEqual(5)
 
             for (const jsonFile of files) {
-                expect((readJsonSync(path.resolve(jsonFolder, jsonFile))).length).toEqual(1)
+                const fileContent = JSON.parse((await fsp.readFile(path.resolve(jsonFolder, jsonFile))).toString())
+                expect(fileContent.length).toEqual(1)
             }
-            // Clean up
-            removeSync(jsonFolder)
         })
         it('should be able to add json to an existing json output when reportFilePerRetry option is set to false', async () => {
-
             const jsonFile = `${jsonFolder}/this-feature.json`
 
-            await fs.rmSync(jsonFolder, { recursive: true, force: true })
-            copySync(__dirname + '/__mocks__/mock.json', jsonFile)
+            await fsp.rm(jsonFolder, { recursive: true, force: true })
+            await fsp.mkdir(jsonFolder, { recursive: true })
+            await fsp.copyFile(__dirname + '/__mocks__/mock.json', jsonFile)
 
             tmpReporter.report.feature = { id: 'this-feature' }
             tmpReporter.options.jsonFolder = jsonFolder
             tmpReporter.options.reportFilePerRetry = false
 
-            expect((readJsonSync(jsonFile)).length).toEqual(1)
+            const fileContent = JSON.parse((await fsp.readFile(path.resolve(jsonFolder, jsonFile))).toString())
+            expect(fileContent.length).toEqual(1)
 
-            tmpReporter.onRunnerEnd()
+            await tmpReporter.onRunnerEnd()
 
-            const files = readdirSync(jsonFolder)
+            const files = (await fsp.readdir(jsonFolder)).filter((dir) => dir !== '.' && dir !== '..')
 
             expect(files.length).toEqual(1)
-            expect((readJsonSync(jsonFile)).length).toEqual(2)
+            const newFileContent = JSON.parse((await fsp.readFile(jsonFile)).toString())
+            expect(newFileContent.length).toEqual(2)
+        })
 
-            // Clean up
-            removeSync(jsonFolder)
+        afterEach(async () => {
+            await fsp.rm(jsonFolder, {
+                recursive: true,
+                force: true
+            })
         })
     })
 

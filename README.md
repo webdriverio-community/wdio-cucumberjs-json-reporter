@@ -15,7 +15,7 @@ The easiest way is to keep `wdio-cucumberjs-json-reporter` as a devDependency in
 ```json
 {
   "devDependencies": {
-    "wdio-cucumberjs-json-reporter": "^1.0.0"
+    "wdio-cucumberjs-json-reporter": "^5.0.0"
   }
 }
 ```
@@ -209,21 +209,15 @@ If you still want to use the [multiple-cucumber-html-reporter](https://github.co
     npm install multiple-cucumber-html-reporter --save-dev
     ```
 
-  Maybe even install `fs-extra` to remove the report folder before you start all  sessions.
-
-    ```bash
-    npm install fs-extra --save-dev
-    ```
-
 - Add this to your configuration file
 
     ```js
+    import fs from 'node:fs/promises'
     // Import the module
-    const { generate } = require('multiple-cucumber-html-reporter');
-    const { removeSync } = require('fs-extra');
+    import { generate } from 'multiple-cucumber-html-reporter'
 
     // Example wdio.conf.js
-    exports.config = {
+    export const config = {
       //..
 
       // =====
@@ -234,7 +228,7 @@ If you still want to use the [multiple-cucumber-html-reporter](https://github.co
        */
       onPrepare: () => {
         // Remove the `.tmp/` folder that holds the json and report files
-        removeSync('.tmp/');
+        return fs.rm('.tmp/', { recursive: true });
       },
       /**
        * Gets executed after all workers got shut down and the process is about to exit.
