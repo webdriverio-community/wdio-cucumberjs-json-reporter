@@ -20,6 +20,7 @@
     "wdio-reporter"
   ],
   "homepage": "https://github.com/webdriverio-community/wdio-cucumberjs-json-reporter#readme",
+  "type": "module",
   "exports": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "scripts": {
