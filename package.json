@@ -38,7 +38,7 @@
     "compile": "tsc --build tsconfig.json",
     "test": "run-s test:*",
     "test:lint": "eslint src",
-    "test:unit": "vitest -c ./vitest.conf.ts",
+    "test:unit": "vitest -c ./vitest.conf.ts --run",
     "precompile": "npm run clean",
     "prerelease": "npm run compile",
     "prepublish": "npm run compile",
