@@ -21,8 +21,17 @@
   ],
   "homepage": "https://github.com/webdriverio-community/wdio-cucumberjs-json-reporter#readme",
   "type": "module",
-  "exports": "./dist/index.js",
-  "types": "./dist/index.d.ts",
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/index.js",
+  "exports": {
+    ".": [
+      {
+        "import": "./dist/index.js",
+        "require": "./dist/cjs/index.js"
+      },
+      "./dist/cjs/index.js"
+    ]
+  },
   "scripts": {
     "build": "run-s clean compile",
     "clean": "rimraf coverage dist .tmp",
