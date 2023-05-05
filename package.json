@@ -1,6 +1,6 @@
 {
   "name": "wdio-cucumberjs-json-reporter",
-  "version": "5.1.0",
+  "version": "5.1.1",
   "description": "A WDIO reporter that creates CucumberJS JSON files for WebdriverIO V5+",
   "author": "Wim Selles <wim@wswebcreation.nl>",
   "license": "MIT",
