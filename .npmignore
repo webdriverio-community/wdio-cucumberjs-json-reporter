@@ -34,3 +34,4 @@ src
 vitest.conf.ts
 *.tgz
 *.json
+!dist/cjs/package.json
