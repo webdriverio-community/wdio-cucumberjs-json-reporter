@@ -15,10 +15,10 @@ export class Metadata {
         const currentConfigCapabilities = data?.capabilities as DesiredCapabilitiesExtended
         const w3cCaps: cjson_metadata = (data.config.capabilities)
             ? Object.prototype.hasOwnProperty.call(data.config.capabilities, 'cjson:metadata')
-            // Fixes: https://github.com/webdriverio-community/wdio-cucumberjs-json-reporter/issues/73
-            ? data.config.capabilities['cjson:metadata'] as cjson_metadata
-            // Fallback
-            : ( browser.options as WebdriverIOExtended )?.requestedCapabilities?.cjson_metadata
+                // Fixes: https://github.com/webdriverio-community/wdio-cucumberjs-json-reporter/issues/73
+                ? data.config.capabilities['cjson:metadata'] as cjson_metadata
+                // Fallback
+                : ( browser.options as WebdriverIOExtended )?.requestedCapabilities?.cjson_metadata
             : {}
         const metadata: cjson_metadata = ( currentConfigCapabilities as W3CCapabilitiesExtended )?.cjson_metadata
             || w3cCaps // When an app is used to test
