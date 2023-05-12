@@ -212,6 +212,9 @@ export class CucumberJsJsonReporter extends WDIOReporter {
      * Runner is done, write the file
      */
     public async onRunnerEnd() {
+        if (!this.report.feature) {
+            return
+        }
         const uniqueId = String(Date.now() + Math.random()).replace('.', '')
         const filename = this.options.reportFilePerRetry
             ? `${this.report.feature.id}_${uniqueId}.json`
