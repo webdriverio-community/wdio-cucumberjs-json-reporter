@@ -212,27 +212,29 @@ export class CucumberJsJsonReporter extends WDIOReporter {
      * Runner is done, write the file
      */
     public async onRunnerEnd() {
-        const uniqueId = String(Date.now() + Math.random()).replace('.', '')
-        const filename = this.options.reportFilePerRetry
-            ? `${this.report.feature.id}_${uniqueId}.json`
-            : `${this.report.feature.id}.json`
-        const jsonFolder = path.resolve(process.cwd(), this.options.jsonFolder)
-        const jsonFile = path.resolve(jsonFolder, filename)
-        const json = [this.report.feature]
-        // Check if there is an existing file, if so concat the data, else add the new
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-        const hasJSONFile = await fs.access(jsonFile).then(() => true, () => false)
-        let output = json
-        if (hasJSONFile) {
-            try {
-                const olderJSON = JSON.parse((await fs.readFile(jsonFile)).toString())
-                output = json.concat(olderJSON)
-            } catch (err: unknown) {
-                log.error(`Failed to attach log to existing log file: ${(err as Error).message}`)
+        if (this.report.feature) {
+            const uniqueId = String(Date.now() + Math.random()).replace('.', '')
+            const filename = this.options.reportFilePerRetry
+                ? `${this.report.feature.id}_${uniqueId}.json`
+                : `${this.report.feature.id}.json`
+            const jsonFolder = path.resolve(process.cwd(), this.options.jsonFolder)
+            const jsonFile = path.resolve(jsonFolder, filename)
+            const json = [this.report.feature]
+            // Check if there is an existing file, if so concat the data, else add the new
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+            const hasJSONFile = await fs.access(jsonFile).then(() => true, () => false)
+            let output = json
+            if (hasJSONFile) {
+                try {
+                    const olderJSON = JSON.parse((await fs.readFile(jsonFile)).toString())
+                    output = json.concat(olderJSON)
+                } catch (err: unknown) {
+                    log.error(`Failed to attach log to existing log file: ${(err as Error).message}`)
+                }
             }
+            await fs.mkdir(jsonFolder, { recursive: true })
+            return fs.writeFile(jsonFile, JSON.stringify(output))
         }
-        await fs.mkdir(jsonFolder, { recursive: true })
-        return fs.writeFile(jsonFile, JSON.stringify(output))
     }
 
     /**
