@@ -225,7 +225,7 @@ describe('metadata', () => {
                             version: undefined,
                         },
                     } as cjson_metadata,
-                    { platformVersion: '10.1' } as WebDriver.DesiredCapabilities,
+                    { 'appium:platformVersion': '10.1' } as WebDriver.DesiredCapabilities,
                 ),
             ).toMatchSnapshot()
         })
