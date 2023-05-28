@@ -212,7 +212,7 @@ export class CucumberJsJsonReporter extends WDIOReporter {
     /**
      * Runner is done, write the file
      */
-    public async onRunnerEnd() {
+    public onRunnerEnd(): void {
         if (!this.report.feature) {
             return
         }
