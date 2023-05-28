@@ -22,7 +22,7 @@ import type { CucumberJsJsonReporterInterface, AttachmentType, CucumberAttachmen
 import type { HookStatsExtended, SuiteStatsExtended, TestStatsExtended } from './types/wdio.js'
 
 const log = logger('wdio-cucumberjs-json-reporter')
-const { pathExists, outputJson, readJson } = fsExtra
+const { existsSync, outputJsonSync, readJsonSync } = fsExtra
 
 export class CucumberJsJsonReporter extends WDIOReporter {
     public instanceMetadata: MetadataObject
@@ -225,9 +225,9 @@ export class CucumberJsJsonReporter extends WDIOReporter {
         const json = [this.report.feature]
         // Check if there is an existing file, if so concat the data, else add the new
         // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-        const output = await pathExists(jsonFile) ? json.concat(await readJson(jsonFile)) : json
+        const output = existsSync(jsonFile) ? json.concat(readJsonSync(jsonFile)) : json
 
-        await outputJson(jsonFile, output)
+        outputJsonSync(jsonFile, output)
     }
 
     /**
