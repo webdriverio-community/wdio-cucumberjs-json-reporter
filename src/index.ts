@@ -1,4 +1,4 @@
-import fsExtra from 'fs-extra'
+import fs from 'fs-extra'
 import path from 'node:path'
 
 import WDIOReporter, { HookStats, RunnerStats, SuiteStats, TestStats } from '@wdio/reporter'
@@ -22,7 +22,6 @@ import type { CucumberJsJsonReporterInterface, AttachmentType, CucumberAttachmen
 import type { HookStatsExtended, SuiteStatsExtended, TestStatsExtended } from './types/wdio.js'
 
 const log = logger('wdio-cucumberjs-json-reporter')
-const { existsSync, outputJsonSync, readJsonSync } = fsExtra
 
 export class CucumberJsJsonReporter extends WDIOReporter {
     public instanceMetadata: MetadataObject
@@ -225,9 +224,9 @@ export class CucumberJsJsonReporter extends WDIOReporter {
         const json = [this.report.feature]
         // Check if there is an existing file, if so concat the data, else add the new
         // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-        const output = existsSync(jsonFile) ? json.concat(readJsonSync(jsonFile)) : json
+        const output = fs.existsSync(jsonFile) ? json.concat(fs.readJsonSync(jsonFile)) : json
 
-        outputJsonSync(jsonFile, output)
+        fs.outputJsonSync(jsonFile, output)
     }
 
     /**
