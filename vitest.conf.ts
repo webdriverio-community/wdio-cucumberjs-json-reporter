@@ -13,7 +13,6 @@ export default defineConfig({
         ],
         coverage: {
             enabled: true,
-            provider: 'c8',
             exclude: ['**/dist/**', '**/__mocks__/**', '**/__fixtures__/**', '**/*.test.ts'],
             lines: 99,
             functions: 95,
