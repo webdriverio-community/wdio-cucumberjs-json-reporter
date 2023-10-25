@@ -282,7 +282,9 @@ export class CucumberJsJsonReporter extends WDIOReporter {
     public getStepDataObject(stepData: TestStatsExtended | HookStatsExtended): Step {
         const keyword =
             stepData?.keyword || keywordStartsWith(stepData.title, this.options.language) || ''
-        const title = (stepData.title.split(keyword).pop() || stepData.title || '').trim()
+        const regex = new RegExp(`^(${keyword})\\s`)
+        const result = regex.exec(stepData.title)
+        const title = (stepData.title.slice(result?.index + keyword.length) || '').trim()
         return {
             arguments: stepData.argument ? [stepData.argument] : [],
             keyword,
