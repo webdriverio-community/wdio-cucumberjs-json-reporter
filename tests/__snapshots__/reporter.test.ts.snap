@@ -193,7 +193,7 @@ exports[`reporter > getStepDataObject > should be able to to create a step JSON 
   "match": {
     "location": "can not be determined with webdriver.io",
   },
-  "name": "e",
+  "name": "I load the Swag Labs demo website",
   "result": {
     "duration": 555000000,
     "status": "passed",
