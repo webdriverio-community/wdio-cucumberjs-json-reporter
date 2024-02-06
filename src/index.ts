@@ -344,8 +344,15 @@ export class CucumberJsJsonReporter extends WDIOReporter {
     public cucumberJsAttachment(attachment: CucumberJsAttachment): void {
         // The attachment can be added to the current running scenario step
         const currentStep = this.getCurrentStep()
+        let data = attachment?.data
+
+        // If the mime_type is 'text/plain' or 'application/json', encode the data to a base64 string (like Cucumber v10+ does)
+        if (attachment.type === 'text/plain' || attachment.type === 'application/json') {
+            data = Buffer.from(JSON.stringify(data)).toString('base64')
+        }
+
         const embeddings = {
-            data: attachment?.data,
+            data: data,
             mime_type: attachment.type,
         }
 
