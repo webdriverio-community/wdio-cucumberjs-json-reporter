@@ -43,7 +43,7 @@
             },
             "embeddings": [
               {
-                "data": "just a before string",
+                "data": "anVzdCBhIGJlZm9yZSBzdHJpbmc=",
                 "mime_type": "text/plain"
               }
             ]
@@ -88,17 +88,15 @@
             },
             "embeddings": [
               {
-                "data": "just a string",
+                "data": "anVzdCBhIHN0cmluZw==",
                 "mime_type": "text/plain"
               },
               {
-                "data": "just a second string",
+                "data": "anVzdCBhIHNlY29uZCBzdHJpbmc=",
                 "mime_type": "text/plain"
               },
               {
-                "data": {
-                  "json-string": true
-                },
+                "data": "ewogICAgICAgICAgICAgICAgICAianNvbi1zdHJpbmciOiB0cnVlCiAgICAgICAgICAgICAgICB9",
                 "mime_type": "application/json"
               }
             ]
@@ -136,7 +134,7 @@
             },
             "embeddings": [
               {
-                "data": "just an after string",
+                "data": "anVzdCBhbiBhZnRlciBzdHJpbmc=",
                 "mime_type": "text/plain"
               }
             ]
@@ -191,7 +189,7 @@
             },
             "embeddings": [
               {
-                "data": "just a before string",
+                "data": "anVzdCBhIGJlZm9yZSBzdHJpbmc=",
                 "mime_type": "text/plain"
               }
             ]
@@ -223,7 +221,7 @@
             },
             "embeddings": [
               {
-                "data": "I open Google for the 'first' time",
+                "data": "SSBvcGVuIEdvb2dsZSBmb3IgdGhlICdmaXJzdCcgdGltZQ==",
                 "mime_type": "text/plain"
               }
             ]
@@ -242,7 +240,7 @@
             },
             "embeddings": [
               {
-                "data": "just an after string",
+                "data": "anVzdCBhbiBhZnRlciBzdHJpbmc=",
                 "mime_type": "text/plain"
               }
             ]
@@ -297,7 +295,7 @@
             },
             "embeddings": [
               {
-                "data": "just a before string",
+                "data": "anVzdCBhIGJlZm9yZSBzdHJpbmc=",
                 "mime_type": "text/plain"
               }
             ]
@@ -329,7 +327,7 @@
             },
             "embeddings": [
               {
-                "data": "I open Google for the 'second' time",
+                "data": "SSBvcGVuIEdvb2dsZSBmb3IgdGhlICdzZWNvbmQnIHRpbWU=",
                 "mime_type": "text/plain"
               }
             ]
@@ -348,7 +346,7 @@
             },
             "embeddings": [
               {
-                "data": "just an after string",
+                "data": "anVzdCBhbiBhZnRlciBzdHJpbmc=",
                 "mime_type": "text/plain"
               }
             ]
