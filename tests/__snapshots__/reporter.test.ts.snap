@@ -19,7 +19,7 @@ exports[`reporter > cucumberJsAttachment > should be able to add embeddings to a
 {
   "embeddings": [
     {
-      "data": "ImRhdGEi",
+      "data": "data",
       "mime_type": "text/plain",
     },
   ],
@@ -52,7 +52,7 @@ exports[`reporter > cucumberJsAttachment > should be able to add embeddings to a
       "mime_type": "text/plain",
     },
     {
-      "data": "ImRhdGEtMiI=",
+      "data": "data-2",
       "mime_type": "text/plain",
     },
   ],
@@ -95,9 +95,9 @@ exports[`reporter > getFeatureDataObject > should be able to to create a feature
 exports[`reporter > getScenarioDataObject > should be able to to create a scenario JSON data object 1`] = `
 {
   "description": "",
-  "id": "create-passed-featurehook-this-is-doing-nothing-because-it's-a-background"",
+  "id": "create-passed-featurehook-this-is-doing-nothing-because-it's-a-background\\"",
   "keyword": "Scenario",
-  "name": "Hook This is doing nothing because it's a background"",
+  "name": "Hook This is doing nothing because it's a background\\"",
   "steps": [],
   "tags": [],
   "type": "test",
@@ -129,7 +129,7 @@ exports[`reporter > getStepDataObject > should be able to add arguments to the s
   "match": {
     "location": "can not be determined with webdriver.io",
   },
-  "name": "I open "http://webdriver.io/"",
+  "name": "I open \\"http://webdriver.io/\\"",
   "result": {
     "duration": 0,
     "status": "",
@@ -145,7 +145,7 @@ exports[`reporter > getStepDataObject > should be able to to create a step JSON 
   "match": {
     "location": "can not be determined with webdriver.io",
   },
-  "name": "I open "http://webdriver.io/"",
+  "name": "I open \\"http://webdriver.io/\\"",
   "result": {
     "duration": 0,
     "status": "",
@@ -198,6 +198,14 @@ exports[`reporter > getStepDataObject > should be able to to create a step JSON 
     "duration": 555000000,
     "status": "passed",
   },
+}
+`;
+
+exports[`reporter > on create > should set the defaults if only the logfile option is provided 1`] = `
+{
+  "jsonFolder": ".tmp/json/",
+  "language": "en",
+  "reportFilePerRetry": true,
 }
 `;
 
