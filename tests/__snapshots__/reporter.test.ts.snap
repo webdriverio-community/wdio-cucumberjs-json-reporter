@@ -19,7 +19,7 @@ exports[`reporter > cucumberJsAttachment > should be able to add embeddings to a
 {
   "embeddings": [
     {
-      "data": "ImRhdGEi",
+      "data": "ZGF0YQ==",
       "mime_type": "text/plain",
     },
   ],
@@ -52,7 +52,7 @@ exports[`reporter > cucumberJsAttachment > should be able to add embeddings to a
       "mime_type": "text/plain",
     },
     {
-      "data": "ImRhdGEtMiI=",
+      "data": "ZGF0YS0y",
       "mime_type": "text/plain",
     },
   ],
