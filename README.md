@@ -182,6 +182,21 @@ You have the option to attach data to the JSON file in all these hooks / steps:
 
 The only thing you need to provide is the following code in your step files.
 
+For ES Modules (ESM)
+```js
+import cucumberJson from 'wdio-cucumberjs-json-reporter';
+
+// Attach a string (if no type is provided it will automatically default to `text/plain`
+cucumberJson.attach('just a string');
+cucumberJson.attach('just a second string', 'text/plain');
+
+// Attach JSON
+cucumberJson.attach({"json-string": true}, 'application/json');
+
+// Attach a screenshot in a before hook
+cucumberJson.attach(await browser.takeScreenshot(), 'image/png');
+```
+For CommonJS (CJS)
 ```js
 const { attach } = require("wdio-cucumberjs-json-reporter");
 
