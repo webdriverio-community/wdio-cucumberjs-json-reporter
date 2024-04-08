@@ -72,7 +72,7 @@
     "@types/node": "^20.5.9",
     "@typescript-eslint/eslint-plugin": "^7.0.0",
     "@typescript-eslint/eslint-plugin-tslint": "^7.0.2",
-    "@typescript-eslint/parser": "^6.5.0",
+    "@typescript-eslint/parser": "^7.5.0",
     "@vitest/coverage-v8": "^1.2.1",
     "eslint": "^8.48.0",
     "eslint-config-prettier": "^9.0.0",
