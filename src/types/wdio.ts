@@ -16,7 +16,7 @@ export interface W3CCapabilitiesExtended extends Capabilities.W3CCapabilities {
     app?: string
 }
 
-export interface DesiredCapabilitiesExtended extends Capabilities.DesiredCapabilities {
+export interface DesiredCapabilitiesExtended extends WebdriverIO.Capabilities {
     cjson_metadata?: cjson_metadata
     app?: string
 }
