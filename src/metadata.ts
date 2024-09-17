@@ -17,14 +17,14 @@ export class Metadata {
     public determineMetadata(data: RunnerStatsExtended): MetadataObject {
         let instanceData: AppData | BrowserData
         const currentCapabilities = data.capabilities as WebdriverIO.Capabilities
-        const optsCaps =  browser.requestedCapabilities as W3CCapabilitiesExtended
-        const currentConfigCapabilities = data?.capabilities as DesiredCapabilitiesExtended & WebdriverIO.Capabilities
+        const optsCaps = browser.requestedCapabilities as W3CCapabilitiesExtended
+        const currentConfigCapabilities = data?.capabilities as DesiredCapabilitiesExtended
         const w3cCaps: cjson_metadata = (data.capabilities)
             ? Object.prototype.hasOwnProperty.call(data.capabilities, 'cjson:metadata')
                 // Fixes: https://github.com/webdriverio-community/wdio-cucumberjs-json-reporter/issues/73
                 ? data.capabilities['cjson:metadata'] as cjson_metadata
                 // Fallback
-                : (data.instanceOptions as unknown as WebdriverIOExtended)?.requestedCapabilities?.cjson_metadata
+                : (browser.options as WebdriverIOExtended)?.requestedCapabilities?.cjson_metadata
             : {}
         const metadata: cjson_metadata = (currentConfigCapabilities as W3CCapabilitiesExtended)?.cjson_metadata
             || w3cCaps // When an app is used to test

@@ -7,7 +7,7 @@ import type {
     RunnerStatsExtended,
     SuiteStatsExtended,
     TestStatsExtended,
-    TestrunnerExtended,
+    TestrunnerExtended
 } from '../../src/types/wdio'
 import type { Feature, Scenario, cjson_metadata } from '../../src/types'
 import { PageLoadingStrategy } from '@wdio/types/build/Capabilities'

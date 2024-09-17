@@ -10,7 +10,7 @@ import {
 import { Metadata } from '../src/metadata.js'
 import { NOT_KNOWN } from '../src/constants.js'
 import type { cjson_metadata } from '../src/types'
-import type { W3CCapabilitiesExtended, WebdriverIOExtended } from '../src/types/wdio'
+import type { ConfigCapabilities, W3CCapabilitiesExtended, WebdriverIOExtended } from '../src/types/wdio'
 
 vi.mock('@wdio/globals', () => ({
     browser: {
@@ -137,7 +137,7 @@ describe('metadata', () => {
             expect(
                 metadataClassObject.determineDeviceName(
                     { device: 'metadata.device' } as cjson_metadata,
-                    {} as WebdriverIO.Capabilities,
+                    {} as ConfigCapabilities,
                 ),
             ).toMatchSnapshot()
         })
@@ -145,14 +145,14 @@ describe('metadata', () => {
             expect(
                 metadataClassObject.determineDeviceName(
                     {} as cjson_metadata,
-                    { deviceName: 'current.config.capabilities.deviceName' } as WebdriverIO.Capabilities,
+                    { 'cjson:metadata': { device: 'current.config.capabilities.deviceName' }} as ConfigCapabilities,
                 ),
             ).toMatchSnapshot()
         })
 
         it('should be able to return the not known deviceName', () => {
             expect(
-                metadataClassObject.determineDeviceName({} as cjson_metadata, {} as WebdriverIO.Capabilities),
+                metadataClassObject.determineDeviceName({} as cjson_metadata, {} as ConfigCapabilities),
             ).toMatchSnapshot()
         })
     })
