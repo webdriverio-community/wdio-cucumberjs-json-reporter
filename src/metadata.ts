@@ -11,7 +11,7 @@ export class Metadata {
     public determineMetadata(data: RunnerStatsExtended): MetadataObject {
         let instanceData: AppData | BrowserData
         const currentCapabilities = data.capabilities as WebdriverIO.Capabilities
-        const optsCaps = browser.requestedCapabilities.capabilities as W3CCapabilitiesExtended
+        const optsCaps = browser.requestedCapabilities as W3CCapabilitiesExtended
         const currentConfigCapabilities = data?.capabilities as DesiredCapabilitiesExtended
         const w3cCaps: cjson_metadata = (data.config.capabilities)
             ? Object.prototype.hasOwnProperty.call(data.config.capabilities, 'cjson:metadata')

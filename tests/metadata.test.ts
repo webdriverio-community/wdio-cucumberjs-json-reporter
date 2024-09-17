@@ -36,14 +36,14 @@ describe('metadata', () => {
     describe('determineAppData', () => {
         it('should return that no app metadata could be determined', () => {
             expect(
-                metadataClassObject.determineAppData({} as WebDriver.DesiredCapabilities, {} as cjson_metadata),
+                metadataClassObject.determineAppData({} as WebdriverIO.Capabilities, {} as cjson_metadata),
             ).toMatchSnapshot()
         })
 
         it('should return that the app name and version based on the metadata', () => {
             expect(
                 metadataClassObject.determineAppData(
-                    {} as WebDriver.DesiredCapabilities,
+                    {} as WebdriverIO.Capabilities,
                     {
                         app: {
                             name: 'metadata app name',
@@ -59,7 +59,7 @@ describe('metadata', () => {
                 metadataClassObject.determineAppData(
                     {
                         app: 'here/there/app.apk',
-                    } as WebDriver.DesiredCapabilities,
+                    } as WebdriverIO.Capabilities,
                     {} as cjson_metadata,
                 ),
             ).toMatchSnapshot()
@@ -70,8 +70,8 @@ describe('metadata', () => {
         it('should return that no browser metadata could be determined', () => {
             expect(
                 metadataClassObject.determineBrowserData(
-                    {} as WebDriver.DesiredCapabilities,
-                    {} as WebDriver.DesiredCapabilities,
+                    {} as WebdriverIO.Capabilities,
+                    {} as WebdriverIO.Capabilities,
                     {} as cjson_metadata,
                 ),
             ).toMatchSnapshot()
@@ -80,8 +80,8 @@ describe('metadata', () => {
         it('should return that the browser name and version based on the metadata', () => {
             expect(
                 metadataClassObject.determineBrowserData(
-                    {} as WebDriver.DesiredCapabilities,
-                    {} as WebDriver.DesiredCapabilities,
+                    {} as WebdriverIO.Capabilities,
+                    {} as WebdriverIO.Capabilities,
                     {
                         browser: {
                             name: 'metadata browser name',
@@ -98,8 +98,8 @@ describe('metadata', () => {
                     {
                         browserName: 'capabilities browser name',
                         version: 'capabilities version',
-                    } as WebDriver.DesiredCapabilities,
-                    {} as WebDriver.DesiredCapabilities,
+                    } as WebdriverIO.Capabilities,
+                    {} as WebdriverIO.Capabilities,
                     {} as cjson_metadata,
                 ),
             ).toMatchSnapshot()
@@ -111,8 +111,8 @@ describe('metadata', () => {
                     {
                         browserName: 'capabilities browser name',
                         browserVersion: 'capabilities browserVersion',
-                    } as WebDriver.DesiredCapabilities,
-                    {} as WebDriver.DesiredCapabilities,
+                    } as WebdriverIO.Capabilities,
+                    {} as WebdriverIO.Capabilities,
                     {} as cjson_metadata,
                 ),
             ).toMatchSnapshot()
@@ -121,11 +121,11 @@ describe('metadata', () => {
         it('should return that the browser name and version based on the configCapabilities', () => {
             expect(
                 metadataClassObject.determineBrowserData(
-                    {} as WebDriver.DesiredCapabilities,
+                    {} as WebdriverIO.Capabilities,
                     {
                         browserName: 'configCapabilities browser name',
                         browserVersion: 'configCapabilities browser version',
-                    } as WebDriver.DesiredCapabilities,
+                    } as WebdriverIO.Capabilities,
                     {} as cjson_metadata,
                 ),
             ).toMatchSnapshot()
@@ -137,7 +137,7 @@ describe('metadata', () => {
             expect(
                 metadataClassObject.determineDeviceName(
                     { device: 'metadata.device' } as cjson_metadata,
-                    {} as WebDriver.DesiredCapabilities,
+                    {} as WebdriverIO.Capabilities,
                 ),
             ).toMatchSnapshot()
         })
@@ -146,14 +146,14 @@ describe('metadata', () => {
             expect(
                 metadataClassObject.determineDeviceName(
                     {} as cjson_metadata,
-                    { deviceName: 'current.config.capabilities.deviceName' } as WebDriver.DesiredCapabilities,
+                    { deviceName: 'current.config.capabilities.deviceName' } as WebdriverIO.Capabilities,
                 ),
             ).toMatchSnapshot()
         })
 
         it('should be able to return the not known deviceName', () => {
             expect(
-                metadataClassObject.determineDeviceName({} as cjson_metadata, {} as WebDriver.DesiredCapabilities),
+                metadataClassObject.determineDeviceName({} as cjson_metadata, {} as WebdriverIO.Capabilities),
             ).toMatchSnapshot()
         })
     })
@@ -167,7 +167,7 @@ describe('metadata', () => {
                             name: 'platform.name',
                         },
                     } as cjson_metadata,
-                    {} as WebDriver.DesiredCapabilities,
+                    {} as WebdriverIO.Capabilities,
                 ),
             ).toMatchSnapshot()
         })
@@ -176,7 +176,7 @@ describe('metadata', () => {
             expect(
                 metadataClassObject.determinePlatformName(
                     {} as cjson_metadata,
-                    { platformName: 'currentCapabilities.platformName' } as WebDriver.DesiredCapabilities,
+                    { platformName: 'currentCapabilities.platformName' } as WebdriverIO.Capabilities,
                 ),
             ).toMatchSnapshot()
         })
@@ -185,7 +185,7 @@ describe('metadata', () => {
             expect(
                 metadataClassObject.determinePlatformName(
                     {} as cjson_metadata,
-                    { platformName: 'mac' } as WebDriver.DesiredCapabilities,
+                    { platformName: 'mac' } as WebdriverIO.Capabilities,
                 ),
             ).toMatchSnapshot()
         })
@@ -194,14 +194,14 @@ describe('metadata', () => {
             expect(
                 metadataClassObject.determinePlatformName(
                     {} as cjson_metadata,
-                    { platformName: 'windows nt' } as WebDriver.DesiredCapabilities,
+                    { platformName: 'windows nt' } as WebdriverIO.Capabilities,
                 ),
             ).toMatchSnapshot()
         })
 
         it('should be able to return the not known platform name', () => {
             expect(
-                metadataClassObject.determinePlatformName({} as cjson_metadata, {} as WebDriver.DesiredCapabilities),
+                metadataClassObject.determinePlatformName({} as cjson_metadata, {} as WebdriverIO.Capabilities),
             ).toMatchSnapshot()
         })
     })
@@ -225,7 +225,7 @@ describe('metadata', () => {
                             version: undefined,
                         },
                     } as cjson_metadata,
-                    { 'appium:platformVersion': '10.1' } as WebDriver.DesiredCapabilities,
+                    { 'appium:platformVersion': '10.1' } as WebdriverIO.Capabilities,
                 ),
             ).toMatchSnapshot()
         })
