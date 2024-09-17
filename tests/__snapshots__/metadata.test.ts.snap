@@ -72,8 +72,6 @@ exports[`metadata > determineBrowserData > should return that the browser name a
 }
 `;
 
-exports[`metadata > determineDeviceName > should be able to return the device metadata based on the current.config.capabilities.deviceName 1`] = `"current.config.capabilities.deviceName"`;
-
 exports[`metadata > determineDeviceName > should be able to return the device metadata based on the metadata.device 1`] = `"metadata.device"`;
 
 exports[`metadata > determineDeviceName > should be able to return the not known deviceName 1`] = `"Device name not known"`;
