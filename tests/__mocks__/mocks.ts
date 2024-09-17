@@ -34,13 +34,7 @@ export const SMALL_RUNNER_STATS: RunnerStats = {
         {
             browserName: 'chrome',
             'goog:chromeOptions': {
-                debuggerAddress: 'localhost:53158',
-                args: ['user-data-dir=/var/folders/rb/_hbqv7fn5114b206t2s05fs40000gn/T/.org.chromium.Chromium.uwkY0A'],
-            },
-            'cjson:metadata': {
-                browserName: 'chrome',
-                browserVersion: '75.0.3770.100',
-                platformName: 'Mac OS X'
+                debuggerAddress: 'localhost:53158'
             },
             proxy: {},
         },
