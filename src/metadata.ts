@@ -2,7 +2,13 @@ import { browser } from '@wdio/globals'
 
 import { NOT_KNOWN } from './constants.js'
 import type { AppData, BrowserData, MetadataObject, cjson_metadata } from './types'
-import type { DesiredCapabilitiesExtended, RunnerStatsExtended, W3CCapabilitiesExtended, WebdriverIOExtended } from './types/wdio'
+import type {
+    ConfigCapabilities,
+    DesiredCapabilitiesExtended,
+    RunnerStatsExtended,
+    W3CCapabilitiesExtended,
+    WebdriverIOExtended,
+} from './types/wdio'
 
 export class Metadata {
     /**
@@ -35,7 +41,7 @@ export class Metadata {
 
         return <MetadataObject>{
             ...instanceData,
-            device: this.determineDeviceName(metadata),
+            device: this.determineDeviceName(metadata, currentConfigCapabilities),
             platform: {
                 name: this.determinePlatformName(metadata, currentCapabilities),
                 version: this.determinePlatformVersion(metadata, currentCapabilities),
@@ -46,8 +52,8 @@ export class Metadata {
     /**
      * Determine the device name
      */
-    public determineDeviceName(metadata: cjson_metadata): string {
-        return (metadata?.device || `Device name ${NOT_KNOWN}`)
+    public determineDeviceName(metadata: cjson_metadata, currentConfigCapabilities: ConfigCapabilities): string {
+        return (metadata?.device || currentConfigCapabilities?.['cjson:metadata']?.device || `Device name ${NOT_KNOWN}`)
     }
 
     /**

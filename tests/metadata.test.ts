@@ -136,14 +136,23 @@ describe('metadata', () => {
         it('should be able to return the device metadata based on the metadata.device', () => {
             expect(
                 metadataClassObject.determineDeviceName(
-                    { device: 'metadata.device' } as cjson_metadata
+                    { device: 'metadata.device' } as cjson_metadata,
+                    {} as WebdriverIO.Capabilities,
+                ),
+            ).toMatchSnapshot()
+        })
+        it('should be able to return the device metadata based on the current.config.capabilities.deviceName', () => {
+            expect(
+                metadataClassObject.determineDeviceName(
+                    {} as cjson_metadata,
+                    { deviceName: 'current.config.capabilities.deviceName' } as WebdriverIO.Capabilities,
                 ),
             ).toMatchSnapshot()
         })
 
         it('should be able to return the not known deviceName', () => {
             expect(
-                metadataClassObject.determineDeviceName({} as cjson_metadata),
+                metadataClassObject.determineDeviceName({} as cjson_metadata, {} as WebdriverIO.Capabilities),
             ).toMatchSnapshot()
         })
     })
