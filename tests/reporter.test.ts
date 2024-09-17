@@ -471,7 +471,7 @@ describe('reporter', () => {
         it('should be able to attach default data', () => {
             WdioCucumberJsJsonReporter.attach('foo')
 
-            expect(mockStdout).toHaveBeenCalledTimes(1)
+            expect(mockStdout).toHaveBeenCalledTimes(2)
             expect(mockStdout).toHaveBeenCalledWith('wdioCucumberJsReporter:attachment', {
                 data: 'foo',
                 type: TEXT_PLAIN,
@@ -481,7 +481,7 @@ describe('reporter', () => {
         it('should be able to attach with all data', () => {
             WdioCucumberJsJsonReporter.attach('foo', 'text/plain')
 
-            expect(mockStdout).toHaveBeenCalledTimes(1)
+            expect(mockStdout).toHaveBeenCalledTimes(2)
             expect(mockStdout).toHaveBeenCalledWith('wdioCucumberJsReporter:attachment', {
                 data: 'foo',
                 type: 'text/plain',
