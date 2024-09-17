@@ -58,7 +58,7 @@ exports[`metadata > determineBrowserData > should return that the browser name a
 {
   "browser": {
     "name": "configCapabilities browser name",
-    "version": "configCapabilities browser version",
+    "version": "No metadata.browser.version available",
   },
 }
 `;

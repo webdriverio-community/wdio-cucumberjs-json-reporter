@@ -110,7 +110,6 @@ export class Metadata {
             || currentConfigCapabilities?.browserName
             || ((metadata && metadata?.browser && metadata.browser?.name) ? metadata?.browser?.name : 'No metadata.browser.name available')
         const browserVersion = currentCapabilities?.browserVersion
-            || currentConfigCapabilities?.browserVersion
             || ((metadata && metadata?.browser && metadata?.browser?.version) ? metadata?.browser?.version : 'No metadata.browser.version available')
 
         return <BrowserData>{

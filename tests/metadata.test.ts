@@ -123,9 +123,8 @@ describe('metadata', () => {
                 metadataClassObject.determineBrowserData(
                     {} as WebdriverIO.Capabilities,
                     {
-                        browserName: 'configCapabilities browser name',
-                        browserVersion: 'configCapabilities browser version',
-                    } as WebdriverIO.Capabilities,
+                        browserName: 'configCapabilities browser name'
+                    } as ConfigCapabilities,
                     {} as cjson_metadata,
                 ),
             ).toMatchSnapshot()
