@@ -105,12 +105,11 @@ export class Metadata {
     /**
      * Determine the browser data
      */
-    public determineBrowserData(currentCapabilities: WebdriverIO.Capabilities, currentConfigCapabilities: WebdriverIO.Capabilities, metadata: cjson_metadata): BrowserData {
+    public determineBrowserData(currentCapabilities: WebdriverIO.Capabilities, currentConfigCapabilities: ConfigCapabilities, metadata: cjson_metadata): BrowserData {
         const browserName = currentCapabilities?.browserName
             || currentConfigCapabilities?.browserName
             || ((metadata && metadata?.browser && metadata.browser?.name) ? metadata?.browser?.name : 'No metadata.browser.name available')
         const browserVersion = currentCapabilities?.browserVersion
-            || currentCapabilities?.browserVersion
             || currentConfigCapabilities?.browserVersion
             || ((metadata && metadata?.browser && metadata?.browser?.version) ? metadata?.browser?.version : 'No metadata.browser.version available')
 

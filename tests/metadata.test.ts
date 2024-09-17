@@ -71,7 +71,7 @@ describe('metadata', () => {
             expect(
                 metadataClassObject.determineBrowserData(
                     {} as WebdriverIO.Capabilities,
-                    {} as WebdriverIO.Capabilities,
+                    {} as ConfigCapabilities,
                     {} as cjson_metadata,
                 ),
             ).toMatchSnapshot()
@@ -81,7 +81,7 @@ describe('metadata', () => {
             expect(
                 metadataClassObject.determineBrowserData(
                     {} as WebdriverIO.Capabilities,
-                    {} as WebdriverIO.Capabilities,
+                    {} as ConfigCapabilities,
                     {
                         browser: {
                             name: 'metadata browser name',
@@ -99,7 +99,7 @@ describe('metadata', () => {
                         browserName: 'capabilities browser name',
                         browserVersion: 'capabilities version',
                     } as WebdriverIO.Capabilities,
-                    {} as WebdriverIO.Capabilities,
+                    {} as ConfigCapabilities,
                     {} as cjson_metadata,
                 ),
             ).toMatchSnapshot()
@@ -112,7 +112,7 @@ describe('metadata', () => {
                         browserName: 'capabilities browser name',
                         browserVersion: 'capabilities browserVersion',
                     } as WebdriverIO.Capabilities,
-                    {} as WebdriverIO.Capabilities,
+                    {} as ConfigCapabilities,
                     {} as cjson_metadata,
                 ),
             ).toMatchSnapshot()
