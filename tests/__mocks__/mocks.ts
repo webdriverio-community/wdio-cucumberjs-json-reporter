@@ -60,7 +60,7 @@ export const FULL_RUNNER_STATS: RunnerStatsExtended = {
     cid: '0-0',
     capabilities:
         <DesiredCapabilitiesExtended>{
-            cjson_metadata: {} as cjson_metadata,
+            'cjson:metadata': {} as cjson_metadata,
             acceptInsecureCerts: false,
             acceptSslCerts: false,
             applicationCacheEnabled: false,
@@ -154,7 +154,7 @@ export const FULL_RUNNER_STATS: RunnerStatsExtended = {
         capabilities: {},
         jsonFolder: '',
         language: 'en',
-        cjson_metadata: {
+        'cjson:metadata': {
             app: {
                 name: 'test',
                 version: '1'
@@ -196,7 +196,7 @@ export const WDIO6_RUNNER_STATS: RunnerStatsExtended = {
     config: <TestrunnerExtended>{
         jsonFolder: '',
         language: 'en',
-        cjson_metadata: {} as cjson_metadata,
+        'cjson:metadata': {} as cjson_metadata,
         logFile: '',
         stdout: true,
         writeStream: {} as WriteStream,

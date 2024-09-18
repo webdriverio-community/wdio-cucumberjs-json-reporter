@@ -23,11 +23,11 @@ export class Metadata {
                 // Fixes: https://github.com/webdriverio-community/wdio-cucumberjs-json-reporter/issues/73
                 ? data.capabilities['cjson:metadata'] as cjson_metadata
                 // Fallback
-                : (browser as WebdriverIOExtended)?.requestedCapabilities?.cjson_metadata
+                : (browser as WebdriverIOExtended)?.requestedCapabilities?.['cjson:metadata'] as cjson_metadata
             : {}
-        const metadata: cjson_metadata = (currentConfigCapabilities as W3CCapabilitiesExtended)?.cjson_metadata
+        const metadata: cjson_metadata = (currentConfigCapabilities as W3CCapabilitiesExtended)?.['cjson:metadata']
             || w3cCaps // When an app is used to test
-            || (optsCaps as DesiredCapabilitiesExtended)?.cjson_metadata // devtools
+            || (optsCaps as DesiredCapabilitiesExtended)?.['cjson:metadata'] // devtools
             || {} as cjson_metadata
 
         // When an app is used to test

@@ -259,7 +259,7 @@ describe('metadata', () => {
 
         it('should return app metadata based on the current.config.capabilities[\'cjson:metadata\'].app', () => {
             // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-            (FULL_RUNNER_STATS.capabilities as W3CCapabilitiesExtended).cjson_metadata!.app = {
+            (FULL_RUNNER_STATS.capabilities as W3CCapabilitiesExtended)['cjson:metadata']!.app = {
                 name: 'mock-appName',
                 version: 'mock-appVersion',
             }
@@ -274,7 +274,7 @@ describe('metadata', () => {
             expect(determinePlatformVersionSpy).toHaveBeenCalledTimes(1)
 
             // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-            delete (FULL_RUNNER_STATS.capabilities as W3CCapabilitiesExtended).cjson_metadata!.app
+            delete (FULL_RUNNER_STATS.capabilities as W3CCapabilitiesExtended)['cjson:metadata']!.app
             determineAppDataSpy.mockClear()
         })
 
@@ -300,7 +300,7 @@ describe('metadata', () => {
                     requestedCapabilities: {
                         w3cCaps: {
                             alwaysMatch: {
-                                cjson_metadata: {},
+                                'cjson:metadata': {},
                             },
                         },
                     },
@@ -323,7 +323,7 @@ describe('metadata', () => {
                     },
                     capabilities: {
                         browserName: 'chrome',
-                        cjson_metadata: {},
+                        'cjson:metadata': {},
                     },
                 } as WebdriverIOExtended,
             }
@@ -341,7 +341,7 @@ describe('metadata', () => {
                 options: {
                     capabilities: {
                         browserName: 'chrome',
-                        cjson_metadata: {},
+                        'cjson:metadata': {},
                     },
                 } as WebdriverIOExtended,
             }
