@@ -45,24 +45,6 @@ exports[`metadata > determineBrowserData > should return that the browser name a
 }
 `;
 
-exports[`metadata > determineBrowserData > should return that the browser name and version based on the capabilities when version is used 1`] = `
-{
-  "browser": {
-    "name": "capabilities browser name",
-    "version": "capabilities version",
-  },
-}
-`;
-
-exports[`metadata > determineBrowserData > should return that the browser name and version based on the configCapabilities 1`] = `
-{
-  "browser": {
-    "name": "configCapabilities browser name",
-    "version": "No metadata.browser.version available",
-  },
-}
-`;
-
 exports[`metadata > determineBrowserData > should return that the browser name and version based on the metadata 1`] = `
 {
   "browser": {

@@ -10,7 +10,7 @@ import {
 import { Metadata } from '../src/metadata.js'
 import { NOT_KNOWN } from '../src/constants.js'
 import type { cjson_metadata } from '../src/types'
-import type { ConfigCapabilities, W3CCapabilitiesExtended, WebdriverIOExtended } from '../src/types/wdio'
+import type { DesiredCapabilitiesExtended, W3CCapabilitiesExtended, WebdriverIOExtended } from '../src/types/wdio'
 
 vi.mock('@wdio/globals', () => ({
     browser: {
@@ -71,7 +71,6 @@ describe('metadata', () => {
             expect(
                 metadataClassObject.determineBrowserData(
                     {} as WebdriverIO.Capabilities,
-                    {} as ConfigCapabilities,
                     {} as cjson_metadata,
                 ),
             ).toMatchSnapshot()
@@ -81,26 +80,12 @@ describe('metadata', () => {
             expect(
                 metadataClassObject.determineBrowserData(
                     {} as WebdriverIO.Capabilities,
-                    {} as ConfigCapabilities,
                     {
                         browser: {
                             name: 'metadata browser name',
                             version: 'metadata version 1.2.3',
                         },
                     } as cjson_metadata,
-                ),
-            ).toMatchSnapshot()
-        })
-
-        it('should return that the browser name and version based on the capabilities when version is used', () => {
-            expect(
-                metadataClassObject.determineBrowserData(
-                    {
-                        browserName: 'capabilities browser name',
-                        browserVersion: 'capabilities version',
-                    } as WebdriverIO.Capabilities,
-                    {} as ConfigCapabilities,
-                    {} as cjson_metadata,
                 ),
             ).toMatchSnapshot()
         })
@@ -112,19 +97,6 @@ describe('metadata', () => {
                         browserName: 'capabilities browser name',
                         browserVersion: 'capabilities browserVersion',
                     } as WebdriverIO.Capabilities,
-                    {} as ConfigCapabilities,
-                    {} as cjson_metadata,
-                ),
-            ).toMatchSnapshot()
-        })
-
-        it('should return that the browser name and version based on the configCapabilities', () => {
-            expect(
-                metadataClassObject.determineBrowserData(
-                    {} as WebdriverIO.Capabilities,
-                    {
-                        browserName: 'configCapabilities browser name'
-                    } as ConfigCapabilities,
                     {} as cjson_metadata,
                 ),
             ).toMatchSnapshot()
@@ -136,7 +108,7 @@ describe('metadata', () => {
             expect(
                 metadataClassObject.determineDeviceName(
                     { device: 'metadata.device' } as cjson_metadata,
-                    {} as ConfigCapabilities,
+                    {} as DesiredCapabilitiesExtended,
                 ),
             ).toMatchSnapshot()
         })
@@ -144,14 +116,14 @@ describe('metadata', () => {
             expect(
                 metadataClassObject.determineDeviceName(
                     {} as cjson_metadata,
-                    { 'cjson:metadata': { device: 'current.config.capabilities.deviceName' }} as ConfigCapabilities,
+                    { 'cjson:metadata': { device: 'current.config.capabilities.deviceName' }} as DesiredCapabilitiesExtended,
                 ),
             ).toMatchSnapshot()
         })
 
         it('should be able to return the not known deviceName', () => {
             expect(
-                metadataClassObject.determineDeviceName({} as cjson_metadata, {} as ConfigCapabilities),
+                metadataClassObject.determineDeviceName({} as cjson_metadata, {} as DesiredCapabilitiesExtended),
             ).toMatchSnapshot()
         })
     })

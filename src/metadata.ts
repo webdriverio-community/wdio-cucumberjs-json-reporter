@@ -3,7 +3,6 @@ import { browser } from '@wdio/globals'
 import { NOT_KNOWN } from './constants.js'
 import type { AppData, BrowserData, MetadataObject, cjson_metadata } from './types'
 import type {
-    ConfigCapabilities,
     DesiredCapabilitiesExtended,
     RunnerStatsExtended,
     W3CCapabilitiesExtended,
@@ -36,7 +35,7 @@ export class Metadata {
             instanceData = this.determineAppData(currentConfigCapabilities, metadata)
         } else {
             // Then a browser
-            instanceData = this.determineBrowserData(currentCapabilities, currentConfigCapabilities, metadata)
+            instanceData = this.determineBrowserData(currentCapabilities, metadata)
         }
 
         return <MetadataObject>{
@@ -52,7 +51,7 @@ export class Metadata {
     /**
      * Determine the device name
      */
-    public determineDeviceName(metadata: cjson_metadata, currentConfigCapabilities: ConfigCapabilities): string {
+    public determineDeviceName(metadata: cjson_metadata, currentConfigCapabilities: DesiredCapabilitiesExtended): string {
         return (metadata?.device || currentConfigCapabilities?.['cjson:metadata']?.device || `Device name ${NOT_KNOWN}`)
     }
 
@@ -105,9 +104,8 @@ export class Metadata {
     /**
      * Determine the browser data
      */
-    public determineBrowserData(currentCapabilities: WebdriverIO.Capabilities, currentConfigCapabilities: ConfigCapabilities, metadata: cjson_metadata): BrowserData {
+    public determineBrowserData(currentCapabilities: WebdriverIO.Capabilities, metadata: cjson_metadata): BrowserData {
         const browserName = currentCapabilities?.browserName
-            || currentConfigCapabilities?.browserName
             || ((metadata && metadata?.browser && metadata.browser?.name) ? metadata?.browser?.name : 'No metadata.browser.name available')
         const browserVersion = currentCapabilities?.browserVersion
             || ((metadata && metadata?.browser && metadata?.browser?.version) ? metadata?.browser?.version : 'No metadata.browser.version available')
