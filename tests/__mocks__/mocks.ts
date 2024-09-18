@@ -10,7 +10,7 @@ import type {
     TestrunnerExtended
 } from '../../src/types/wdio'
 import type { Feature, Scenario, cjson_metadata } from '../../src/types'
-import { PageLoadingStrategy } from '@wdio/types/build/Capabilities'
+import { Capabilities } from '@wdio/types'
 
 export const EMPTY_FEATURE: Feature = {
     keyword: 'Feature',
@@ -80,7 +80,7 @@ export const FULL_RUNNER_STATS: RunnerStatsExtended = {
             locationContextEnabled: true,
             mobileEmulationEnabled: false,
             nativeEvents: true,
-            pageLoadStrategy: 'normal' as PageLoadingStrategy,
+            pageLoadStrategy: 'normal' as Capabilities.PageLoadingStrategy,
             platform: 'Mac OS X',
             proxy: {},
             rotatable: false,
