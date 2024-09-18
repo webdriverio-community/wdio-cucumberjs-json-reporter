@@ -1,6 +1,5 @@
 import type { WriteStream } from 'node:fs'
 import { type HookStats, type RunnerStats, type SuiteStats, type Test, TestStats } from '@wdio/reporter'
-import { Capabilities } from '@wdio/types'
 import type {
     ConfigCapabilities,
     DesiredCapabilitiesExtended,
@@ -11,6 +10,7 @@ import type {
     TestrunnerExtended
 } from '../../src/types/wdio'
 import type { Feature, Scenario, cjson_metadata } from '../../src/types'
+import { Capabilities } from '@wdio/types'
 
 export const EMPTY_FEATURE: Feature = {
     keyword: 'Feature',
