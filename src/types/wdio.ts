@@ -13,19 +13,19 @@ import type { cjson_metadata } from '../types'
 import { W3CCapabilities } from '@wdio/types/build/Capabilities'
 
 export interface W3CCapabilitiesExtended extends W3CCapabilities {
-    cjson_metadata?: cjson_metadata
+    'cjson:metadata'?: cjson_metadata
     app?: string
 }
 
 export interface DesiredCapabilitiesExtended extends WebdriverIO.Capabilities {
-    cjson_metadata?: cjson_metadata
+    'cjson:metadata'?: cjson_metadata
     app?: string
 }
 
 export interface TestrunnerExtended extends Options.Testrunner {
     jsonFolder?: string
     language?: string
-    cjson_metadata?: cjson_metadata
+    'cjson:metadata'?: cjson_metadata
     logFile?: string
     stdout?: boolean
     writeStream?: WriteStream
@@ -33,7 +33,7 @@ export interface TestrunnerExtended extends Options.Testrunner {
 export interface WebdriverIOExtended extends Options.WebdriverIO {
     app?: string
     requestedCapabilities?: {
-        cjson_metadata?: cjson_metadata
+        'cjson:metadata'?: cjson_metadata
         w3cCaps: {
             alwaysMatch?: {
                 foo?: true
