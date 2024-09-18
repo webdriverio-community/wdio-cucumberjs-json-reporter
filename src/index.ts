@@ -58,7 +58,7 @@ export class CucumberJsJsonReporter extends WDIOReporter {
      * Attach data to the report
      */
     public static attach(data: CucumberAttachmentData, type: AttachmentType = TEXT_PLAIN): void {
-        // eslint-disable-next-line @typescript-eslint/ban-types, @typescript-eslint/no-unsafe-assignment
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-function-type, @typescript-eslint/no-unsafe-assignment
         (process.emit as Function)('wdioCucumberJsReporter:attachment', { data, type })
     }
 

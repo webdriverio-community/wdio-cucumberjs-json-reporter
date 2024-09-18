@@ -1,4 +1,4 @@
-import type { Capabilities, Options } from '@wdio/types'
+import type { Options } from '@wdio/types'
 import {
     type default as WDIOReporterBaseOptions,
     type Argument,
@@ -10,13 +10,14 @@ import {
 } from '@wdio/reporter'
 import type { WriteStream } from 'fs'
 import type { cjson_metadata } from '../types'
+import { W3CCapabilities } from '@wdio/types/build/Capabilities'
 
-export interface W3CCapabilitiesExtended extends Capabilities.W3CCapabilities {
+export interface W3CCapabilitiesExtended extends W3CCapabilities {
     cjson_metadata?: cjson_metadata
     app?: string
 }
 
-export interface DesiredCapabilitiesExtended extends Capabilities.DesiredCapabilities {
+export interface DesiredCapabilitiesExtended extends WebdriverIO.Capabilities {
     cjson_metadata?: cjson_metadata
     app?: string
 }

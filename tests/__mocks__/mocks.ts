@@ -1,6 +1,5 @@
 import type { WriteStream } from 'node:fs'
 import { type HookStats, type RunnerStats, type SuiteStats, type Test, TestStats } from '@wdio/reporter'
-import type { Capabilities } from '@wdio/types'
 import type {
     ConfigCapabilities,
     DesiredCapabilitiesExtended,
@@ -8,9 +7,10 @@ import type {
     RunnerStatsExtended,
     SuiteStatsExtended,
     TestStatsExtended,
-    TestrunnerExtended,
+    TestrunnerExtended
 } from '../../src/types/wdio'
 import type { Feature, Scenario, cjson_metadata } from '../../src/types'
+import { Capabilities } from '@wdio/types'
 
 export const EMPTY_FEATURE: Feature = {
     keyword: 'Feature',
@@ -31,22 +31,14 @@ export const EMPTY_SCENARIO: Scenario = {
 }
 export const SMALL_RUNNER_STATS: RunnerStats = {
     capabilities:
-    {
-        browserName: 'chrome',
-        chromedriverVersion: '2.46.628411 (3324f4c8be9ff2f70a05a30ebc72ffb013e1a71e)',
-        chromeOptions: {
-            args: ['user-data-dir=/var/folders/rb/_hbqv7fn5114b206t2s05fs40000gn/T/.org.chromium.Chromium.uwkY0A'],
+        {
+            browserName: 'chrome',
+            'goog:chromeOptions': {
+                debuggerAddress: 'localhost:53158'
+            },
+            proxy: {},
         },
-        'goog:chromeOptions': {
-            debuggerAddress: 'localhost:53158'
-        },
-        platform: 'Mac OS X',
-        proxy: {},
-        version: '75.0.3770.100',
-    },
-    config: {
-        capabilities: {},
-    },
+    config: {},
     type: 'runner',
     start: new Date('2019-07-14T07:25:20.897Z'),
     _duration: 0,
@@ -191,10 +183,6 @@ export const WDIO6_RUNNER_STATS: RunnerStatsExtended = {
         acceptInsecureCerts: false,
         browserName: 'chrome',
         browserVersion: '81.0.4044.122',
-        chromedriverVersion: '2.46.628411 (3324f4c8be9ff2f70a05a30ebc72ffb013e1a71e)',
-        chromeOptions: {
-            args: ['user-data-dir=/var/folders/rb/_hbqv7fn5114b206t2s05fs40000gn/T/.org.chromium.Chromium.uwkY0A'],
-        },
         'goog:chromeOptions': { debuggerAddress: 'localhost:56189' },
         pageLoadStrategy: 'normal',
         platformName: 'mac os x',
@@ -202,8 +190,7 @@ export const WDIO6_RUNNER_STATS: RunnerStatsExtended = {
         setWindowRect: true,
         strictFileInteractability: false,
         timeouts: { implicit: 0, pageLoad: 300000, script: 30000 },
-        unhandledPromptBehavior: 'dismiss and notify',
-        'webdriver.remote.sessionid': '27e5b2b068aa1612e60d90a9e5164a7d',
+        unhandledPromptBehavior: 'dismiss and notify'
     },
     sanitizedCapabilities: 'chrome.81_0_4044_122.macosx',
     config: <TestrunnerExtended>{
