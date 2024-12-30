@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import fs from 'node:fs'
-import fsp from 'node:fs/promises'
-import url from 'node:url'
-import path from 'node:path'
-import { describe, it, expect, beforeAll, beforeEach, afterEach, vi, type SpyInstance } from 'vitest'
+import * as fs from 'node:fs'
+import * as fsp from 'node:fs/promises'
+import * as url from 'node:url'
+import * as path from 'node:path'
+import { describe, it, expect, beforeAll, beforeEach, afterEach, vi, type MockInstance } from 'vitest'
 
 import { containsSteps, getFailedMessage } from '../src/utils.js'
 import { AFTER, BEFORE, FAILED, PASSED, PENDING, TEXT_PLAIN } from '../src/constants.js'
@@ -91,7 +91,7 @@ describe('reporter', () => {
         it('should set instance data if it is not available yet', () => {
             const metadata = { foo: 'bar' }
             const metadataClassObject: Metadata = tmpReporter.metadataClassObject
-            const determineMetadataSpy: SpyInstance = vi
+            const determineMetadataSpy: MockInstance = vi
                 .spyOn(metadataClassObject, 'determineMetadata')
                 .mockReturnValue(metadata)
 
@@ -105,7 +105,7 @@ describe('reporter', () => {
 
         it('should set not set instance data if it is already available', () => {
             const metadata = { foo: 'bar' }
-            const determineMetadataSpy: SpyInstance = vi
+            const determineMetadataSpy: MockInstance = vi
                 .spyOn(new Metadata(), 'determineMetadata')
                 .mockReturnValue(metadata)
 
@@ -457,7 +457,7 @@ describe('reporter', () => {
     })
 
     describe('attach', () => {
-        let mockStdout: SpyInstance
+        let mockStdout: MockInstance
         beforeAll(() => {
             process.emit = vi.fn() as any
             mockStdout = vi.spyOn(process, 'emit')
