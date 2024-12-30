@@ -12,12 +12,16 @@ export default defineConfig({
             '**/node_modules/**'
         ],
         coverage: {
+            reporter: ['text'],
+            provider: "v8",
             enabled: true,
             exclude: ['**/dist/**', '**/__mocks__/**', '**/__fixtures__/**', '**/*.test.ts'],
-            lines: 99,
-            functions: 95,
-            branches: 95,
-            statements: 99
+            thresholds: {
+                lines: 99,
+                functions: 95,
+                branches: 95,
+                statements: 99
+            }
         }
     }
 })

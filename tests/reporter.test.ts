@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import * as fs from 'node:fs'
 import * as fsp from 'node:fs/promises'
-import * as url from 'node:url'
 import * as path from 'node:path'
 import { describe, it, expect, beforeAll, beforeEach, afterEach, vi, type MockInstance } from 'vitest'
 
@@ -25,8 +24,7 @@ import { Metadata } from '../src/metadata.js'
 import type { Step } from '../src/types.js'
 import WdioCucumberJsJsonReporter from '../src/index.js'
 
-const __dirname = url.fileURLToPath(new URL('.', import.meta.url))
-const logFolderPath = path.join(__dirname, '.tmp')
+const logFolderPath = path.join(process.cwd(), '.tmp')
 const logFile = path.join(logFolderPath, 'logFile.json')
 const jsonFolder = path.join(logFolderPath, 'ut-folder')
 
@@ -459,12 +457,10 @@ describe('reporter', () => {
     describe('attach', () => {
         let mockStdout: MockInstance
         beforeAll(() => {
-            process.emit = vi.fn() as any
             mockStdout = vi.spyOn(process, 'emit')
         })
 
         afterEach(() => {
-            //   process.emit.mockClear()
             mockStdout.mockClear()
         })
 
