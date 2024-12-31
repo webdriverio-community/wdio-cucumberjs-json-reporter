@@ -50,7 +50,6 @@ export class CucumberJsJsonReporter extends WDIOReporter {
         this.instanceMetadata = null
         this.report = <Report>{}
 
-        this.registerListeners()
         this.metadataClassObject = new Metadata()
     }
 
@@ -60,13 +59,6 @@ export class CucumberJsJsonReporter extends WDIOReporter {
     public static attach(data: CucumberAttachmentData, type: AttachmentType = TEXT_PLAIN): void {
         // eslint-disable-next-line @typescript-eslint/no-unsafe-function-type, @typescript-eslint/no-unsafe-assignment
         (process.emit as Function)('wdioCucumberJsReporter:attachment', { data, type })
-    }
-
-    /**
-     * Add a customer listener for the attachments
-     */
-    public registerListeners(): void {
-        process.on('wdioCucumberJsReporter:attachment', this.cucumberJsAttachment.bind(this))
     }
 
     /**
