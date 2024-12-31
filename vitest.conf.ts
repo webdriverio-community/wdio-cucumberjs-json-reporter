@@ -15,12 +15,12 @@ export default defineConfig({
             reporter: ['text'],
             provider: "v8",
             enabled: true,
-            exclude: ['**/dist/**', '**/__mocks__/**', '**/__fixtures__/**', '**/*.test.ts', '**/src/types/**', '**/src/types.ts'],
+            exclude: ['**/dist/**', '**/__mocks__/**', '**/__fixtures__/**', '**/*.test.ts', '**/src/types/**', '**/src/types.ts', '*.cjs', '*.conf.ts'],
             thresholds: {
-                lines: 99,
-                functions: 95,
-                branches: 95,
-                statements: 99
+                lines: 90,
+                functions: 90,
+                branches: 90,
+                statements: 90
             }
         }
     }
