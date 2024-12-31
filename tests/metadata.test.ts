@@ -1,4 +1,4 @@
-import { describe, it, expect, beforeAll, beforeEach, afterEach, vi, type SpyInstance } from 'vitest'
+import { describe, it, expect, beforeAll, beforeEach, afterEach, vi, type MockInstance } from 'vitest'
 import type { Options } from '@wdio/types'
 
 import {
@@ -205,10 +205,10 @@ describe('metadata', () => {
     })
 
     describe('determineMetadata', () => {
-        let determineAppDataSpy: SpyInstance
-        let determineBrowserDataSpy: SpyInstance
-        let determineDeviceNameSpy: SpyInstance
-        let determinePlatformNameSpy: SpyInstance
+        let determineAppDataSpy: MockInstance
+        let determineBrowserDataSpy: MockInstance
+        let determineDeviceNameSpy: MockInstance
+        let determinePlatformNameSpy: MockInstance
         let determinePlatformVersionSpy
         const appMockData = {
             app: {

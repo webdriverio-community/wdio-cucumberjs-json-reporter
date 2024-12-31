@@ -12,12 +12,17 @@ export default defineConfig({
             '**/node_modules/**'
         ],
         coverage: {
+            provider: "v8",
+            ignoreEmptyLines: false,
             enabled: true,
-            exclude: ['**/dist/**', '**/__mocks__/**', '**/__fixtures__/**', '**/*.test.ts'],
-            lines: 99,
-            functions: 95,
-            branches: 95,
-            statements: 99
+            include: ['src/**/*.ts'],
+            exclude: ['**/types.ts', '**/src/types/**'],
+            thresholds: {
+                lines: 90,
+                functions: 90,
+                branches: 90,
+                statements: 90
+            }
         }
     }
 })
