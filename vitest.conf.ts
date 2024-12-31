@@ -15,7 +15,7 @@ export default defineConfig({
             reporter: ['text'],
             provider: "v8",
             enabled: true,
-            exclude: ['**/dist/**', '**/__mocks__/**', '**/__fixtures__/**', '**/*.test.ts'],
+            exclude: ['**/dist/**', '**/__mocks__/**', '**/__fixtures__/**', '**/*.test.ts', '**/src/types/**', '**/src/types.ts'],
             thresholds: {
                 lines: 99,
                 functions: 95,
