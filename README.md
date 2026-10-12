@@ -1,5 +1,12 @@
 # WDIO CucumberJS JSON Reporter ![Test](https://github.com/webdriverio-community/wdio-cucumberjs-json-reporter/actions/workflows/test.yml/badge.svg) [![MIT license](http://img.shields.io/badge/license-MIT-brightgreen.svg)](http://opensource.org/licenses/MIT)
 
+> [!IMPORTANT]
+> **This repository serves WebdriverIO v9 only.** It gets only maintenance fixes for v9.
+>
+> For WebdriverIO v10, this reporter moves into the main WebdriverIO repository as
+> [`@wdio/cucumberjs-json-reporter`](https://github.com/webdriverio/webdriverio/tree/main/packages/wdio-cucumberjs-json-reporter).
+> Report v10 issues in [webdriverio/webdriverio](https://github.com/webdriverio/webdriverio/issues).
+
 A WDIO reporter that creates CucumberJS JSON files for WebdriverIO v8 and up.
 
 [![NPM](https://nodei.co/npm/wdio-cucumberjs-json-reporter.png)](https://nodei.co/npm/wdio-cucumberjs-json-reporter/)
