@@ -50,6 +50,7 @@ export class CucumberJsJsonReporter extends WDIOReporter {
         this.instanceMetadata = null
         this.report = <Report>{}
 
+        this.registerListeners()
         this.metadataClassObject = new Metadata()
     }
 
@@ -59,6 +60,20 @@ export class CucumberJsJsonReporter extends WDIOReporter {
     public static attach(data: CucumberAttachmentData, type: AttachmentType = TEXT_PLAIN): void {
         // eslint-disable-next-line @typescript-eslint/no-unsafe-function-type, @typescript-eslint/no-unsafe-assignment
         (process.emit as Function)('wdioCucumberJsReporter:attachment', { data, type })
+    }
+
+    /**
+     * Add a custom listener for the attachments.
+     *
+     * `attach()` emits the `wdioCucumberJsReporter:attachment` event on the process,
+     * without this listener the attachment (e.g. a screenshot) is never embedded
+     * into the cucumber JSON, see https://github.com/webdriverio-community/wdio-cucumberjs-json-reporter/issues/500
+     */
+    public registerListeners(): void {
+        // Remove listeners of previously created instances (e.g. in tests) so the
+        // attachment event is only handled by the latest reporter instance
+        process.removeAllListeners('wdioCucumberJsReporter:attachment')
+        process.on('wdioCucumberJsReporter:attachment', this.cucumberJsAttachment.bind(this))
     }
 
     /**
@@ -335,7 +350,15 @@ export class CucumberJsJsonReporter extends WDIOReporter {
      */
     public cucumberJsAttachment(attachment: CucumberJsAttachment): void {
         // The attachment can be added to the current running scenario step
-        const currentStep = this.getCurrentStep()
+        const currentScenario = this.report.feature?.elements?.length ? this.getCurrentScenario() : undefined
+        const currentStep = currentScenario?.steps?.length ? this.getCurrentStep() : undefined
+
+        // Don't crash the run when an attachment is emitted outside of a running step
+        if (!currentStep) {
+            log.warn('Unable to attach data to the report, there is no step running at the moment')
+            return
+        }
+
         let data = attachment?.data
 
         // If the mime_type is 'text/plain' or 'application/json', encode the data to a base64 string (like Cucumber v10+ does)

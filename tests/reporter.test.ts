@@ -36,7 +36,8 @@ vi.mock('../src/utils', () => ({
 
 vi.mock('@wdio/logger', () => ({
     default: vi.fn().mockReturnValue({
-        info: vi.fn()
+        info: vi.fn(),
+        warn: vi.fn()
     })
 }))
 
@@ -467,7 +468,10 @@ describe('reporter', () => {
         it('should be able to attach default data', () => {
             WdioCucumberJsJsonReporter.attach('foo')
 
-            expect(mockStdout).toHaveBeenCalledTimes(1)
+            // registering the attachment listener also emits `newListener`/`removeListener` events,
+            // so only count the actual attachment events
+            const attachmentCalls = mockStdout.mock.calls.filter(([event]) => event === 'wdioCucumberJsReporter:attachment')
+            expect(attachmentCalls).toHaveLength(1)
             expect(mockStdout).toHaveBeenCalledWith('wdioCucumberJsReporter:attachment', {
                 data: 'foo',
                 type: TEXT_PLAIN,
@@ -477,7 +481,8 @@ describe('reporter', () => {
         it('should be able to attach with all data', () => {
             WdioCucumberJsJsonReporter.attach('foo', 'text/plain')
 
-            expect(mockStdout).toHaveBeenCalledTimes(1)
+            const attachmentCalls = mockStdout.mock.calls.filter(([event]) => event === 'wdioCucumberJsReporter:attachment')
+            expect(attachmentCalls).toHaveLength(1)
             expect(mockStdout).toHaveBeenCalledWith('wdioCucumberJsReporter:attachment', {
                 data: 'foo',
                 type: 'text/plain',
@@ -520,6 +525,75 @@ describe('reporter', () => {
 
             expect(tmpReporter.report.feature.elements![0].steps![0]).toMatchSnapshot()
             expect(getCurrentStepSpy).toHaveBeenCalledTimes(1)
+        })
+    })
+
+    /**
+     * Regression tests for https://github.com/webdriverio-community/wdio-cucumberjs-json-reporter/issues/500
+     * `attach()` emits a process event, the reporter should listen to it and embed
+     * the attachment (e.g. a screenshot) into the current step of the cucumber JSON
+     */
+    describe('attachment process listener (issue #500)', () => {
+        const setupScenarioWithStep = (reporter: WdioCucumberJsJsonReporter) => {
+            const step: Step = {
+                keyword: 'When',
+                name: 'I take a screenshot',
+                result: { status: PENDING, duration: 0 },
+            }
+            reporter.report.feature = EMPTY_FEATURE
+            reporter.report.feature.elements!.push(EMPTY_SCENARIO)
+            reporter.report.feature.elements![0].steps!.push(step)
+            return step
+        }
+
+        it('should embed a screenshot attachment into the current step when attach() is called', () => {
+            setupScenarioWithStep(tmpReporter)
+
+            // simulate `cucumberJson.attach(await browser.takeScreenshot(), 'image/png')` in a step
+            const screenshotBase64 = Buffer.from('fake-png-binary-content').toString('base64')
+            WdioCucumberJsJsonReporter.attach(screenshotBase64, 'image/png')
+
+            expect(tmpReporter.report.feature.elements![0].steps![0].embeddings).toEqual([
+                {
+                    data: screenshotBase64,
+                    mime_type: 'image/png',
+                },
+            ])
+        })
+
+        it('should base64 encode a text/plain attachment when attach() is called', () => {
+            setupScenarioWithStep(tmpReporter)
+
+            WdioCucumberJsJsonReporter.attach('some log output', 'text/plain')
+
+            expect(tmpReporter.report.feature.elements![0].steps![0].embeddings).toEqual([
+                {
+                    data: Buffer.from('some log output').toString('base64'),
+                    mime_type: 'text/plain',
+                },
+            ])
+        })
+
+        it('should append multiple attachments to the same step', () => {
+            setupScenarioWithStep(tmpReporter)
+
+            const screenshotBase64 = Buffer.from('fake-png-binary-content').toString('base64')
+            WdioCucumberJsJsonReporter.attach(screenshotBase64, 'image/png')
+            WdioCucumberJsJsonReporter.attach('second attachment', 'text/plain')
+
+            expect(tmpReporter.report.feature.elements![0].steps![0].embeddings).toEqual([
+                { data: screenshotBase64, mime_type: 'image/png' },
+                { data: Buffer.from('second attachment').toString('base64'), mime_type: 'text/plain' },
+            ])
+        })
+
+        it('should not throw when attach() is called while no step is running', () => {
+            const reporterWithoutSteps = new WdioCucumberJsJsonReporter({ logFile })
+            reporterWithoutSteps.report.feature = EMPTY_FEATURE
+            reporterWithoutSteps.report.feature.elements!.push(EMPTY_SCENARIO)
+
+            expect(() => WdioCucumberJsJsonReporter.attach('orphan data')).not.toThrow()
+            expect(reporterWithoutSteps.report.feature.elements![0].steps).toEqual([])
         })
     })
 })
